@@ -9,7 +9,7 @@
     "backend": "node backend/server.js",
     "server": "node backend/server.js",
     "start": "node backend/server.js",
-    "build": "npm run build --prefix frontend",
+    "build": "npx vite build frontend",
     "lint": "npm run lint --prefix frontend"
   },
   "dependencies": {
