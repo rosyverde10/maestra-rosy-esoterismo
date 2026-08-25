@@ -9,8 +9,7 @@
     "backend": "node backend/server.js",
     "server": "node backend/server.js",
     "start": "node backend/server.js",
-    "postinstall": "npm install --prefix frontend && npm install --prefix backend",
-    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm run build --prefix frontend",
     "lint": "npm run lint --prefix frontend"
   },
   "dependencies": {
