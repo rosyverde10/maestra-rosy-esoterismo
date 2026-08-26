@@ -7,31 +7,35 @@ export const AboutSection: React.FC = () => {
   const { siteConfig } = data;
 
   return (
-    <section id="nosotros" className="py-16 sm:py-24 bg-[#0f071d] border-b border-amber-500/20 relative">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-20 space-y-12 sm:space-y-16">
+    <section id="nosotros" className="py-16 sm:py-24 bg-mystic-dark border-b border-amber-500/25 relative overflow-hidden">
+      
+      {/* Background Orbs */}
+      <div className="absolute top-1/2 left-10 w-96 h-96 bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12 relative z-10">
         
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* Main Layout Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* Left Text Block */}
           <div className="space-y-6 animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-950/80 border border-amber-400/30 text-amber-300 text-xs font-semibold">
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>{siteConfig.aboutBadge || "✨ Don Espiritual & Devoción"}</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/90 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-md">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="uppercase tracking-wider">{siteConfig.aboutBadge || "✨ Don Espiritual & Devoción"}</span>
             </div>
 
-            <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold text-gold-gradient leading-tight">
+            <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-gold-gradient leading-tight">
               {siteConfig.aboutTitle}
             </h2>
 
-            <p className="text-purple-200/90 text-base sm:text-lg font-serif-body leading-relaxed">
+            <p className="text-purple-100/90 text-base sm:text-xl font-serif-body leading-relaxed font-normal">
               {siteConfig.aboutText}
             </p>
 
-            <div className="p-6 rounded-2xl bg-purple-950/50 border border-amber-500/20 shadow-xl space-y-3 backdrop-blur-md">
-              <h3 className="font-serif-title font-bold text-lg text-amber-300 flex items-center gap-2">
-                <Flame className="w-5 h-5 text-amber-400" />
-                Consagración y Preparación de Velones
+            <div className="p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl space-y-3 backdrop-blur-md">
+              <h3 className="font-serif-title font-bold text-xl text-amber-300 flex items-center gap-2.5">
+                <Flame className="w-5 h-5 text-amber-400 shrink-0" />
+                Consagración y Ritualización Personalizada
               </h3>
               <p className="text-purple-200/80 text-xs sm:text-sm leading-relaxed font-serif-body">
                 {siteConfig.traditionText}
@@ -39,54 +43,54 @@ export const AboutSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Visual Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 animate-fade-up stagger-2">
+          {/* Right Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 animate-fade-up stagger-2">
             
-            <div className="p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl space-y-3 backdrop-blur-md transform transition-transform hover:-translate-y-1 hover:border-amber-400/40">
-              <div className="w-12 h-12 rounded-xl bg-purple-900/80 text-amber-300 flex items-center justify-center font-bold border border-amber-400/30">
-                <Eye className="w-6 h-6 text-amber-300" />
+            <div className="p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-xl space-y-3 backdrop-blur-md hover:border-amber-400/60 transition-all hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold border border-amber-300 shadow-md">
+                <Eye className="w-6 h-6 text-purple-950" />
               </div>
               <h3 className="font-serif-title font-bold text-lg text-amber-300">
                 Lecturas de Tarot Certeras
               </h3>
-              <p className="text-purple-200/70 text-xs leading-relaxed">
-                Consultas presenciales o virtuales con interpretación profunda y orientación en decisiones sentimentales y laborales.
+              <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm leading-relaxed">
+                Consultas presenciales o virtuales con interpretación profunda y orientación clara en decisiones sentimentales y laborales.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl space-y-3 backdrop-blur-md transform transition-transform hover:-translate-y-1 hover:border-amber-400/40">
-              <div className="w-12 h-12 rounded-xl bg-purple-900/80 text-amber-300 flex items-center justify-center font-bold border border-amber-400/30">
-                <Sun className="w-6 h-6 text-amber-300" />
+            <div className="p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-xl space-y-3 backdrop-blur-md hover:border-amber-400/60 transition-all hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold border border-amber-300 shadow-md">
+                <Sun className="w-6 h-6 text-purple-950" />
               </div>
               <h3 className="font-serif-title font-bold text-lg text-amber-300">
                 Limpias Energéticas
               </h3>
-              <p className="text-purple-200/70 text-xs leading-relaxed">
-                Desbloqueo de aura y purificación para disolver el mal de ojo, envidias y cargas energéticas acumuladas.
+              <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm leading-relaxed">
+                Desbloqueo de aura y purificación profunda para disolver mal de ojo, envidias y pesadez espiritual.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl space-y-3 backdrop-blur-md transform transition-transform hover:-translate-y-1 hover:border-amber-400/40">
-              <div className="w-12 h-12 rounded-xl bg-purple-900/80 text-amber-300 flex items-center justify-center font-bold border border-amber-400/30">
-                <ShieldCheck className="w-6 h-6 text-amber-300" />
+            <div className="p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-xl space-y-3 backdrop-blur-md hover:border-amber-400/60 transition-all hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold border border-amber-300 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-purple-950" />
               </div>
               <h3 className="font-serif-title font-bold text-lg text-amber-300">
                 Amuletos Curados
               </h3>
-              <p className="text-purple-200/70 text-xs leading-relaxed">
-                Cuarzos y amuletos impregnados de energía de protección personal para resguardar tu hogar y negocio.
+              <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm leading-relaxed">
+                Cuarzos y amuletos impregnados de energía de resguardo personal para proteger tu hogar y negocio.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl space-y-3 backdrop-blur-md transform transition-transform hover:-translate-y-1 hover:border-amber-400/40">
-              <div className="w-12 h-12 rounded-xl bg-purple-900/80 text-amber-300 flex items-center justify-center font-bold border border-amber-400/30">
-                <Heart className="w-6 h-6 text-amber-300" />
+            <div className="p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-xl space-y-3 backdrop-blur-md hover:border-amber-400/60 transition-all hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold border border-amber-300 shadow-md">
+                <Heart className="w-6 h-6 text-purple-950" />
               </div>
               <h3 className="font-serif-title font-bold text-lg text-amber-300">
                 Atención Confidencial
               </h3>
-              <p className="text-purple-200/70 text-xs leading-relaxed">
-                Trato respetuoso, discreto y empático en cada consulta espiritual para tu total tranquilidad.
+              <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm leading-relaxed">
+                Trato empático, ético y absolutamente confidencial en cada consulta para tu plena tranquilidad.
               </p>
             </div>
 

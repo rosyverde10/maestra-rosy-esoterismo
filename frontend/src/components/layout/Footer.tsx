@@ -11,54 +11,54 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminLogin, onOpenAdminPan
   const { data, isAdmin } = useSite();
 
   return (
-    <footer className="bg-[#090312] text-purple-200/80 py-12 border-t border-amber-500/20 relative overflow-hidden">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-20 space-y-8 relative z-10">
+    <footer className="bg-[#040208] text-purple-200/80 py-12 border-t border-amber-500/25 relative overflow-hidden">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-8 relative z-10">
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-purple-900/60 text-center md:text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-900 to-indigo-900 text-amber-300 flex items-center justify-center shadow-lg shrink-0 border border-amber-400/40">
-              <Moon className="w-5 h-5 fill-amber-400 text-amber-400" />
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-amber-500/20 text-center md:text-left">
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-full bg-gold-shine text-purple-950 flex items-center justify-center shadow-lg shrink-0 border border-amber-300">
+              <Moon className="w-6 h-6 fill-purple-950 text-purple-950" />
             </div>
 
             <div>
-              <h3 className="font-serif-title font-bold text-lg text-amber-300">
+              <h3 className="font-serif-title font-bold text-xl text-gold-gradient tracking-widest uppercase">
                 {data.siteConfig.businessName}
               </h3>
-              <p className="text-xs text-purple-300/80">
-                Lecturas de Tarot, Limpias Energéticas & Productos Curados
+              <p className="text-xs text-purple-200/80 font-serif-body italic">
+                Guiado Astral • Tarot • Trabajos & Limpias Espirituales
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-medium text-purple-200/90">
+          <div className="flex flex-wrap justify-center gap-6 text-xs font-serif-title font-semibold tracking-wider text-purple-100 uppercase">
             <a href="#inicio" className="hover:text-amber-300 transition-colors">Inicio</a>
-            <a href="#catalogo" className="hover:text-amber-300 transition-colors">Catálogo Esotérico</a>
+            <a href="#catalogo" className="hover:text-amber-300 transition-colors">Catálogo Ritual</a>
             <a href="#nosotros" className="hover:text-amber-300 transition-colors">Sanación & Don</a>
-            <a href="#contacto" className="hover:text-amber-300 transition-colors">Contacto Espiritual</a>
+            <a href="#contacto" className="hover:text-amber-300 transition-colors">Contacto Directo</a>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-300/60">
-          <p className="flex items-center gap-1.5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-300/70">
+          <p className="flex items-center gap-2">
             <span>© {new Date().getFullYear()} {data.siteConfig.businessName}. Todos los derechos reservados.</span>
-            <Sparkles className="w-3 h-3 text-amber-400 inline" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 inline" />
           </p>
 
           <div className="flex items-center gap-4">
             {isAdmin ? (
               <button
                 onClick={onOpenAdminPanel}
-                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-500/30"
+                className="inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-200 font-serif-title font-semibold text-xs transition-colors bg-emerald-950/90 px-4 py-2 rounded-full border border-emerald-500/50 shadow-md uppercase tracking-wider"
               >
-                <ShieldCheck className="w-4 h-4" />
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 Panel Admin Activo
               </button>
             ) : (
               <button
                 onClick={onOpenAdminLogin}
-                className="inline-flex items-center gap-1.5 text-amber-400/80 hover:text-amber-200 transition-colors opacity-75 hover:opacity-100 bg-purple-950/60 px-3 py-1.5 rounded-lg border border-amber-500/20"
+                className="inline-flex items-center gap-2 text-amber-300/90 hover:text-amber-200 font-serif-title font-semibold text-xs transition-colors bg-purple-950/80 hover:bg-purple-900 px-4 py-2 rounded-full border border-amber-500/30 uppercase tracking-wider shadow-sm"
               >
-                <Lock className="w-3.5 h-3.5" />
+                <Lock className="w-3.5 h-3.5 text-amber-400" />
                 Acceso Administrador
               </button>
             )}

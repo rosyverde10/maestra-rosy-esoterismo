@@ -10,76 +10,70 @@ export const SocialContact: React.FC = () => {
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section id="contacto" className="py-16 sm:py-24 bg-[#0c0517]">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-20 space-y-12 sm:space-y-16">
+    <section id="contacto" className="py-16 sm:py-24 bg-mystic-dark">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-950/80 border border-amber-400/30 text-amber-300 text-xs font-semibold">
+        <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/90 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Atención Directa & Confidencial</span>
+            <span className="uppercase tracking-wider">Atención Directa & Confidencial</span>
           </div>
 
-          <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold text-gold-gradient">
+          <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-gold-gradient tracking-tight">
             Contacto Espiritual
           </h2>
 
-          <p className="text-purple-200/80 text-base sm:text-lg font-serif-body">
+          <p className="text-purple-200/90 text-base sm:text-xl font-serif-body leading-relaxed">
             Comunícate directamente con la Maestra Rosy por WhatsApp o llamada telefónica para agendar tu consulta de tarot o pedir informes sobre rituales y limpias.
           </p>
         </div>
 
         {/* Contact Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          {/* WhatsApp Primary Card */}
+          {/* WhatsApp Card */}
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-emerald-700 to-teal-800 text-white shadow-xl hover:shadow-2xl hover:shadow-emerald-600/30 transition-all transform hover:-translate-y-1 border border-emerald-500/50 flex sm:flex-col justify-between items-center sm:items-start gap-3 sm:space-y-6"
+            className="group p-6 rounded-3xl bg-gradient-to-br from-emerald-950 via-teal-950 to-emerald-900 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-1 border.5 border-emerald-500/50 flex flex-col justify-between space-y-6 relative overflow-hidden"
           >
-            <div className="flex sm:flex-col items-center sm:items-start gap-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white shrink-0 group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-800 transition-all shadow-md">
-                <MessageCircle className="w-5 h-5 sm:w-7 sm:h-7" />
+            <div className="space-y-4 relative z-10">
+              <div className="w-13 h-13 rounded-2xl bg-emerald-500 text-emerald-950 flex items-center justify-center font-bold shrink-0 shadow-lg group-hover:scale-110 transition-transform">
+                <MessageCircle className="w-7 h-7 fill-emerald-950" />
               </div>
               <div>
-                <h3 className="font-serif-title font-bold text-base sm:text-xl text-emerald-100">WhatsApp Directo</h3>
-                <p className="text-emerald-100/90 text-[11px] sm:text-xs font-normal leading-tight sm:leading-relaxed hidden sm:block">
-                  Atención oportuna para citas de tarot y velones.
+                <h3 className="font-serif-title font-bold text-xl text-emerald-200">WhatsApp Directo</h3>
+                <p className="text-emerald-100/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                  Atención prioritaria para citas de tarot y velones preparados.
                 </p>
-                <span className="text-emerald-200 text-xs font-semibold sm:hidden block mt-0.5">
-                  {socialConfig.whatsappNumber}
-                </span>
               </div>
             </div>
-            <div className="sm:pt-2 sm:border-t sm:border-emerald-500/40 flex items-center justify-between font-bold text-xs sm:text-sm shrink-0 w-full text-emerald-200">
-              <span className="hidden sm:inline">{socialConfig.whatsappNumber}</span>
+            <div className="pt-3 border-t border-emerald-500/30 flex items-center justify-between font-serif-title font-bold text-xs sm:text-sm text-emerald-300 uppercase tracking-wider relative z-10">
+              <span>{socialConfig.whatsappNumber}</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </a>
 
-          {/* Telephone Card */}
+          {/* Phone Card */}
           <a
             href={`tel:${socialConfig.phone.replace(/[^0-9+]/g, '')}`}
-            className="group p-5 sm:p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl hover:shadow-purple-900/40 hover:border-amber-400/50 transition-all transform hover:-translate-y-1 backdrop-blur-md flex sm:flex-col justify-between items-center sm:items-start gap-3 sm:space-y-6"
+            className="group p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl hover:border-amber-400/70 transition-all transform hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between space-y-6"
           >
-            <div className="flex sm:flex-col items-center sm:items-start gap-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-900/80 text-amber-300 flex items-center justify-center shrink-0 group-hover:bg-amber-400 group-hover:text-amber-950 group-hover:scale-110 transition-all shadow-md border border-amber-400/30">
-                <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
+            <div className="space-y-4">
+              <div className="w-13 h-13 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold shrink-0 shadow-lg border border-amber-300 group-hover:scale-110 transition-transform">
+                <Phone className="w-6 h-6 text-purple-950" />
               </div>
               <div>
-                <h3 className="font-serif-title font-bold text-base sm:text-xl text-amber-300 group-hover:text-amber-200 transition-colors">Llamada Telefónica</h3>
-                <p className="text-purple-200/70 text-[11px] sm:text-xs font-normal leading-tight sm:leading-relaxed hidden sm:block">
-                  Llamada directa para consultas y citas presenciales.
+                <h3 className="font-serif-title font-bold text-xl text-amber-300">Llamada Directa</h3>
+                <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                  Llamada telefónica para consultas presenciales o virtuales.
                 </p>
-                <span className="text-amber-300 text-xs font-semibold sm:hidden block mt-0.5">
-                  {socialConfig.phone}
-                </span>
               </div>
             </div>
-            <div className="sm:pt-2 sm:border-t sm:border-purple-900/60 flex items-center justify-between font-bold text-xs sm:text-sm text-amber-300 shrink-0 w-full">
-              <span className="hidden sm:inline">{socialConfig.phone}</span>
+            <div className="pt-3 border-t border-purple-900/60 flex items-center justify-between font-serif-title font-bold text-xs sm:text-sm text-amber-300 uppercase tracking-wider">
+              <span>{socialConfig.phone}</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </a>
@@ -90,23 +84,23 @@ export const SocialContact: React.FC = () => {
               href={socialConfig.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-5 sm:p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl hover:shadow-blue-900/40 hover:border-blue-400/50 transition-all transform hover:-translate-y-1 backdrop-blur-md flex sm:flex-col justify-between items-center sm:items-start gap-3 sm:space-y-6"
+              className="group p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl hover:border-blue-400/70 transition-all transform hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between space-y-6"
             >
-              <div className="flex sm:flex-col items-center sm:items-start gap-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-950/80 text-blue-300 flex items-center justify-center shrink-0 group-hover:bg-[#1877F2] group-hover:text-white group-hover:scale-110 transition-all shadow-md border border-blue-500/30">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+              <div className="space-y-4">
+                <div className="w-13 h-13 rounded-2xl bg-blue-950 text-blue-300 flex items-center justify-center shrink-0 shadow-lg border border-blue-500/40 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-serif-title font-bold text-base sm:text-xl text-purple-100 group-hover:text-blue-300 transition-colors">Facebook</h3>
-                  <p className="text-purple-200/70 text-[11px] sm:text-xs font-normal leading-tight sm:leading-relaxed hidden sm:block">
+                  <h3 className="font-serif-title font-bold text-xl text-purple-100 group-hover:text-blue-300 transition-colors">Facebook</h3>
+                  <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
                     Testimonios e historias del santuario espiritual.
                   </p>
                 </div>
               </div>
-              <div className="sm:pt-2 sm:border-t sm:border-purple-900/60 flex items-center justify-between font-semibold text-xs text-blue-300 shrink-0 w-full">
-                <span className="hidden sm:inline">Visitar Facebook</span>
+              <div className="pt-3 border-t border-purple-900/60 flex items-center justify-between font-serif-title font-bold text-xs text-blue-300 uppercase tracking-wider">
+                <span>Visitar Facebook</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </a>
@@ -118,23 +112,23 @@ export const SocialContact: React.FC = () => {
               href={socialConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-5 sm:p-6 rounded-2xl bg-purple-950/60 border border-amber-500/20 shadow-xl hover:shadow-pink-900/40 hover:border-pink-400/50 transition-all transform hover:-translate-y-1 backdrop-blur-md flex sm:flex-col justify-between items-center sm:items-start gap-3 sm:space-y-6"
+              className="group p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl hover:border-pink-400/70 transition-all transform hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between space-y-6"
             >
-              <div className="flex sm:flex-col items-center sm:items-start gap-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-pink-950/80 text-pink-300 flex items-center justify-center shrink-0 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:via-rose-500 group-hover:to-purple-600 group-hover:text-white group-hover:scale-110 transition-all shadow-md border border-pink-500/30">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+              <div className="space-y-4">
+                <div className="w-13 h-13 rounded-2xl bg-pink-950 text-pink-300 flex items-center justify-center shrink-0 shadow-lg border border-pink-500/40 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-serif-title font-bold text-base sm:text-xl text-purple-100 group-hover:text-pink-300 transition-colors">Instagram</h3>
-                  <p className="text-purple-200/70 text-[11px] sm:text-xs font-normal leading-tight sm:leading-relaxed hidden sm:block">
-                    Fotografías de velaciones y trabajos rituales.
+                  <h3 className="font-serif-title font-bold text-xl text-purple-100 group-hover:text-pink-300 transition-colors">Instagram</h3>
+                  <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                    Fotografías de velaciones y rituales.
                   </p>
                 </div>
               </div>
-              <div className="sm:pt-2 sm:border-t sm:border-purple-900/60 flex items-center justify-between font-semibold text-xs text-pink-300 shrink-0 w-full">
-                <span className="hidden sm:inline">Seguir en Instagram</span>
+              <div className="pt-3 border-t border-purple-900/60 flex items-center justify-between font-serif-title font-bold text-xs text-pink-300 uppercase tracking-wider">
+                <span>Seguir en Instagram</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </a>
@@ -142,24 +136,24 @@ export const SocialContact: React.FC = () => {
         </div>
 
         {/* Location & Schedule Banner */}
-        <div className="bg-purple-950/60 rounded-2xl p-6 sm:p-8 border border-amber-500/20 grid grid-cols-1 md:grid-cols-2 gap-6 items-center backdrop-blur-md">
+        <div className="bg-mystic-card rounded-3xl p-6 sm:p-8 border border-amber-500/30 grid grid-cols-1 md:grid-cols-2 gap-6 items-center shadow-2xl">
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
-            <div className="w-10 h-10 rounded-full bg-purple-900 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/30">
-              <MapPin className="w-5 h-5" />
+            <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center shrink-0 border border-amber-300 shadow-md">
+              <MapPin className="w-6 h-6 text-purple-950" />
             </div>
             <div>
-              <h4 className="font-serif-title font-bold text-base text-amber-300">Consultorio & Atención a Distancia</h4>
-              <p className="text-sm text-purple-200/80 font-serif-body">{socialConfig.locationAddress}</p>
+              <h4 className="font-serif-title font-bold text-lg text-amber-300">Santuario & Atención Virtual</h4>
+              <p className="text-sm sm:text-base text-purple-200/90 font-serif-body mt-0.5">{socialConfig.locationAddress}</p>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
-            <div className="w-10 h-10 rounded-full bg-purple-900 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/30">
-              <Clock className="w-5 h-5" />
+            <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center shrink-0 border border-amber-300 shadow-md">
+              <Clock className="w-6 h-6 text-purple-950" />
             </div>
             <div>
-              <h4 className="font-serif-title font-bold text-base text-amber-300">Horarios de Atenciones</h4>
-              <p className="text-sm text-purple-200/80 font-serif-body">{socialConfig.workingHours}</p>
+              <h4 className="font-serif-title font-bold text-lg text-amber-300">Horarios de Atención</h4>
+              <p className="text-sm sm:text-base text-purple-200/90 font-serif-body mt-0.5">{socialConfig.workingHours}</p>
             </div>
           </div>
         </div>

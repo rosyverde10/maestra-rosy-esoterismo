@@ -12,27 +12,22 @@ interface AdminLoginModalProps {
 export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClose, onSuccess }) => {
   const { requestOTPCode, verifyOTPCode, data } = useSite();
 
-  // Step 1 or Step 2
   const [step, setStep] = useState<1 | 2>(1);
 
-  // Form State
   const [email, setEmail] = useState(data.adminEmail || 'rosyverde10@gmail.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Step 2 OTP State (6 Digits)
   const [otpDigits, setOtpDigits] = useState<string[]>(['', '', '', '', '', '']);
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
-  const [timeLeftSeconds, setTimeLeftSeconds] = useState<number>(300); // 5 minutes
+  const [timeLeftSeconds, setTimeLeftSeconds] = useState<number>(300);
 
   const firstOtpInputRef = useRef<HTMLInputElement>(null);
 
-  // Lock background scroll when modal is open
   useBodyScrollLock(isOpen);
 
-  // Reset modal state when opened/closed
   useEffect(() => {
     if (!isOpen) {
       setStep(1);
@@ -44,7 +39,6 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
     }
   }, [isOpen, data.adminEmail]);
 
-  // Countdown timer for 5-minute OTP code expiration
   useEffect(() => {
     if (step !== 2 || !expiresAt) return;
 
@@ -54,14 +48,13 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
 
       if (remaining <= 0) {
         clearInterval(interval);
-        setError('El código de 6 dígitos de 5 minutos ha expirado. Por favor solicite uno nuevo.');
+        setError('El código de 6 dígitos ha expirado. Por favor solicite uno nuevo.');
       }
     }, 1000);
 
     return () => clearInterval(interval);
   }, [step, expiresAt]);
 
-  // Focus first OTP input box when step 2 opens
   useEffect(() => {
     if (step === 2) {
       setTimeout(() => {
@@ -72,7 +65,6 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
 
   if (!isOpen) return null;
 
-  // Step 1 Submission: Validate Email + Password and request 6-digit OTP email
   const handleRequestCode = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -104,7 +96,6 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
     }
   };
 
-  // Step 2 Submission: Verify 6-digit OTP code
   const handleVerifyCode = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     setError('');
@@ -186,42 +177,42 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#07020f]/85 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#040208]/90 backdrop-blur-2xl flex items-center justify-center p-4">
 
-      <div className="bg-[#170b2e] text-purple-100 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-amber-400/30 relative transform transition-all my-auto">
+      <div className="bg-[#0e071c] text-purple-100 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.9)] border border-amber-400/50 relative transform transition-all my-auto">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-purple-300 hover:text-amber-300 rounded-full hover:bg-purple-900/40 transition-colors"
+          className="absolute top-4 right-4 p-2.5 text-purple-300 hover:text-amber-300 rounded-full bg-purple-950/80 hover:bg-purple-900 transition-colors border border-amber-400/30"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* STEP 1: CREDENTIALS */}
+        {/* STEP 1 */}
         {step === 1 && (
           <div className="space-y-6">
             <div className="text-center space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-900 to-indigo-900 text-amber-300 flex items-center justify-center mx-auto shadow-lg border border-amber-400/30">
-                <Moon className="w-7 h-7 fill-amber-400 text-amber-400" />
+              <div className="w-14 h-14 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center mx-auto shadow-xl border border-amber-300">
+                <Moon className="w-7 h-7 fill-purple-950 text-purple-950" />
               </div>
               <div>
-                <h3 className="font-serif-title font-bold text-2xl text-amber-300">
-                  Acceso Maestra Rosy
+                <h3 className="font-serif-title font-bold text-2xl text-gold-gradient tracking-wide">
+                  Acceso Panel Admin
                 </h3>
-                <p className="text-xs text-purple-200/70 mt-1 leading-relaxed">
-                  Ingrese sus credenciales para solicitar el código de verificación al correo.
+                <p className="text-xs text-purple-200/80 mt-1 font-serif-body">
+                  Ingrese sus credenciales para recibir el código de seguridad al correo.
                 </p>
               </div>
             </div>
 
             <form onSubmit={handleRequestCode} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-amber-400 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-serif-title font-bold text-amber-400 uppercase tracking-wider mb-1.5">
                   Correo Electrónico
                 </label>
                 <div className="relative">
-                  <Mail className="w-5 h-5 text-purple-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <Mail className="w-5 h-5 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="email"
                     required
@@ -231,17 +222,17 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                       setError('');
                     }}
                     placeholder="rosyverde10@gmail.com"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-amber-500/30 bg-purple-950/80 text-purple-100 focus:outline-none focus:ring-2 focus:ring-amber-400/40 text-sm font-medium"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-amber-500/40 bg-[#07030e] text-white focus:outline-none focus:ring-2 focus:ring-amber-400/50 text-sm font-medium shadow-inner"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-amber-400 uppercase tracking-wider mb-1.5">
-                  Contraseña / PIN
+                <label className="block text-xs font-serif-title font-bold text-amber-400 uppercase tracking-wider mb-1.5">
+                  Contraseña de Seguridad
                 </label>
                 <div className="relative">
-                  <KeyRound className="w-5 h-5 text-purple-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <KeyRound className="w-5 h-5 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
@@ -251,7 +242,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                       setError('');
                     }}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-amber-500/30 bg-purple-950/80 text-purple-100 focus:outline-none focus:ring-2 focus:ring-amber-400/40 text-sm font-medium"
+                    className="w-full pl-11 pr-11 py-3 rounded-xl border border-amber-500/40 bg-[#07030e] text-white focus:outline-none focus:ring-2 focus:ring-amber-400/50 text-sm font-medium shadow-inner"
                   />
                   <button
                     type="button"
@@ -264,8 +255,8 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
               </div>
 
               {error && (
-                <div className="p-3 rounded-xl bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-semibold flex items-center gap-2">
-                  <ShieldAlert className="w-4 h-4 shrink-0" />
+                <div className="p-3 rounded-xl bg-rose-950/90 border border-rose-500/50 text-rose-200 text-xs font-semibold flex items-center gap-2">
+                  <ShieldAlert className="w-4 h-4 shrink-0 text-rose-400" />
                   <span>{error}</span>
                 </div>
               )}
@@ -273,7 +264,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 border border-amber-300"
+                className="w-full py-3.5 px-4 rounded-xl bg-gold-shine text-purple-950 font-serif-title font-bold text-xs shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 border border-amber-300 uppercase tracking-wider"
               >
                 {loading ? (
                   <>
@@ -282,8 +273,8 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4" />
-                    <span>Enviar Código de 6 Digitos</span>
+                    <Sparkles className="w-4 h-4 text-purple-950" />
+                    <span>Enviar Código de 6 DÍGITOS</span>
                   </>
                 )}
               </button>
@@ -291,34 +282,33 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
           </div>
         )}
 
-        {/* STEP 2: 6-DIGIT OTP CODE */}
+        {/* STEP 2 */}
         {step === 2 && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setStep(1)}
-                className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-semibold"
+                className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-serif-title font-bold"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Volver</span>
               </button>
-              <span className="text-[11px] font-semibold text-purple-300/70">Paso 2 de 2</span>
+              <span className="text-[11px] font-serif-title font-semibold text-purple-300/80 uppercase">Paso 2 de 2</span>
             </div>
 
             <div className="text-center space-y-2">
-              <div className="w-12 h-12 rounded-2xl bg-amber-400 text-amber-950 flex items-center justify-center mx-auto shadow-lg">
-                <Sparkles className="w-6 h-6" />
+              <div className="w-13 h-13 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center mx-auto shadow-xl border border-amber-300">
+                <Sparkles className="w-6 h-6 text-purple-950" />
               </div>
               <h3 className="font-serif-title font-bold text-xl text-amber-300">
-                Código Enviado a su Correo
+                Código Enviado al Correo
               </h3>
-              <p className="text-xs text-purple-200/80 leading-relaxed max-w-xs mx-auto">
+              <p className="text-xs text-purple-200/90 font-serif-body leading-relaxed max-w-xs mx-auto">
                 Hemos enviado un código de seguridad de 6 dígitos a: <br />
                 <strong className="text-amber-300 font-bold">{email}</strong>
               </p>
             </div>
 
-            {/* OTP 6 Boxes Input */}
             <form onSubmit={handleVerifyCode} className="space-y-5">
               <div className="flex justify-center gap-2" onPaste={handleOtpPaste}>
                 {otpDigits.map((digit, idx) => (
@@ -332,13 +322,12 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                     value={digit}
                     onChange={(e) => handleOtpChange(idx, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                    className="w-11 h-13 text-center text-xl font-bold text-amber-300 bg-purple-950/90 border-2 border-amber-500/30 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/40 shadow-md"
+                    className="w-11 h-13 text-center text-xl font-serif-title font-extrabold text-amber-300 bg-[#07030e] border-2 border-amber-500/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/40 shadow-inner"
                   />
                 ))}
               </div>
 
-              {/* Timer & Resend */}
-              <div className="flex items-center justify-between text-xs text-purple-300/70 pt-1">
+              <div className="flex items-center justify-between text-xs text-purple-300/80 pt-1 font-serif-body">
                 <div className="flex items-center gap-1.5 font-mono">
                   <Clock className="w-3.5 h-3.5 text-amber-400" />
                   <span>Vence en: {formatTimer(timeLeftSeconds)}</span>
@@ -346,15 +335,15 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                 <button
                   type="button"
                   onClick={(e) => handleRequestCode(e)}
-                  className="text-amber-400 hover:text-amber-300 font-semibold underline cursor-pointer"
+                  className="text-amber-400 hover:text-amber-300 font-bold underline cursor-pointer"
                 >
                   Reenviar código
                 </button>
               </div>
 
               {error && (
-                <div className="p-3 rounded-xl bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-semibold flex items-center gap-2">
-                  <ShieldAlert className="w-4 h-4 shrink-0" />
+                <div className="p-3 rounded-xl bg-rose-950/90 border border-rose-500/50 text-rose-200 text-xs font-semibold flex items-center gap-2">
+                  <ShieldAlert className="w-4 h-4 shrink-0 text-rose-400" />
                   <span>{error}</span>
                 </div>
               )}
@@ -362,7 +351,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 border border-amber-300"
+                className="w-full py-3.5 px-4 rounded-xl bg-gold-shine text-purple-950 font-serif-title font-bold text-xs shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 border border-amber-300 uppercase tracking-wider"
               >
                 {loading ? (
                   <>
@@ -371,7 +360,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                   </>
                 ) : (
                   <>
-                    <CheckCircle className="w-4 h-4" />
+                    <CheckCircle className="w-4 h-4 text-purple-950" />
                     <span>Verificar e Iniciar Sesión</span>
                   </>
                 )}

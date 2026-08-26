@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSite } from '../../context/SiteContext';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
-import { Menu, X, MessageCircle, Moon, Sparkles } from 'lucide-react';
+import { Menu, X, MessageCircle, Moon, Sparkles, Compass } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
@@ -13,7 +13,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const { data } = useSite();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Lock scroll when mobile menu drawer is open
   useBodyScrollLock(mobileMenuOpen);
 
   const toggleMobileMenu = () => {
@@ -45,55 +44,67 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(data.socialConfig.whatsappMessage)}`;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#120726]/90 backdrop-blur-xl border-b border-amber-500/20 py-2.5 sm:py-3 transition-all duration-300 shadow-2xl">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-20 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-[#06030b]/85 backdrop-blur-2xl border-b border-amber-500/30 py-3 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 flex items-center justify-between">
 
-        {/* Logo */}
+        {/* Brand Identity */}
         <a href="#" onClick={(e) => handleNavClick(e, '#inicio')} className="flex items-center gap-3 group">
           {data.siteConfig.logoImage ? (
-            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-amber-400/40 shadow-lg">
+            <div className="w-11 h-11 rounded-full overflow-hidden shrink-0 border-2 border-amber-400/60 shadow-[0_0_15px_rgba(251,191,36,0.35)] group-hover:scale-105 transition-transform">
               <img src={data.siteConfig.logoImage} alt="Logo" className="w-full h-full object-cover" />
             </div>
           ) : (
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-900 to-indigo-900 border border-amber-400/50 text-amber-300 flex items-center justify-center shadow-lg group-hover:border-amber-300 transition-all shrink-0">
-              <Moon className="w-5 h-5 fill-amber-400 text-amber-400 animate-pulse" />
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 via-purple-900 to-indigo-950 border-2 border-amber-400 text-amber-300 flex items-center justify-center shadow-[0_0_15px_rgba(251,191,36,0.4)] group-hover:rotate-12 transition-transform shrink-0">
+              <Moon className="w-6 h-6 fill-amber-300 text-amber-300 animate-pulse" />
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <span className="font-serif-title font-bold text-sm sm:text-lg md:text-xl text-amber-300 block leading-tight tracking-wider truncate drop-shadow">
-              {data.siteConfig.businessName}
-            </span>
-            <span className="text-[10px] sm:text-xs text-purple-300/80 hidden sm:block font-medium truncate">
-              Lecturas de Tarot, Limpias Espirituales & Productos Curados
+            <div className="flex items-center gap-1.5">
+              <span className="font-serif-title font-bold text-base sm:text-xl text-gold-gradient block tracking-widest uppercase">
+                {data.siteConfig.businessName}
+              </span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-star-glow hidden sm:inline" />
+            </div>
+            <span className="text-[10px] sm:text-xs text-purple-200/90 font-serif-body italic hidden sm:block tracking-wide">
+              Guiado Astral • Tarot • Trabajos & Limpias Espirituales
             </span>
           </div>
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-medium text-purple-200">
-          <a href="#inicio" onClick={(e) => handleNavClick(e, '#inicio')} className="hover:text-amber-300 transition-colors whitespace-nowrap">Inicio</a>
-          <a href="#catalogo" onClick={(e) => handleNavClick(e, '#catalogo')} className="hover:text-amber-300 transition-colors whitespace-nowrap">Catálogo Esotérico</a>
-          <a href="#nosotros" onClick={(e) => handleNavClick(e, '#nosotros')} className="hover:text-amber-300 transition-colors whitespace-nowrap">Sanación & Don</a>
-          <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-amber-300 transition-colors whitespace-nowrap">Contacto Espiritual</a>
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-9 text-xs sm:text-sm font-semibold tracking-wider text-purple-100 uppercase">
+          <a href="#inicio" onClick={(e) => handleNavClick(e, '#inicio')} className="hover:text-amber-300 transition-all hover:scale-105 flex items-center gap-1">
+            <span>Inicio</span>
+          </a>
+          <a href="#catalogo" onClick={(e) => handleNavClick(e, '#catalogo')} className="hover:text-amber-300 transition-all hover:scale-105 flex items-center gap-1">
+            <Compass className="w-3.5 h-3.5 text-amber-400" />
+            <span>Catálogo Ritual</span>
+          </a>
+          <a href="#nosotros" onClick={(e) => handleNavClick(e, '#nosotros')} className="hover:text-amber-300 transition-all hover:scale-105 flex items-center gap-1">
+            <span>Sanación & Don</span>
+          </a>
+          <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-amber-300 transition-all hover:scale-105 flex items-center gap-1">
+            <span>Contacto Directo</span>
+          </a>
         </nav>
 
-        {/* Action Button - Direct WhatsApp */}
+        {/* WhatsApp Action Button */}
         <div className="hidden md:flex items-center gap-3 shrink-0">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-lg hover:shadow-emerald-900/40 transition-all transform hover:-translate-y-0.5 whitespace-nowrap border border-emerald-400/30"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-shine text-purple-950 font-serif-title font-bold text-xs shadow-lg hover:shadow-amber-500/40 hover:scale-105 transition-all uppercase tracking-wider border border-amber-300"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>Consultar por WhatsApp</span>
+            <MessageCircle className="w-4 h-4 fill-purple-950" />
+            <span>Consultar con Maestra Rosy</span>
           </a>
         </div>
 
-        {/* Mobile & Tablet Animated Hamburger Button */}
+        {/* Mobile Hamburger Button */}
         <button
           onClick={toggleMobileMenu}
-          className="lg:hidden p-2 rounded-xl text-amber-300 hover:bg-purple-900/40 focus:outline-none shrink-0 transition-transform active:scale-95 border border-amber-500/20"
+          className="lg:hidden p-2.5 rounded-xl bg-purple-950/60 text-amber-300 hover:bg-purple-900 focus:outline-none shrink-0 border border-amber-400/40 shadow-lg"
           aria-label="Menú"
         >
           <motion.div
@@ -108,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         </button>
       </div>
 
-      {/* Mobile & Tablet Dropdown Drawer */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -116,26 +127,26 @@ export const Navbar: React.FC<NavbarProps> = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden overflow-hidden border-t border-amber-500/20 bg-[#120726]/95 backdrop-blur-2xl px-4 pt-3 pb-6 shadow-2xl max-h-[80vh] overflow-y-auto"
+            className="lg:hidden overflow-hidden border-t border-amber-500/30 bg-[#06030b]/98 backdrop-blur-2xl px-5 pt-4 pb-7 shadow-2xl"
           >
-            <nav className="flex flex-col gap-2 font-medium text-purple-100">
+            <nav className="flex flex-col gap-2.5 font-medium text-purple-100">
               {[
                 { href: '#inicio', label: 'Inicio' },
-                { href: '#catalogo', label: 'Catálogo de Servicios & Velas' },
-                { href: '#nosotros', label: 'Sanación & Trayectoria' },
+                { href: '#catalogo', label: 'Catálogo de Velas & Tarot' },
+                { href: '#nosotros', label: 'Sanación, Limpias & Trayectoria' },
                 { href: '#contacto', label: 'Contacto & Agendar Cita' },
               ].map((link, idx) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * idx, duration: 0.25 }}
+                  transition={{ delay: 0.05 * idx, duration: 0.2 }}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="py-2.5 px-4 rounded-xl hover:bg-purple-900/40 hover:text-amber-300 font-semibold text-sm transition-all flex items-center justify-between group cursor-pointer border border-transparent hover:border-amber-500/20"
+                  className="py-3 px-4 rounded-xl bg-purple-950/40 hover:bg-purple-900/60 hover:text-amber-300 font-serif-title font-semibold text-sm transition-all flex items-center justify-between border border-amber-500/20"
                 >
                   <span>{link.label}</span>
-                  <Sparkles className="w-4 h-4 text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Sparkles className="w-4 h-4 text-amber-400" />
                 </motion.a>
               ))}
             </nav>
@@ -143,17 +154,17 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.3 }}
-              className="mt-4 pt-4 border-t border-purple-900/50"
+              transition={{ delay: 0.2, duration: 0.25 }}
+              className="mt-5 pt-4 border-t border-amber-500/20"
             >
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold text-center text-sm flex items-center justify-center gap-2 shadow-lg animate-pulse-glow transition-all"
+                className="w-full py-3.5 px-4 rounded-xl bg-gold-shine text-purple-950 font-serif-title font-bold text-center text-sm flex items-center justify-center gap-2.5 shadow-xl uppercase tracking-wider border border-amber-300"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Agendar por WhatsApp</span>
+                <MessageCircle className="w-4 h-4 fill-purple-950" />
+                <span>Consulta Directa WhatsApp</span>
               </a>
             </motion.div>
           </motion.div>
