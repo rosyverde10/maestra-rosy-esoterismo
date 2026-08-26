@@ -1,13 +1,56 @@
 import React, { useState } from 'react';
 import { useSite } from '../../context/SiteContext';
-import { ArrowDown, MessageCircle, Sparkles, Compass, ShieldCheck, Flame } from 'lucide-react';
+import { ArrowDown, MessageCircle, Sparkles, Compass, RotateCw, Eye } from 'lucide-react';
+
+interface SpiritualAdviceCard {
+  title: string;
+  symbol: string;
+  advice: string;
+  element: string;
+}
+
+const adviceCards: SpiritualAdviceCard[] = [
+  {
+    title: 'La Estrella de la Luz',
+    symbol: '⭐',
+    advice: 'Tus caminos de paz y salud se abren. Confía en la purificación y en tu fuerza interior para soltar pesadumbres pasadas.',
+    element: 'Prosperidad & Claridad'
+  },
+  {
+    title: 'El Sol de la Abundancia',
+    symbol: '☀️',
+    advice: 'Día propicio para proyectos laborales y comerciales. Las intenciones de crecimiento económico se multiplican con fe.',
+    element: 'Éxito Financiero'
+  },
+  {
+    title: 'La Luna de la Intuición',
+    symbol: '🌙',
+    advice: 'Escucha tus pálpitos en el amor y en la familia. Momento ideal para realizar endulzamientos y disolver malentendidos.',
+    element: 'Armonía de Pareja'
+  },
+  {
+    title: 'El Escudo del Arcángel',
+    symbol: '🛡️',
+    advice: 'Estás protegido de miradas o intenciones pesadas. Una limpia espiritual reforzará tu aura para mantenerte inquebrantable.',
+    element: 'Protección Absoluta'
+  }
+];
 
 export const Hero: React.FC = () => {
   const { data } = useSite();
   const { siteConfig } = data;
   const [heroLoaded, setHeroLoaded] = useState(false);
+  
+  // Daily Card Generator State
+  const [currentAdviceIndex, setCurrentAdviceIndex] = useState(0);
 
-  const whatsappMessage = `Hola Maestra Rosy, vi su sitio web de esoterismo y me gustaría agendar una consulta o pedir informes.`;
+  const activeCard = adviceCards[currentAdviceIndex];
+
+  const handleDrawCard = () => {
+    setCurrentAdviceIndex((prev) => (prev + 1) % adviceCards.length);
+  };
+
+  const whatsappMessage = `Hola Maestra Rosy, me salió la carta del día "${activeCard.title}" en su sitio web y me gustaría agendar una consulta de tarot o pedir informes.`;
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
@@ -17,7 +60,7 @@ export const Hero: React.FC = () => {
       <div className="absolute top-10 left-1/3 w-[500px] h-[500px] bg-amber-600/15 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-purple-900/25 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 space-y-12 sm:space-y-16">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
@@ -40,8 +83,39 @@ export const Hero: React.FC = () => {
               {siteConfig.heroSubtitle}
             </p>
 
+            {/* Interactive Daily Tarot / Guidance Card Generator */}
+            <div className="p-5 rounded-3xl bg-mystic-card border border-amber-500/35 shadow-2xl space-y-3 backdrop-blur-md max-w-xl mx-auto lg:mx-0 text-left">
+              <div className="flex items-center justify-between">
+                <span className="font-serif-title font-bold text-xs text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <Eye className="w-4 h-4 text-amber-400" />
+                  Consejo Espiritual del Día
+                </span>
+                <button
+                  onClick={handleDrawCard}
+                  className="px-3 py-1 rounded-full bg-purple-900/80 hover:bg-purple-800 text-amber-300 text-xs font-semibold border border-amber-500/30 flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <RotateCw className="w-3.5 h-3.5" />
+                  <span>Obtener Otra Carta</span>
+                </button>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-purple-950/70 border border-amber-500/20 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gold-shine text-purple-950 flex items-center justify-center text-2xl shadow-md border border-amber-300 shrink-0">
+                  {activeCard.symbol}
+                </div>
+                <div>
+                  <h4 className="font-serif-title font-bold text-base text-amber-300">
+                    {activeCard.title} — <span className="text-xs text-purple-300 font-serif-body font-normal">{activeCard.element}</span>
+                  </h4>
+                  <p className="text-xs text-purple-200/90 font-serif-body mt-0.5 leading-relaxed">
+                    "{activeCard.advice}"
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-3 sm:pt-5">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <a
                 href="#catalogo"
                 onClick={(e) => {
@@ -72,25 +146,6 @@ export const Hero: React.FC = () => {
                 <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0 fill-emerald-400/20" />
                 <span>{siteConfig.heroWhatsappCta || "Agendar Consulta Privada"}</span>
               </a>
-            </div>
-
-            {/* Feature Pillars Grid */}
-            <div className="pt-7 sm:pt-9 border-t border-amber-500/20 grid grid-cols-3 gap-3 text-center max-w-xl mx-auto lg:mx-0">
-              <div className="space-y-1 p-3.5 rounded-2xl bg-purple-950/50 backdrop-blur-md border border-amber-500/30 shadow-lg hover:border-amber-400/60 transition-all">
-                <Flame className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                <span className="block font-serif-title font-bold text-amber-300 text-xs sm:text-sm">{siteConfig.heroFeature1Title || "Tarot Certero"}</span>
-                <span className="block text-[11px] text-purple-200/80 font-serif-body">{siteConfig.heroFeature1Subtitle || "Presencial & En línea"}</span>
-              </div>
-              <div className="space-y-1 p-3.5 rounded-2xl bg-purple-950/50 backdrop-blur-md border border-amber-500/30 shadow-lg hover:border-amber-400/60 transition-all">
-                <Sparkles className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                <span className="block font-serif-title font-bold text-amber-300 text-xs sm:text-sm">{siteConfig.heroFeature2Title || "Limpias & Sanación"}</span>
-                <span className="block text-[11px] text-purple-200/80 font-serif-body">{siteConfig.heroFeature2Subtitle || "Aura y Energías"}</span>
-              </div>
-              <div className="space-y-1 p-3.5 rounded-2xl bg-purple-950/50 backdrop-blur-md border border-amber-500/30 shadow-lg hover:border-amber-400/60 transition-all">
-                <ShieldCheck className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                <span className="block font-serif-title font-bold text-amber-300 text-xs sm:text-sm">{siteConfig.heroFeature3Title || "Productos Curados"}</span>
-                <span className="block text-[11px] text-purple-200/80 font-serif-body">{siteConfig.heroFeature3Subtitle || "Velas y Lociones"}</span>
-              </div>
             </div>
 
           </div>
@@ -139,6 +194,26 @@ export const Hero: React.FC = () => {
 
           </div>
 
+        </div>
+
+        {/* Live Statistics Ticker Banner */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-amber-500/20 text-center">
+          <div className="p-4 rounded-2xl bg-mystic-card border border-amber-500/25 space-y-1">
+            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">+15 Años</span>
+            <span className="block text-xs text-purple-200/80 font-serif-body">Guiado Espiritual</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-mystic-card border border-amber-500/25 space-y-1">
+            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">100%</span>
+            <span className="block text-xs text-purple-200/80 font-serif-body">Atención Confidencial</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-mystic-card border border-amber-500/25 space-y-1">
+            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">Presencial</span>
+            <span className="block text-xs text-purple-200/80 font-serif-body">Y Consultas Virtuales</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-mystic-card border border-amber-500/25 space-y-1">
+            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">24/7</span>
+            <span className="block text-xs text-purple-200/80 font-serif-body">Atención por WhatsApp</span>
+          </div>
         </div>
 
       </div>

@@ -4,10 +4,12 @@ import { AnnouncementBar } from './components/layout/AnnouncementBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
+import { MoonPhaseSection } from './components/sections/MoonPhaseSection';
 import { ProductCatalog } from './components/sections/ProductCatalog';
-import { ProductModal } from './components/sections/ProductModal';
 import { AboutSection } from './components/sections/AboutSection';
+import { TestimonialsSection } from './components/sections/TestimonialsSection';
 import { SocialContact } from './components/sections/SocialContact';
+import { ProductModal } from './components/sections/ProductModal';
 import { AdminLoginModal } from './components/admin/AdminLoginModal';
 import { AdminPanel } from './components/admin/AdminPanel';
 import type { Product } from './types';
@@ -45,8 +47,6 @@ const MainContent: React.FC = () => {
           }
         }, 350);
 
-        // Limpiar de inmediato el parametro ?producto=ID de la barra de navegación
-        // para que al recargar la página no vuelva a abrirse automáticamente
         if (window.history.replaceState) {
           window.history.replaceState(null, '', window.location.pathname);
         }
@@ -63,7 +63,6 @@ const MainContent: React.FC = () => {
     }
   };
 
-  // Auto scroll and clean #catalogo hash from URL bar
   React.useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash;
@@ -82,12 +81,11 @@ const MainContent: React.FC = () => {
     }
   }, []);
 
-
   return (
-    <div className="min-h-screen flex flex-col bg-[#0c0517] text-purple-100 overflow-x-hidden max-w-full">
+    <div className="min-h-screen flex flex-col bg-[#06030b] text-purple-100 overflow-x-hidden max-w-full">
 
-      {/* Top Header Wrapper (Fixed PERMANENTE e Inamovible a la pantalla) */}
-      <div className="fixed top-0 left-0 right-0 z-40 shadow-sm bg-[#120726]">
+      {/* Top Header Wrapper */}
+      <div className="fixed top-0 left-0 right-0 z-40 shadow-md bg-[#06030b]">
         <AnnouncementBar />
         <Navbar
           onOpenAdminLogin={handleOpenAdminLogin}
@@ -95,22 +93,28 @@ const MainContent: React.FC = () => {
         />
       </div>
 
-      {/* Main Content (Espaciador superior ajustado para compensar el header fijo) */}
+      {/* Main Content Flow */}
       <div className="pt-16 sm:pt-20 flex flex-col flex-1">
 
-        {/* Hero Portada */}
+        {/* Hero Portada con Widget de Carta del Día */}
         <Hero />
 
-        {/* Interactive Catalog Section */}
+        {/* NUEVA SECCIÓN: Fases Lunares & Energías Rituales */}
+        <MoonPhaseSection />
+
+        {/* Catálogo de Productos & Servicios */}
         <ProductCatalog onSelectProduct={(prod) => setSelectedProduct(prod)} />
 
-        {/* Tradicion & History Section */}
+        {/* Sanación & Trayectoria de la Maestra Rosy */}
         <AboutSection />
 
-        {/* Social Contact Cards */}
+        {/* NUEVA SECCIÓN: Testimonios & Casos de Éxito */}
+        <TestimonialsSection />
+
+        {/* Contacto Espiritual & Redes Sociales */}
         <SocialContact />
 
-        {/* Footer */}
+        {/* Pie de Página */}
         <Footer
           onOpenAdminLogin={handleOpenAdminLogin}
           onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
@@ -123,7 +127,7 @@ const MainContent: React.FC = () => {
         onClose={() => setSelectedProduct(null)}
       />
 
-      {/* Admin Login Security Modal */}
+      {/* Admin Login Modal */}
       <AdminLoginModal
         isOpen={isAdminLoginOpen}
         onClose={() => setIsAdminLoginOpen(false)}
@@ -133,7 +137,7 @@ const MainContent: React.FC = () => {
         }}
       />
 
-      {/* Admin Full Management Panel */}
+      {/* Admin Panel */}
       <AdminPanel
         isOpen={isAdminPanelOpen}
         onClose={() => setIsAdminPanelOpen(false)}
