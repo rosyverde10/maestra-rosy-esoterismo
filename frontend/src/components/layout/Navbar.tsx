@@ -45,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <header className="py-3 px-3 sm:px-6 md:px-8 transition-all duration-300">
-      <div className="max-w-[1400px] mx-auto apple-liquid-glass-pill px-5 sm:px-8 py-3 flex items-center justify-between border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+      <div className="max-w-[1400px] mx-auto apple-liquid-glass-pill px-5 sm:px-8 py-3 flex items-center justify-between">
 
         {/* Brand Identity - Clean & Uncluttered */}
         <a href="#" onClick={(e) => handleNavClick(e, '#inicio')} className="flex items-center gap-3 group shrink-0">
@@ -68,18 +68,18 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </div>
         </a>
 
-        {/* Desktop Nav Links - Centered, Clean, NO Icons/Emojis, Spacious */}
+        {/* Desktop Nav Links - Centered, Clean, Progressive Underline on Hover */}
         <nav className="hidden lg:flex items-center justify-center gap-8 xl:gap-12 text-xs sm:text-sm font-serif-title font-semibold tracking-wider text-purple-100 uppercase">
-          <a href="#inicio" onClick={(e) => handleNavClick(e, '#inicio')} className="hover:text-amber-300 transition-all hover:scale-105">
+          <a href="#inicio" onClick={(e) => handleNavClick(e, '#inicio')} className="hover:text-amber-300 transition-colors nav-link-underline">
             Inicio
           </a>
-          <a href="#nosotros" onClick={(e) => handleNavClick(e, '#nosotros')} className="hover:text-amber-300 transition-all hover:scale-105">
+          <a href="#nosotros" onClick={(e) => handleNavClick(e, '#nosotros')} className="hover:text-amber-300 transition-colors nav-link-underline">
             Sanación & Don
           </a>
-          <a href="#catalogo" onClick={(e) => handleNavClick(e, '#catalogo')} className="hover:text-amber-300 transition-all hover:scale-105">
+          <a href="#catalogo" onClick={(e) => handleNavClick(e, '#catalogo')} className="hover:text-amber-300 transition-colors nav-link-underline">
             Catálogo Ritual
           </a>
-          <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-amber-300 transition-all hover:scale-105">
+          <a href="#contacto" onClick={(e) => handleNavClick(e, '#contacto')} className="hover:text-amber-300 transition-colors nav-link-underline">
             Contacto Directo
           </a>
         </nav>
