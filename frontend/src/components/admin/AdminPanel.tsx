@@ -1317,7 +1317,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                       Los códigos de seguridad de 6 dígitos para inicio de sesión se envían a este correo verificado:
                     </p>
                     <div className="p-3 rounded-xl bg-[#0a0414] border border-amber-500/30 flex items-center justify-between">
-                      <span className="font-mono font-bold text-sm text-amber-300">rosyverde10@gmail.com</span>
+                      <span className="font-mono font-bold text-sm text-amber-300">{data.adminEmail || 'michisnsqk@gmail.com'}</span>
                       <span className="px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-300 text-[10px] font-extrabold uppercase border border-emerald-500/30">
                         ✓ Verificado (Resend API)
                       </span>

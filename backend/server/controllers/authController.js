@@ -28,7 +28,7 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const adminEmail = (process.env.EMAIL_USER || currentSiteData?.adminEmail || "rosyverde10@gmail.com").trim().toLowerCase();
+      const adminEmail = (process.env.EMAIL_USER || currentSiteData?.adminEmail || "michisnsqk@gmail.com").trim().toLowerCase();
 
       const isEmailValid = normalizedEmail === adminEmail;
       const isPasswordValid = password === currentSiteData.adminPinHash;

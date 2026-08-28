@@ -14,7 +14,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
 
   const [step, setStep] = useState<1 | 2>(1);
 
-  const [email, setEmail] = useState(data.adminEmail || 'rosyverde10@gmail.com');
+  const [email, setEmail] = useState(data.adminEmail || 'michisnsqk@gmail.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
   useEffect(() => {
     if (!isOpen) {
       setStep(1);
-      setEmail(data.adminEmail || 'rosyverde10@gmail.com');
+      setEmail(data.adminEmail || 'michisnsqk@gmail.com');
       setPassword('');
       setError('');
       setOtpDigits(['', '', '', '', '', '']);
@@ -221,7 +221,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
                       setEmail(e.target.value);
                       setError('');
                     }}
-                    placeholder="rosyverde10@gmail.com"
+                    placeholder="michisnsqk@gmail.com"
                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-amber-500/40 bg-[#07030e] text-white focus:outline-none focus:ring-2 focus:ring-amber-400/50 text-sm font-medium shadow-inner"
                   />
                 </div>
