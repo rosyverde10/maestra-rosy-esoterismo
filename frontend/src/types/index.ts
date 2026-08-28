@@ -43,11 +43,9 @@ export interface SocialConfig {
   whatsappNumber: string;
   whatsappMessage: string;
   phone: string;
-  facebookUrl: string;
-  instagramUrl: string;
-  tiktokUrl: string;
   locationAddress: string;
   workingHours: string;
+  googleMapsUrl?: string;
 }
 
 export interface SiteData {

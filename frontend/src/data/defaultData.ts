@@ -8,7 +8,7 @@ export const INITIAL_SITE_DATA: SiteData = {
     businessName: "Maestra Rosy - Esoterismo & Lecturas de Tarot",
     tagline: "Guiado Espiritual, Lecturas de Tarot, Limpias Energéticas, Velas Ritualizadas y Lociones Esotéricas",
     logoImage: undefined,
-    heroBadge: "✨ Maestra Rosy • Canalizadora & Guía Espiritual",
+    heroBadge: "Maestra Rosy • Canalizadora & Guía Espiritual",
     heroTitle: "Guiado Espiritual, Lecturas de Tarot y Limpias Energéticas",
     heroSubtitle: "Encuentra respuesta, claridad y paz espiritual. Sanación de aura, lecturas de tarot presenciales o en línea, velones preparados para el amor y la prosperidad, y lociones esotéricas curadas.",
     heroImage: "/images/hero.jpg",
@@ -27,18 +27,16 @@ export const INITIAL_SITE_DATA: SiteData = {
     aboutText: "Con años de experiencia en las artes esotéricas y guiado espiritual, la Maestra Rosy ayuda a desatar nudos energéticos, atraer la prosperidad, proteger el hogar y traer armonía a las parejas.",
     traditionText: "Cada vela es cargada y consagrada individualmente en altar con aceites esenciales, hierbas sagradas y oraciones de luz para garantizar la efectividad del trabajo espiritual.",
     aboutImage: "/images/hero.jpg",
-    announcementBanner: "✨ Santuario Espiritual Maestra Rosy • Consultas de Tarot presenciales y a distancia por WhatsApp",
+    announcementBanner: "Santuario Espiritual Maestra Rosy • Consultas de Tarot presenciales y a distancia por WhatsApp",
     footerText: "Santuario de Sanación y Guiado Espiritual. Lecturas de Tarot, Limpias y Productos Esotéricos."
   },
   socialConfig: {
     whatsappNumber: "5215551234567",
     whatsappMessage: "Hola Maestra Rosy, vi su sitio web de esoterismo y me gustaría agendar una lectura de tarot o consultar por un servicio.",
     phone: "+52 (55) 5123 4567",
-    facebookUrl: "https://facebook.com",
-    instagramUrl: "https://instagram.com",
-    tiktokUrl: "https://tiktok.com",
     locationAddress: "Consultorio Espiritual, Ciudad de México / Consultas a Distancia",
-    workingHours: "Lunes a Sábado: 9:00 AM - 9:00 PM | Atendemos mensajes de WhatsApp"
+    workingHours: "Lunes a Sábado: 9:00 AM - 9:00 PM | Atendemos mensajes de WhatsApp",
+    googleMapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6616089851174!2d-99.16781268509355!3d19.427024986887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd15a7%3A0x6a6d36e2f1e2f1e2!2sAngel%20de%20la%20Independencia!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx"
   },
   categories: [
     "Todas",

@@ -1277,31 +1277,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </div>
                   </div>
 
-                  {/* REDES SOCIALES */}
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/30 space-y-3">
-                    <label className="block text-xs font-bold text-amber-300 uppercase">Enlaces a Redes Sociales</label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="space-y-1">
-                        <span className="text-[11px] font-bold text-blue-400 block">Página de Facebook</span>
-                        <input
-                          type="text"
-                          value={socialConfigForm.facebookUrl}
-                          onChange={(e) => handleSocialConfigChange({ facebookUrl: e.target.value })}
-                          placeholder="https://facebook.com/..."
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <span className="text-[11px] font-bold text-pink-400 block">Perfil de Instagram</span>
-                        <input
-                          type="text"
-                          value={socialConfigForm.instagramUrl}
-                          onChange={(e) => handleSocialConfigChange({ instagramUrl: e.target.value })}
-                          placeholder="https://instagram.com/..."
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
-                        />
-                      </div>
-                    </div>
+                  {/* UBICACIÓN DE GOOGLE MAPS */}
+                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/30 space-y-2">
+                    <label className="block text-xs font-bold text-amber-300 uppercase flex items-center justify-between">
+                      <span>Ubicación / Embed de Google Maps</span>
+                      <span className="text-[10px] font-bold text-amber-300 bg-purple-950 px-2 py-0.5 rounded-full border border-amber-500/30">Mapa Interactivo</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={socialConfigForm.googleMapsUrl || ''}
+                      onChange={(e) => handleSocialConfigChange({ googleMapsUrl: e.target.value })}
+                      placeholder="https://www.google.com/maps/embed?pb=..."
+                      className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs font-mono"
+                    />
+                    <p className="text-[11px] text-purple-300/80 leading-relaxed">
+                      Ingrese la URL o enlace "Insertar mapa" (embed) de Google Maps para mostrar su ubicación interactiva en la página.
+                    </p>
                   </div>
 
                   <button
