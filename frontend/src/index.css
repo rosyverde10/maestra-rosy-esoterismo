@@ -14,11 +14,6 @@
     overflow-x: hidden;
     touch-action: manipulation;
     background-color: #05020a;
-    background-image: 
-      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(180, 83, 9, 0.2), transparent),
-      radial-gradient(ellipse 70% 50% at 10% 45%, rgba(109, 40, 217, 0.22), transparent),
-      radial-gradient(ellipse 60% 60% at 90% 85%, rgba(30, 27, 75, 0.6), transparent);
-    background-attachment: fixed;
   }
 }
 
@@ -240,14 +235,14 @@
 }
 
 .bg-mystic-dark {
-  background-color: #05020a;
+  background-color: transparent;
 }
 
 .bg-mystic-pattern {
-  background-color: #05020a;
+  background-color: transparent;
   background-image: 
-    radial-gradient(rgba(251, 191, 36, 0.15) 1.2px, transparent 1.2px),
-    radial-gradient(rgba(192, 132, 252, 0.12) 1.2px, #05020a 1.2px);
+    radial-gradient(rgba(251, 191, 36, 0.12) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(192, 132, 252, 0.10) 1.2px, transparent 1.2px);
   background-size: 40px 40px;
   background-position: 0 0, 20px 20px;
 }
@@ -296,4 +291,79 @@
 
 .animate-pulse-glow {
   animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* --- APPLE MUSIC STYLE ANIMATED LIQUID GRADIENT CANVAS --- */
+
+@keyframes appleLiquid1 {
+  0% {
+    transform: translate(0vw, 0vh) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(12vw, 15vh) scale(1.3) rotate(120deg);
+  }
+  66% {
+    transform: translate(-10vw, 22vh) scale(0.9) rotate(240deg);
+  }
+  100% {
+    transform: translate(0vw, 0vh) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes appleLiquid2 {
+  0% {
+    transform: translate(0vw, 0vh) scale(1.2) rotate(0deg);
+  }
+  33% {
+    transform: translate(-18vw, -12vh) scale(0.85) rotate(-120deg);
+  }
+  66% {
+    transform: translate(12vw, -20vh) scale(1.3) rotate(-240deg);
+  }
+  100% {
+    transform: translate(0vw, 0vh) scale(1.2) rotate(-360deg);
+  }
+}
+
+@keyframes appleLiquid3 {
+  0% {
+    transform: translate(0vw, 0vh) scale(0.9) rotate(0deg);
+  }
+  33% {
+    transform: translate(-14vw, 18vh) scale(1.35) rotate(90deg);
+  }
+  66% {
+    transform: translate(15vw, -12vh) scale(1.05) rotate(210deg);
+  }
+  100% {
+    transform: translate(0vw, 0vh) scale(0.9) rotate(360deg);
+  }
+}
+
+@keyframes appleLiquid4 {
+  0% {
+    transform: translate(0vw, 0vh) scale(1.1) rotate(0deg);
+  }
+  50% {
+    transform: translate(10vw, -15vh) scale(1.35) rotate(180deg);
+  }
+  100% {
+    transform: translate(0vw, 0vh) scale(1.1) rotate(360deg);
+  }
+}
+
+.animate-apple-liquid-1 {
+  animation: appleLiquid1 20s ease-in-out infinite;
+}
+
+.animate-apple-liquid-2 {
+  animation: appleLiquid2 26s ease-in-out infinite;
+}
+
+.animate-apple-liquid-3 {
+  animation: appleLiquid3 24s ease-in-out infinite;
+}
+
+.animate-apple-liquid-4 {
+  animation: appleLiquid4 30s ease-in-out infinite;
 }

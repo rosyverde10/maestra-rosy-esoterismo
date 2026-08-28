@@ -3,6 +3,7 @@ import { SiteProvider, useSite } from './context/SiteContext';
 import { AnnouncementBar } from './components/layout/AnnouncementBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { AppleMusicBackground } from './components/layout/AppleMusicBackground';
 import { Hero } from './components/sections/Hero';
 import { EsoterismGuideSection } from './components/sections/EsoterismGuideSection';
 import { MoonPhaseSection } from './components/sections/MoonPhaseSection';
@@ -82,9 +83,12 @@ const MainContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#05020a] text-purple-100 overflow-x-hidden max-w-full">
+    <div className="min-h-screen flex flex-col bg-[#05020a] text-purple-100 overflow-x-hidden max-w-full relative">
 
-      {/* Floating Header Wrapper WITHOUT full-width background rectangle */}
+      {/* APPLE MUSIC STYLE ANIMATED LIQUID GRADIENT CANVAS */}
+      <AppleMusicBackground />
+
+      {/* Floating Header Wrapper */}
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
         <div className="pointer-events-auto">
           <AnnouncementBar />
@@ -98,12 +102,12 @@ const MainContent: React.FC = () => {
       </div>
 
       {/* Main Content Flow */}
-      <div className="pt-16 sm:pt-20 flex flex-col flex-1">
+      <div className="pt-16 sm:pt-20 flex flex-col flex-1 relative z-10">
 
-        {/* 1. Hero Portada con Widget Liquid Glass */}
+        {/* 1. Hero Portada */}
         <Hero />
 
-        {/* 2. NUEVA SECCIÓN: ¿Qué es el Esoterismo & Guía Espiritual? */}
+        {/* 2. ¿Qué es el Esoterismo & Guía Espiritual? */}
         <EsoterismGuideSection />
 
         {/* 3. Sanación, Don & Trayectoria de la Maestra Rosy */}
