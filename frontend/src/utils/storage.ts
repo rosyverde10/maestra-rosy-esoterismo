@@ -1,5 +1,4 @@
 import type { SiteData } from '../types';
-
 import { INITIAL_SITE_DATA } from '../data/defaultData';
 
 const STORAGE_KEY = 'cajitas_levantamiento_cruz_v1_data';
@@ -12,10 +11,11 @@ export const loadSiteData = (): SiteData => {
       return INITIAL_SITE_DATA;
     }
     const parsed = JSON.parse(stored);
-    // Ensure all required fields exist
+    // Ensure all required fields exist & sync adminEmail
     return {
       ...INITIAL_SITE_DATA,
       ...parsed,
+      adminEmail: parsed.adminEmail || INITIAL_SITE_DATA.adminEmail,
       siteConfig: { ...INITIAL_SITE_DATA.siteConfig, ...(parsed.siteConfig || {}) },
       socialConfig: { ...INITIAL_SITE_DATA.socialConfig, ...(parsed.socialConfig || {}) },
       categories: (parsed.categories && parsed.categories.length > 0) ? parsed.categories : INITIAL_SITE_DATA.categories,

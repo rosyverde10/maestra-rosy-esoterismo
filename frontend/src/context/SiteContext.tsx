@@ -179,13 +179,18 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const requestOTPCode = async (email: string, pass: string): Promise<RequestOTPResult> => {
     const normalizedEmail = email.trim().toLowerCase();
-    const targetEmail = (data.adminEmail || "robertmartinez010486@gmail.com").toLowerCase();
+    const currentAdminEmail = (data.adminEmail || "michisnsqk@gmail.com").toLowerCase();
 
-    if (normalizedEmail !== targetEmail) {
+    if (pass !== data.adminPinHash) {
       return { success: false, message: 'Credenciales Incorrectas' };
     }
 
-    if (pass !== data.adminPinHash) {
+    const isAllowedEmail = 
+      normalizedEmail === currentAdminEmail || 
+      normalizedEmail === 'michisnsqk@gmail.com' || 
+      normalizedEmail === 'rosyverde10@gmail.com';
+
+    if (!isAllowedEmail) {
       return { success: false, message: 'Credenciales Incorrectas' };
     }
 
