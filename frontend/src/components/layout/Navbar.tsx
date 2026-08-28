@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
             className="whatsapp-emerald-btn px-6 py-2.5 text-xs flex items-center gap-2.5 uppercase tracking-wider animate-pulse-glow"
           >
             <MessageCircle className="w-4 h-4 fill-emerald-950 text-emerald-950 shrink-0" />
-            <span>Consultar con Maestra Rosy</span>
+            <span>Consultar</span>
           </a>
         </div>
 

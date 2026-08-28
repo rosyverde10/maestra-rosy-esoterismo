@@ -4,6 +4,7 @@ import { AnnouncementBar } from './components/layout/AnnouncementBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
+import { EsoterismGuideSection } from './components/sections/EsoterismGuideSection';
 import { MoonPhaseSection } from './components/sections/MoonPhaseSection';
 import { ProductCatalog } from './components/sections/ProductCatalog';
 import { AboutSection } from './components/sections/AboutSection';
@@ -102,19 +103,22 @@ const MainContent: React.FC = () => {
         {/* 1. Hero Portada con Widget Liquid Glass */}
         <Hero />
 
-        {/* 2. Sanación, Don & Trayectoria */}
+        {/* 2. NUEVA SECCIÓN: ¿Qué es el Esoterismo & Guía Espiritual? */}
+        <EsoterismGuideSection />
+
+        {/* 3. Sanación, Don & Trayectoria de la Maestra Rosy */}
         <AboutSection />
 
-        {/* 3. Fases Lunares & Energías Rituales */}
+        {/* 4. Fases Lunares & Energías Rituales */}
         <MoonPhaseSection />
 
-        {/* 4. Catálogo de Servicios & Productos */}
+        {/* 5. Catálogo de Servicios & Productos */}
         <ProductCatalog onSelectProduct={(prod) => setSelectedProduct(prod)} />
 
-        {/* 5. Contacto Espiritual Directo */}
+        {/* 6. Contacto Espiritual Directo */}
         <SocialContact />
 
-        {/* 6. Pie de Página */}
+        {/* 7. Pie de Página */}
         <Footer
           onOpenAdminLogin={handleOpenAdminLogin}
           onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
