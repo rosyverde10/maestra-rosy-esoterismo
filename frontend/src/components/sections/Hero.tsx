@@ -1,54 +1,13 @@
 import React, { useState } from 'react';
 import { useSite } from '../../context/SiteContext';
-import { ArrowDown, MessageCircle, Sparkles, Compass, RotateCw, Eye } from 'lucide-react';
-
-interface SpiritualAdviceCard {
-  title: string;
-  symbol: string;
-  advice: string;
-  element: string;
-}
-
-const adviceCards: SpiritualAdviceCard[] = [
-  {
-    title: 'La Estrella de la Luz',
-    symbol: '⭐',
-    advice: 'Tus caminos de paz y salud se abren. Confía en la purificación y en tu fuerza interior para soltar pesadumbres pasadas.',
-    element: 'Prosperidad & Claridad'
-  },
-  {
-    title: 'El Sol de la Abundancia',
-    symbol: '☀️',
-    advice: 'Día propicio para proyectos laborales y comerciales. Las intenciones de crecimiento económico se multiplican con fe.',
-    element: 'Éxito Financiero'
-  },
-  {
-    title: 'La Luna de la Intuición',
-    symbol: '🌙',
-    advice: 'Escucha tus pálpitos en el amor y en la familia. Momento ideal para realizar endulzamientos y disolver malentendidos.',
-    element: 'Armonía de Pareja'
-  },
-  {
-    title: 'El Escudo del Arcángel',
-    symbol: '🛡️',
-    advice: 'Estás protegido de miradas o intenciones pesadas. Una limpia espiritual reforzará tu aura para mantenerte inquebrantable.',
-    element: 'Protección Absoluta'
-  }
-];
+import { ArrowDown, MessageCircle, Sparkles, Compass } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const { data } = useSite();
   const { siteConfig } = data;
   const [heroLoaded, setHeroLoaded] = useState(false);
-  
-  const [currentAdviceIndex, setCurrentAdviceIndex] = useState(0);
-  const activeCard = adviceCards[currentAdviceIndex];
 
-  const handleDrawCard = () => {
-    setCurrentAdviceIndex((prev) => (prev + 1) % adviceCards.length);
-  };
-
-  const whatsappMessage = `Hola Maestra Rosy, me salió la carta del día "${activeCard.title}" en su sitio web y me gustaría agendar una consulta de tarot o pedir informes.`;
+  const whatsappMessage = `Hola Maestra Rosy, me gustaría agendar una consulta privada o solicitar informes sobre sus servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
@@ -62,13 +21,13 @@ export const Hero: React.FC = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Main Hero Text Content */}
+          {/* Main Hero Text Content - Serious, Elegant & Solemn */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left animate-fade-up">
             
             {/* Liquid Glass Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-lg mx-auto lg:mx-0">
+            <div className="inline-flex items-center gap-2.5 px-4.5 py-2 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-lg mx-auto lg:mx-0">
               <Sparkles className="w-4 h-4 text-amber-400 shrink-0 animate-star-glow" />
-              <span className="tracking-wider uppercase font-serif-title">{siteConfig.heroBadge || "✨ Maestra Rosy • Canalizadora & Guía Espiritual"}</span>
+              <span className="tracking-wider uppercase font-serif-title">{siteConfig.heroBadge || "Maestra Rosy • Canalizadora & Guía Espiritual"}</span>
             </div>
 
             {/* Hero Main Heading */}
@@ -81,39 +40,8 @@ export const Hero: React.FC = () => {
               {siteConfig.heroSubtitle}
             </p>
 
-            {/* Interactive Daily Tarot / Guidance Card Generator */}
-            <div className="p-6 liquid-glass-card shadow-2xl space-y-4 max-w-xl mx-auto lg:mx-0 text-left relative overflow-hidden">
-              <div className="flex items-center justify-between">
-                <span className="font-serif-title font-bold text-xs text-amber-400 uppercase tracking-wider flex items-center gap-2">
-                  <Eye className="w-4 h-4 text-amber-400" />
-                  Consejo Espiritual del Día
-                </span>
-                <button
-                  onClick={handleDrawCard}
-                  className="px-3.5 py-1.5 rounded-full bg-purple-950/80 hover:bg-purple-900 text-amber-300 text-xs font-serif-title font-semibold border border-amber-500/30 flex items-center gap-1.5 transition-all cursor-pointer shadow-md"
-                >
-                  <RotateCw className="w-3.5 h-3.5" />
-                  <span>Girar Carta</span>
-                </button>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-purple-950/80 border border-amber-500/25 flex items-center gap-4 shadow-inner">
-                <div className="w-13 h-13 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center text-3xl shadow-lg border border-amber-300 shrink-0">
-                  {activeCard.symbol}
-                </div>
-                <div>
-                  <h4 className="font-serif-title font-bold text-base text-amber-300">
-                    {activeCard.title} — <span className="text-xs text-purple-200/90 font-serif-body font-normal">{activeCard.element}</span>
-                  </h4>
-                  <p className="text-xs text-purple-100/90 font-serif-body mt-1 leading-relaxed italic">
-                    "{activeCard.advice}"
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
               <a
                 href="#catalogo"
                 onClick={(e) => {
