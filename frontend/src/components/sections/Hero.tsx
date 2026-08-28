@@ -20,30 +20,31 @@ export const Hero: React.FC = () => {
   const whatsappMessage = `Hola Maestra Rosy, me gustaría agendar una consulta privada o solicitar informes sobre sus servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
+  // Stat items with fixed size (NO layout-shifting scale transform) and pure color illumination
   const stats = [
     {
       title: '+15 Años',
       subtitle: 'Guiado Espiritual',
-      glowClass: 'border-amber-400/90 shadow-[0_0_35px_rgba(251,191,36,0.7)] scale-105 bg-purple-950/95 border-2',
-      titleClass: 'text-gold-gradient'
+      glowClass: 'border-amber-400 bg-purple-950/95 shadow-[0_0_35px_rgba(251,191,36,0.7)] text-amber-300',
+      titleClass: 'text-gold-gradient font-bold'
     },
     {
       title: '100%',
       subtitle: 'Atención Confidencial',
-      glowClass: 'border-purple-400/90 shadow-[0_0_35px_rgba(192,132,252,0.7)] scale-105 bg-purple-950/95 border-2',
-      titleClass: 'text-mystic-gradient'
+      glowClass: 'border-purple-400 bg-purple-950/95 shadow-[0_0_35px_rgba(192,132,252,0.7)] text-purple-300',
+      titleClass: 'text-mystic-gradient font-bold'
     },
     {
       title: 'Presencial',
       subtitle: 'Y Consultas Virtuales',
-      glowClass: 'border-emerald-400/90 shadow-[0_0_35px_rgba(52,211,153,0.7)] scale-105 bg-emerald-950/90 border-2',
-      titleClass: 'text-emerald-300'
+      glowClass: 'border-emerald-400 bg-emerald-950/90 shadow-[0_0_35px_rgba(52,211,153,0.7)] text-emerald-300',
+      titleClass: 'text-emerald-300 font-bold'
     },
     {
       title: '24/7',
       subtitle: 'Atención por WhatsApp',
-      glowClass: 'border-teal-400/90 shadow-[0_0_35px_rgba(45,212,191,0.7)] scale-105 bg-teal-950/90 border-2',
-      titleClass: 'text-teal-300'
+      glowClass: 'border-teal-400 bg-teal-950/90 shadow-[0_0_35px_rgba(45,212,191,0.7)] text-teal-300',
+      titleClass: 'text-teal-300 font-bold'
     }
   ];
 
@@ -159,23 +160,23 @@ export const Hero: React.FC = () => {
 
         </div>
 
-        {/* Live Statistics Ticker Banner - Continuous Sequential Illumination */}
+        {/* Live Statistics Ticker Banner - Fixed Outer Size with Smooth Pure Light Illumination */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-amber-500/20 text-center">
           {stats.map((stat, idx) => {
             const isActive = activeStatIndex === idx;
             return (
               <div
                 key={idx}
-                className={`p-4 rounded-full transition-all duration-700 space-y-1 cursor-default ${
+                className={`p-4 rounded-full transition-all duration-700 space-y-1 cursor-default border-2 h-full flex flex-col justify-center items-center ${
                   isActive
                     ? stat.glowClass
-                    : 'liquid-glass-pill opacity-75 border-amber-500/25'
+                    : 'liquid-glass-pill opacity-65 border-amber-500/20 bg-[#0c051a]/60'
                 }`}
               >
-                <span className={`font-serif-title font-extrabold text-2xl sm:text-3xl block transition-all duration-700 ${isActive ? stat.titleClass : 'text-gold-gradient'}`}>
+                <span className={`font-serif-title font-extrabold text-2xl sm:text-3xl block transition-colors duration-700 ${isActive ? stat.titleClass : 'text-gold-gradient'}`}>
                   {stat.title}
                 </span>
-                <span className={`block text-xs font-serif-body transition-colors duration-700 ${isActive ? 'text-white font-semibold' : 'text-purple-200/90'}`}>
+                <span className={`block text-xs font-serif-body transition-colors duration-700 ${isActive ? 'text-white font-semibold' : 'text-purple-200/80'}`}>
                   {stat.subtitle}
                 </span>
               </div>
