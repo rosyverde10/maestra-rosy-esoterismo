@@ -57,14 +57,17 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
     setVisibleCount(initialCount);
     const catalogElem = document.getElementById('catalogo');
     if (catalogElem) {
-      catalogElem.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = catalogElem.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
   return (
-    <section id="catalogo" className="py-16 sm:py-24 bg-mystic-dark border-b border-amber-500/25 relative">
+    <section id="catalogo" className="py-12 lg:py-16 bg-mystic-dark border-b border-amber-500/25 relative">
       
-      {/* FLOATING RETURN BUTTON */}
+      {/* HIGH-VISIBILITY FLOATING RETURN BUTTON (MOBILE & DESKTOP OPTIMIZED) */}
       <AnimatePresence>
         {isExpanded && (
           <motion.button
@@ -73,7 +76,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.85 }}
             onClick={handleShowLess}
-            className="fixed bottom-6 right-6 z-40 px-5 py-3 liquid-glass-btn text-xs sm:text-sm shadow-2xl flex items-center gap-2 cursor-pointer uppercase tracking-wider"
+            className="fixed bottom-8 right-5 sm:bottom-8 sm:right-8 z-[60] px-5 py-3.5 liquid-glass-btn text-xs sm:text-sm shadow-[0_10px_35px_rgba(0,0,0,0.95)] border-2 border-amber-300 flex items-center gap-2 cursor-pointer uppercase tracking-wider font-bold"
             title="Ver menos elementos y volver arriba"
           >
             <ChevronUp className="w-4 h-4 text-purple-950 animate-bounce" />
@@ -82,30 +85,30 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
         )}
       </AnimatePresence>
 
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-8 lg:space-y-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-md">
+        <div className="text-center max-w-3xl mx-auto space-y-3 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span className="uppercase tracking-wider font-serif-title">Catálogo Ritual & Consultas</span>
           </div>
 
-          <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-gold-gradient tracking-tight">
+          <h2 className="font-serif-title text-2xl sm:text-4xl lg:text-4xl font-extrabold text-gold-gradient tracking-tight">
             {data.siteConfig.catalogTitle || "Catálogo de Servicios & Productos Esotéricos"}
           </h2>
 
-          <p className="text-purple-200/90 text-base sm:text-xl font-serif-body leading-relaxed">
+          <p className="text-purple-200/90 text-sm sm:text-base lg:text-lg font-serif-body leading-relaxed">
             {data.siteConfig.catalogSubtitle || "Trabajos de luz, elementos purificados y velaciones ritualizadas por la Maestra Rosy"}
           </p>
         </div>
 
         {/* Search & Filter Controls */}
-        <div className="space-y-6 animate-fade-up stagger-1">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="space-y-4 animate-fade-up stagger-1">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             
             {/* Search Input */}
-            <div className="relative w-full md:w-88">
+            <div className="relative w-full lg:w-88 shrink-0">
               <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-amber-400" />
               <input
                 type="text"
@@ -124,17 +127,17 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
               )}
             </div>
 
-            {/* Category Filter Pills */}
-            <div className="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 flex items-center gap-2.5 scrollbar-none">
+            {/* Category Filter Pills - UNCLIPPED & WELL-PADDED CONTAINER */}
+            <div className="w-full lg:w-auto overflow-x-auto py-3 px-1 flex items-center gap-2.5 scrollbar-none max-w-full">
               <Filter className="w-4 h-4 text-amber-400 shrink-0 hidden sm:block mr-1" />
               {data.categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2.5 rounded-full text-xs font-serif-title font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer uppercase tracking-wider ${
+                  className={`px-4 py-2.5 rounded-full text-xs font-serif-title transition-all whitespace-nowrap shrink-0 cursor-pointer uppercase tracking-wider ${
                     selectedCategory === cat
-                      ? 'liquid-glass-btn shadow-[0_0_20px_rgba(251,191,36,0.35)] scale-105 font-bold border border-amber-300'
-                      : 'bg-purple-950/70 hover:bg-purple-900 text-purple-200 border border-amber-500/25'
+                      ? 'liquid-glass-btn font-bold border-2 border-amber-300 shadow-[0_0_20px_rgba(251,191,36,0.5)] text-purple-950'
+                      : 'bg-purple-950/80 hover:bg-purple-900 text-purple-200 border border-amber-500/30 font-medium'
                   }`}
                 >
                   {cat}
@@ -147,7 +150,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
 
         {/* Product Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="space-y-12">
+          <div className="space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 animate-fade-up stagger-2">
               {visibleProducts.map((product) => (
                 <ProductCard
@@ -159,7 +162,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
             </div>
 
             {/* Show More / Show Less Buttons */}
-            <div className="text-center pt-4 flex flex-wrap items-center justify-center gap-4 animate-fade-up">
+            <div className="text-center pt-2 flex flex-wrap items-center justify-center gap-4 animate-fade-up">
               {visibleCount < filteredProducts.length && (
                 <button
                   type="button"

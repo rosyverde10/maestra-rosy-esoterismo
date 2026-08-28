@@ -6,7 +6,6 @@ import { Footer } from './components/layout/Footer';
 import { AppleMusicBackground } from './components/layout/AppleMusicBackground';
 import { Hero } from './components/sections/Hero';
 import { EsoterismGuideSection } from './components/sections/EsoterismGuideSection';
-import { MoonPhaseSection } from './components/sections/MoonPhaseSection';
 import { ProductCatalog } from './components/sections/ProductCatalog';
 import { AboutSection } from './components/sections/AboutSection';
 import { SocialContact } from './components/sections/SocialContact';
@@ -113,16 +112,13 @@ const MainContent: React.FC = () => {
         {/* 3. Sanación, Don & Trayectoria de la Maestra Rosy */}
         <AboutSection />
 
-        {/* 4. Fases Lunares & Energías Rituales */}
-        <MoonPhaseSection />
-
-        {/* 5. Catálogo de Servicios & Productos */}
+        {/* 4. Catálogo de Servicios & Productos */}
         <ProductCatalog onSelectProduct={(prod) => setSelectedProduct(prod)} />
 
-        {/* 6. Contacto Espiritual Directo */}
+        {/* 5. Contacto Espiritual Directo */}
         <SocialContact />
 
-        {/* 7. Pie de Página */}
+        {/* 6. Pie de Página */}
         <Footer
           onOpenAdminLogin={handleOpenAdminLogin}
           onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
