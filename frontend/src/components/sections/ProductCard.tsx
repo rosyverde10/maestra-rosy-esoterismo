@@ -46,7 +46,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
   return (
     <div
       onClick={() => onSelect(product)}
-      className="group bg-mystic-card rounded-2xl overflow-hidden shadow-xl border border-amber-500/30 hover:border-amber-400/70 transition-all duration-300 flex flex-col h-full cursor-pointer select-none relative"
+      className="group liquid-glass-card overflow-hidden shadow-2xl transition-all duration-300 flex flex-col h-full cursor-pointer select-none relative"
     >
       {/* Image Showcase Container */}
       <div className="relative aspect-4/3 overflow-hidden bg-purple-950/60">
@@ -64,11 +64,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06030b] via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#05020a] via-transparent to-black/40" />
 
         {/* Top Floating Badges */}
         <div className="absolute top-3 left-3 right-3 flex justify-between items-start pointer-events-none z-10">
-          <span className="px-3 py-1 rounded-full bg-[#06030b]/85 backdrop-blur-md text-amber-300 text-[11px] font-serif-title font-semibold tracking-wider border border-amber-400/40 shadow-lg uppercase">
+          <span className="px-3 py-1 liquid-glass-pill text-amber-300 text-[11px] font-serif-title font-semibold tracking-wider uppercase">
             {product.category}
           </span>
 
@@ -87,7 +87,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
               e.stopPropagation();
               onSelect(product);
             }}
-            className="px-5 py-2.5 rounded-full bg-gold-shine text-purple-950 font-serif-title font-bold text-xs shadow-xl hover:scale-105 transition-transform flex items-center gap-2 border border-amber-200 uppercase tracking-wider"
+            className="px-5 py-2.5 liquid-glass-btn text-xs shadow-xl flex items-center gap-2 uppercase tracking-wider"
           >
             <Eye className="w-4 h-4 text-purple-950" />
             Ver Detalles
@@ -111,7 +111,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
             {product.name}
           </h3>
 
-          <p className="text-purple-200/80 font-serif-body text-sm line-clamp-2 mt-1.5 leading-relaxed font-normal">
+          <p className="text-purple-200/90 font-serif-body text-sm line-clamp-2 mt-1.5 leading-relaxed font-normal">
             {product.description}
           </p>
 
@@ -140,7 +140,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
               e.stopPropagation();
               onSelect(product);
             }}
-            className="w-full py-2.5 px-3 rounded-xl border border-amber-400/40 text-amber-300 hover:bg-purple-950 text-xs font-serif-title font-bold transition-all flex items-center justify-center gap-1.5 uppercase"
+            className="w-full py-2.5 px-3 rounded-2xl border border-amber-400/40 text-amber-300 hover:bg-purple-950 text-xs font-serif-title font-bold transition-all flex items-center justify-center gap-1.5 uppercase"
           >
             <Eye className="w-3.5 h-3.5" />
             Detalles
@@ -151,7 +151,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-lg border border-emerald-400/30 uppercase tracking-wider"
+            className="w-full py-2.5 px-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-lg border border-emerald-400/30 uppercase tracking-wider"
           >
             <MessageCircle className="w-3.5 h-3.5" />
             Consultar

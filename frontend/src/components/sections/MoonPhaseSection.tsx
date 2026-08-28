@@ -77,16 +77,16 @@ export const MoonPhaseSection: React.FC = () => {
   return (
     <section className="py-16 sm:py-24 bg-mystic-dark border-b border-amber-500/25 relative overflow-hidden">
       
-      {/* Ambient Radial Background */}
-      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-900/20 rounded-full blur-[100px] pointer-events-none" />
+      {/* Ambient Blob */}
+      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-900/20 rounded-full blur-[100px] pointer-events-none animate-float" />
 
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/90 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-md">
             <Moon className="w-4 h-4 text-amber-400 animate-pulse" />
-            <span className="uppercase tracking-wider">Astrología & Energías Rituales</span>
+            <span className="uppercase tracking-wider font-serif-title">Astrología & Energías Rituales</span>
           </div>
 
           <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-gold-gradient tracking-tight">
@@ -106,10 +106,10 @@ export const MoonPhaseSection: React.FC = () => {
               <button
                 key={phase.id}
                 onClick={() => setSelectedPhase(phase)}
-                className={`p-4 rounded-2xl border transition-all text-center flex flex-col items-center gap-2 cursor-pointer ${
+                className={`p-4 rounded-3xl border transition-all text-center flex flex-col items-center gap-2 cursor-pointer ${
                   isSelected
-                    ? 'bg-gold-shine text-purple-950 border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.4)] scale-105 font-bold'
-                    : 'bg-mystic-card text-purple-200 border-amber-500/25 hover:border-amber-400/50 hover:bg-purple-950'
+                    ? 'liquid-glass-btn shadow-[0_0_25px_rgba(251,191,36,0.4)] scale-105 font-bold'
+                    : 'liquid-glass-pill text-purple-200 border-amber-500/25 hover:border-amber-400/50 hover:bg-purple-950'
                 }`}
               >
                 <span className="text-3xl sm:text-4xl animate-float">{phase.icon}</span>
@@ -132,7 +132,7 @@ export const MoonPhaseSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="max-w-4xl mx-auto bg-mystic-card rounded-3xl p-6 sm:p-10 border border-amber-500/35 shadow-2xl space-y-6"
+            className="max-w-4xl mx-auto liquid-glass-card p-6 sm:p-10 shadow-2xl space-y-6"
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-amber-500/20 text-center md:text-left">
               <div className="flex items-center gap-4">
@@ -171,7 +171,7 @@ export const MoonPhaseSection: React.FC = () => {
                 {selectedPhase.recommendedRituals.map((ritual, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-purple-950/70 border border-amber-500/20 flex items-center gap-3 text-sm text-purple-100 font-medium"
+                    className="p-3.5 rounded-2xl bg-purple-950/70 border border-amber-500/20 flex items-center gap-3 text-sm text-purple-100 font-medium"
                   >
                     <Flame className="w-4 h-4 text-amber-400 shrink-0" />
                     <span>{ritual}</span>

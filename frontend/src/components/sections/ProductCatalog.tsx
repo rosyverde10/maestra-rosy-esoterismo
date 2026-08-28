@@ -73,7 +73,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.85 }}
             onClick={handleShowLess}
-            className="fixed bottom-6 right-6 z-40 px-5 py-3 rounded-full bg-gold-shine text-purple-950 font-serif-title font-bold text-xs sm:text-sm shadow-[0_10px_30px_rgba(245,158,11,0.4)] backdrop-blur-md border border-amber-300 flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 transition-all uppercase tracking-wider"
+            className="fixed bottom-6 right-6 z-40 px-5 py-3 liquid-glass-btn text-xs sm:text-sm shadow-2xl flex items-center gap-2 cursor-pointer uppercase tracking-wider"
             title="Ver menos elementos y volver arriba"
           >
             <ChevronUp className="w-4 h-4 text-purple-950 animate-bounce" />
@@ -86,9 +86,9 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/90 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span className="uppercase tracking-wider">Catálogo Ritual & Consultas</span>
+            <span className="uppercase tracking-wider font-serif-title">Catálogo Ritual & Consultas</span>
           </div>
 
           <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-gold-gradient tracking-tight">
@@ -133,7 +133,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2.5 rounded-full text-xs font-serif-title font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer uppercase tracking-wider ${
                     selectedCategory === cat
-                      ? 'bg-gold-shine text-purple-950 shadow-[0_0_20px_rgba(251,191,36,0.35)] scale-105 font-bold border border-amber-300'
+                      ? 'liquid-glass-btn shadow-[0_0_20px_rgba(251,191,36,0.35)] scale-105 font-bold border border-amber-300'
                       : 'bg-purple-950/70 hover:bg-purple-900 text-purple-200 border border-amber-500/25'
                   }`}
                 >
@@ -164,7 +164,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                 <button
                   type="button"
                   onClick={handleShowMore}
-                  className="px-9 py-4 rounded-full bg-gold-shine text-purple-950 font-serif-title font-bold text-xs sm:text-sm shadow-[0_10px_30px_rgba(245,158,11,0.35)] hover:scale-105 transition-all inline-flex items-center gap-2.5 border border-amber-300 cursor-pointer uppercase tracking-wider"
+                  className="px-9 py-4 liquid-glass-btn text-xs sm:text-sm shadow-xl inline-flex items-center gap-2.5 cursor-pointer uppercase tracking-wider"
                 >
                   <span>Ver más ({filteredProducts.length - visibleCount} restantes)</span>
                   <ChevronDown className="w-4 h-4 text-purple-950" />
@@ -184,14 +184,14 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
             </div>
           </div>
         ) : (
-          <div className="text-center py-16 bg-purple-950/50 rounded-3xl border border-amber-500/30 space-y-4 max-w-md mx-auto shadow-2xl">
+          <div className="text-center py-16 liquid-glass-card space-y-4 max-w-md mx-auto shadow-2xl">
             <div className="w-14 h-14 rounded-full bg-purple-900/80 text-amber-300 flex items-center justify-center mx-auto border border-amber-400/40">
               <Box className="w-7 h-7" />
             </div>
             <h3 className="font-serif-title font-bold text-xl text-amber-300">
               No se encontraron elementos
             </h3>
-            <p className="text-purple-200/80 text-xs sm:text-sm font-serif-body">
+            <p className="text-purple-200/90 text-xs sm:text-sm font-serif-body">
               Intente cambiando el término de búsqueda o seleccione otra categoría.
             </p>
             <button
@@ -199,7 +199,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                 setSelectedCategory('Todas');
                 setSearchQuery('');
               }}
-              className="px-5 py-2.5 rounded-full bg-gold-shine text-purple-950 text-xs font-serif-title font-bold hover:scale-105 transition-transform uppercase tracking-wider border border-amber-300"
+              className="px-5 py-2.5 liquid-glass-btn text-xs shadow-md uppercase tracking-wider"
             >
               Ver todos los servicios y productos
             </button>

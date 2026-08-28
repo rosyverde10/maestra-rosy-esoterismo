@@ -7,7 +7,6 @@ import { Hero } from './components/sections/Hero';
 import { MoonPhaseSection } from './components/sections/MoonPhaseSection';
 import { ProductCatalog } from './components/sections/ProductCatalog';
 import { AboutSection } from './components/sections/AboutSection';
-import { TestimonialsSection } from './components/sections/TestimonialsSection';
 import { SocialContact } from './components/sections/SocialContact';
 import { ProductModal } from './components/sections/ProductModal';
 import { AdminLoginModal } from './components/admin/AdminLoginModal';
@@ -82,10 +81,10 @@ const MainContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#06030b] text-purple-100 overflow-x-hidden max-w-full">
+    <div className="min-h-screen flex flex-col bg-[#05020a] text-purple-100 overflow-x-hidden max-w-full">
 
       {/* Top Header Wrapper */}
-      <div className="fixed top-0 left-0 right-0 z-40 shadow-md bg-[#06030b]">
+      <div className="fixed top-0 left-0 right-0 z-40 shadow-md bg-[#05020a]/90 backdrop-blur-xl">
         <AnnouncementBar />
         <Navbar
           onOpenAdminLogin={handleOpenAdminLogin}
@@ -96,25 +95,22 @@ const MainContent: React.FC = () => {
       {/* Main Content Flow */}
       <div className="pt-16 sm:pt-20 flex flex-col flex-1">
 
-        {/* Hero Portada con Widget de Carta del Día */}
+        {/* 1. Hero Portada con Widget Liquid Glass */}
         <Hero />
 
-        {/* NUEVA SECCIÓN: Fases Lunares & Energías Rituales */}
-        <MoonPhaseSection />
-
-        {/* Catálogo de Productos & Servicios */}
-        <ProductCatalog onSelectProduct={(prod) => setSelectedProduct(prod)} />
-
-        {/* Sanación & Trayectoria de la Maestra Rosy */}
+        {/* 2. Sanación, Don & Trayectoria (Story-First Layout) */}
         <AboutSection />
 
-        {/* NUEVA SECCIÓN: Testimonios & Casos de Éxito */}
-        <TestimonialsSection />
+        {/* 3. Fases Lunares & Energías Rituales */}
+        <MoonPhaseSection />
 
-        {/* Contacto Espiritual & Redes Sociales */}
+        {/* 4. Catálogo de Servicios & Productos */}
+        <ProductCatalog onSelectProduct={(prod) => setSelectedProduct(prod)} />
+
+        {/* 5. Contacto Espiritual Directo */}
         <SocialContact />
 
-        {/* Pie de Página */}
+        {/* 6. Pie de Página */}
         <Footer
           onOpenAdminLogin={handleOpenAdminLogin}
           onOpenAdminPanel={() => setIsAdminPanelOpen(true)}

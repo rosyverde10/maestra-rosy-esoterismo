@@ -10,14 +10,14 @@ export const SocialContact: React.FC = () => {
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section id="contacto" className="py-16 sm:py-24 bg-mystic-dark">
+    <section id="contacto" className="py-16 sm:py-24 bg-mystic-dark relative">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/90 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span className="uppercase tracking-wider">Atención Directa & Confidencial</span>
+            <span className="uppercase tracking-wider font-serif-title">Atención Directa & Confidencial</span>
           </div>
 
           <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-gold-gradient tracking-tight">
@@ -37,7 +37,7 @@ export const SocialContact: React.FC = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group p-6 rounded-3xl bg-gradient-to-br from-emerald-950 via-teal-950 to-emerald-900 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-1 border.5 border-emerald-500/50 flex flex-col justify-between space-y-6 relative overflow-hidden"
+            className="group p-6 rounded-3xl bg-gradient-to-br from-emerald-950 via-teal-950 to-emerald-900 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-1 border border-emerald-500/50 flex flex-col justify-between space-y-6 relative overflow-hidden"
           >
             <div className="space-y-4 relative z-10">
               <div className="w-13 h-13 rounded-2xl bg-emerald-500 text-emerald-950 flex items-center justify-center font-bold shrink-0 shadow-lg group-hover:scale-110 transition-transform">
@@ -45,7 +45,7 @@ export const SocialContact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-serif-title font-bold text-xl text-emerald-200">WhatsApp Directo</h3>
-                <p className="text-emerald-100/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                <p className="text-emerald-100/90 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
                   Atención prioritaria para citas de tarot y velones preparados.
                 </p>
               </div>
@@ -59,7 +59,7 @@ export const SocialContact: React.FC = () => {
           {/* Phone Card */}
           <a
             href={`tel:${socialConfig.phone.replace(/[^0-9+]/g, '')}`}
-            className="group p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl hover:border-amber-400/70 transition-all transform hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between space-y-6"
+            className="group p-6 liquid-glass-card shadow-2xl hover:border-amber-400/70 transition-all transform hover:-translate-y-1 flex flex-col justify-between space-y-6"
           >
             <div className="space-y-4">
               <div className="w-13 h-13 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold shrink-0 shadow-lg border border-amber-300 group-hover:scale-110 transition-transform">
@@ -67,7 +67,7 @@ export const SocialContact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-serif-title font-bold text-xl text-amber-300">Llamada Directa</h3>
-                <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                <p className="text-purple-200/90 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
                   Llamada telefónica para consultas presenciales o virtuales.
                 </p>
               </div>
@@ -84,7 +84,7 @@ export const SocialContact: React.FC = () => {
               href={socialConfig.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl hover:border-blue-400/70 transition-all transform hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between space-y-6"
+              className="group p-6 liquid-glass-card shadow-2xl hover:border-blue-400/70 transition-all transform hover:-translate-y-1 flex flex-col justify-between space-y-6"
             >
               <div className="space-y-4">
                 <div className="w-13 h-13 rounded-2xl bg-blue-950 text-blue-300 flex items-center justify-center shrink-0 shadow-lg border border-blue-500/40 group-hover:scale-110 transition-transform">
@@ -94,8 +94,8 @@ export const SocialContact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-serif-title font-bold text-xl text-purple-100 group-hover:text-blue-300 transition-colors">Facebook</h3>
-                  <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
-                    Testimonios e historias del santuario espiritual.
+                  <p className="text-purple-200/90 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                    Santuario espiritual & atención a clientes.
                   </p>
                 </div>
               </div>
@@ -112,7 +112,7 @@ export const SocialContact: React.FC = () => {
               href={socialConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-6 rounded-3xl bg-mystic-card border border-amber-500/30 shadow-2xl hover:border-pink-400/70 transition-all transform hover:-translate-y-1 backdrop-blur-md flex flex-col justify-between space-y-6"
+              className="group p-6 liquid-glass-card shadow-2xl hover:border-pink-400/70 transition-all transform hover:-translate-y-1 flex flex-col justify-between space-y-6"
             >
               <div className="space-y-4">
                 <div className="w-13 h-13 rounded-2xl bg-pink-950 text-pink-300 flex items-center justify-center shrink-0 shadow-lg border border-pink-500/40 group-hover:scale-110 transition-transform">
@@ -122,7 +122,7 @@ export const SocialContact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-serif-title font-bold text-xl text-purple-100 group-hover:text-pink-300 transition-colors">Instagram</h3>
-                  <p className="text-purple-200/80 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
+                  <p className="text-purple-200/90 font-serif-body text-xs sm:text-sm mt-1 leading-relaxed">
                     Fotografías de velaciones y rituales.
                   </p>
                 </div>
@@ -136,7 +136,7 @@ export const SocialContact: React.FC = () => {
         </div>
 
         {/* Location & Schedule Banner */}
-        <div className="bg-mystic-card rounded-3xl p-6 sm:p-8 border border-amber-500/30 grid grid-cols-1 md:grid-cols-2 gap-6 items-center shadow-2xl">
+        <div className="liquid-glass-card p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center shadow-2xl">
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
             <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center shrink-0 border border-amber-300 shadow-md">
               <MapPin className="w-6 h-6 text-purple-950" />
