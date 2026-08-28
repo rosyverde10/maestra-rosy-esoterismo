@@ -67,7 +67,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
   return (
     <section id="catalogo" className="py-12 lg:py-16 bg-mystic-dark border-b border-amber-500/25 relative">
       
-      {/* HIGH-VISIBILITY FLOATING RETURN BUTTON (MOBILE & DESKTOP OPTIMIZED) */}
+      {/* HIGH-VISIBILITY FLOATING RETURN BUTTON */}
       <AnimatePresence>
         {isExpanded && (
           <motion.button
@@ -127,8 +127,8 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
               )}
             </div>
 
-            {/* Category Filter Pills - UNCLIPPED & WELL-PADDED CONTAINER */}
-            <div className="w-full lg:w-auto overflow-x-auto py-3 px-1 flex items-center gap-2.5 scrollbar-none max-w-full">
+            {/* Category Filter Pills - AMPLE VERTICAL PADDING (py-7 -my-3) TO PREVENT GLOW CLIPPING */}
+            <div className="w-full lg:w-auto overflow-x-auto py-7 px-3 -my-3 flex items-center gap-2.5 scrollbar-none max-w-full">
               <Filter className="w-4 h-4 text-amber-400 shrink-0 hidden sm:block mr-1" />
               {data.categories.map((cat) => (
                 <button
@@ -136,7 +136,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2.5 rounded-full text-xs font-serif-title transition-all whitespace-nowrap shrink-0 cursor-pointer uppercase tracking-wider ${
                     selectedCategory === cat
-                      ? 'liquid-glass-btn font-bold border-2 border-amber-300 shadow-[0_0_20px_rgba(251,191,36,0.5)] text-purple-950'
+                      ? 'liquid-glass-btn font-bold border-2 border-amber-300 shadow-[0_0_18px_rgba(251,191,36,0.65)] text-purple-950'
                       : 'bg-purple-950/80 hover:bg-purple-900 text-purple-200 border border-amber-500/30 font-medium'
                   }`}
                 >
