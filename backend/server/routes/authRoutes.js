@@ -3,6 +3,7 @@ import { AuthController } from '../controllers/authController.js';
 
 const router = Router();
 
+router.post('/direct-login', AuthController.directLogin);
 router.post('/request-code', AuthController.requestCode);
 router.post('/verify-code', AuthController.verifyCode);
 
