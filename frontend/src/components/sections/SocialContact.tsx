@@ -10,8 +10,8 @@ export const SocialContact: React.FC = () => {
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section id="contacto" className="py-16 sm:py-24 bg-mystic-dark relative">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12">
+    <section id="contacto" className="py-12 lg:py-14 lg:min-h-[calc(100vh-5rem)] lg:flex lg:flex-col lg:justify-center bg-mystic-dark relative">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-10 w-full">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">

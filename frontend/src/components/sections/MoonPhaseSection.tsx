@@ -75,12 +75,12 @@ export const MoonPhaseSection: React.FC = () => {
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section className="py-16 sm:py-24 bg-mystic-dark border-b border-amber-500/25 relative overflow-hidden">
+    <section id="luna" className="py-12 lg:py-14 lg:min-h-[calc(100vh-5rem)] lg:flex lg:flex-col lg:justify-center bg-mystic-dark border-b border-amber-500/25 relative overflow-hidden">
       
       {/* Ambient Blob */}
       <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-900/20 rounded-full blur-[100px] pointer-events-none animate-float" />
 
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12 relative z-10">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-10 relative z-10 w-full">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-up">

@@ -49,13 +49,13 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section id="inicio" className="relative overflow-hidden bg-mystic-pattern py-14 sm:py-20 border-b border-amber-500/25">
+    <section id="inicio" className="relative overflow-hidden bg-mystic-pattern py-10 lg:py-14 lg:min-h-[calc(100vh-5rem)] lg:flex lg:flex-col lg:justify-center border-b border-amber-500/25">
       
       {/* Background Liquid Ambient Blobs */}
       <div className="absolute top-10 left-1/4 w-[550px] h-[550px] bg-amber-600/15 rounded-full blur-[140px] pointer-events-none animate-float" />
       <div className="absolute bottom-10 right-1/4 w-[480px] h-[480px] bg-purple-800/20 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 space-y-12 sm:space-y-16">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 space-y-8 lg:space-y-10 w-full">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           

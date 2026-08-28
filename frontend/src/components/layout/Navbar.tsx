@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
     <header className="py-3 px-3 sm:px-6 md:px-8 transition-all duration-300">
       <div className="max-w-[1400px] mx-auto apple-liquid-glass-pill px-5 sm:px-8 py-3 flex items-center justify-between">
 
-        {/* Brand Identity - Clean & Uncluttered */}
+        {/* Brand Identity */}
         <a href="#" onClick={(e) => handleNavClick(e, '#inicio')} className="flex items-center gap-3 group shrink-0">
           {data.siteConfig.logoImage ? (
             <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-amber-400/80 shadow-[0_0_15px_rgba(251,191,36,0.4)] group-hover:scale-105 transition-transform">
@@ -68,10 +68,13 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </div>
         </a>
 
-        {/* Desktop Nav Links - Centered, Clean, Progressive Underline on Hover */}
-        <nav className="hidden lg:flex items-center justify-center gap-8 xl:gap-12 text-xs sm:text-sm font-serif-title font-semibold tracking-wider text-purple-100 uppercase">
+        {/* Desktop Nav Links - Centered, Clean, Progressive Underline */}
+        <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 text-xs sm:text-sm font-serif-title font-semibold tracking-wider text-purple-100 uppercase">
           <a href="#inicio" onClick={(e) => handleNavClick(e, '#inicio')} className="hover:text-amber-300 transition-colors nav-link-underline">
             Inicio
+          </a>
+          <a href="#esoterismo" onClick={(e) => handleNavClick(e, '#esoterismo')} className="hover:text-amber-300 transition-colors nav-link-underline">
+            ¿Qué es el Esoterismo?
           </a>
           <a href="#nosotros" onClick={(e) => handleNavClick(e, '#nosotros')} className="hover:text-amber-300 transition-colors nav-link-underline">
             Sanación & Don
@@ -90,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="whatsapp-emerald-btn px-6 py-2.5 text-xs flex items-center gap-2.5 uppercase tracking-wider animate-pulse-glow"
+            className="whatsapp-emerald-btn px-5 py-2 text-xs flex items-center gap-2 uppercase tracking-wider animate-pulse-glow"
           >
             <MessageCircle className="w-4 h-4 fill-emerald-950 text-emerald-950 shrink-0" />
             <span>Consultar</span>
@@ -128,6 +131,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <nav className="flex flex-col gap-3 font-medium text-purple-100">
               {[
                 { href: '#inicio', label: 'Inicio' },
+                { href: '#esoterismo', label: '¿Qué es el Esoterismo?' },
                 { href: '#nosotros', label: 'Sanación, Limpias & Trayectoria' },
                 { href: '#catalogo', label: 'Catálogo de Velas & Tarot' },
                 { href: '#contacto', label: 'Contacto & Agendar Cita' },

@@ -7,12 +7,12 @@ export const AboutSection: React.FC = () => {
   const { siteConfig } = data;
 
   return (
-    <section id="nosotros" className="py-16 sm:py-24 bg-mystic-dark border-b border-amber-500/25 relative overflow-hidden">
+    <section id="nosotros" className="py-12 lg:py-14 lg:min-h-[calc(100vh-5rem)] lg:flex lg:flex-col lg:justify-center bg-mystic-dark border-b border-amber-500/25 relative overflow-hidden">
       
       {/* Ambient Blob */}
       <div className="absolute top-1/2 left-10 w-96 h-96 bg-amber-600/10 rounded-full blur-[100px] pointer-events-none animate-float" />
 
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-12 relative z-10">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 space-y-10 relative z-10 w-full">
         
         {/* Main Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
