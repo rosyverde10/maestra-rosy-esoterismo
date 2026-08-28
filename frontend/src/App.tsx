@@ -83,13 +83,17 @@ const MainContent: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#05020a] text-purple-100 overflow-x-hidden max-w-full">
 
-      {/* Top Header Wrapper */}
-      <div className="fixed top-0 left-0 right-0 z-40 shadow-md bg-[#05020a]/90 backdrop-blur-xl">
-        <AnnouncementBar />
-        <Navbar
-          onOpenAdminLogin={handleOpenAdminLogin}
-          onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
-        />
+      {/* Floating Header Wrapper WITHOUT full-width background rectangle */}
+      <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
+        <div className="pointer-events-auto">
+          <AnnouncementBar />
+        </div>
+        <div className="pointer-events-auto">
+          <Navbar
+            onOpenAdminLogin={handleOpenAdminLogin}
+            onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
+          />
+        </div>
       </div>
 
       {/* Main Content Flow */}
@@ -98,7 +102,7 @@ const MainContent: React.FC = () => {
         {/* 1. Hero Portada con Widget Liquid Glass */}
         <Hero />
 
-        {/* 2. Sanación, Don & Trayectoria (Story-First Layout) */}
+        {/* 2. Sanación, Don & Trayectoria */}
         <AboutSection />
 
         {/* 3. Fases Lunares & Energías Rituales */}
