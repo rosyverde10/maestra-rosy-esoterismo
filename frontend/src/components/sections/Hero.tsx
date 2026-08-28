@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSite } from '../../context/SiteContext';
 import { ArrowDown, MessageCircle, Sparkles, Compass } from 'lucide-react';
 
@@ -7,8 +7,45 @@ export const Hero: React.FC = () => {
   const { siteConfig } = data;
   const [heroLoaded, setHeroLoaded] = useState(false);
 
+  // Sequential Illumination Loop State for Ticker Capsules
+  const [activeStatIndex, setActiveStatIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStatIndex((prev) => (prev + 1) % 4);
+    }, 2200);
+    return () => clearInterval(interval);
+  }, []);
+
   const whatsappMessage = `Hola Maestra Rosy, me gustaría agendar una consulta privada o solicitar informes sobre sus servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const stats = [
+    {
+      title: '+15 Años',
+      subtitle: 'Guiado Espiritual',
+      glowClass: 'border-amber-400/90 shadow-[0_0_35px_rgba(251,191,36,0.7)] scale-105 bg-purple-950/95 border-2',
+      titleClass: 'text-gold-gradient'
+    },
+    {
+      title: '100%',
+      subtitle: 'Atención Confidencial',
+      glowClass: 'border-purple-400/90 shadow-[0_0_35px_rgba(192,132,252,0.7)] scale-105 bg-purple-950/95 border-2',
+      titleClass: 'text-mystic-gradient'
+    },
+    {
+      title: 'Presencial',
+      subtitle: 'Y Consultas Virtuales',
+      glowClass: 'border-emerald-400/90 shadow-[0_0_35px_rgba(52,211,153,0.7)] scale-105 bg-emerald-950/90 border-2',
+      titleClass: 'text-emerald-300'
+    },
+    {
+      title: '24/7',
+      subtitle: 'Atención por WhatsApp',
+      glowClass: 'border-teal-400/90 shadow-[0_0_35px_rgba(45,212,191,0.7)] scale-105 bg-teal-950/90 border-2',
+      titleClass: 'text-teal-300'
+    }
+  ];
 
   return (
     <section id="inicio" className="relative overflow-hidden bg-mystic-pattern py-14 sm:py-20 border-b border-amber-500/25">
@@ -21,7 +58,7 @@ export const Hero: React.FC = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Main Hero Text Content - Serious, Elegant & Solemn */}
+          {/* Main Hero Text Content */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left animate-fade-up">
             
             {/* Liquid Glass Badge */}
@@ -122,24 +159,28 @@ export const Hero: React.FC = () => {
 
         </div>
 
-        {/* Live Statistics Ticker Banner */}
+        {/* Live Statistics Ticker Banner - Continuous Sequential Illumination */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-amber-500/20 text-center">
-          <div className="p-4 liquid-glass-pill space-y-1">
-            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">+15 Años</span>
-            <span className="block text-xs text-purple-200/90 font-serif-body">Guiado Espiritual</span>
-          </div>
-          <div className="p-4 liquid-glass-pill space-y-1">
-            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">100%</span>
-            <span className="block text-xs text-purple-200/90 font-serif-body">Atención Confidencial</span>
-          </div>
-          <div className="p-4 liquid-glass-pill space-y-1">
-            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">Presencial</span>
-            <span className="block text-xs text-purple-200/90 font-serif-body">Y Consultas Virtuales</span>
-          </div>
-          <div className="p-4 liquid-glass-pill space-y-1">
-            <span className="font-serif-title font-extrabold text-2xl sm:text-3xl text-gold-gradient">24/7</span>
-            <span className="block text-xs text-purple-200/90 font-serif-body">Atención por WhatsApp</span>
-          </div>
+          {stats.map((stat, idx) => {
+            const isActive = activeStatIndex === idx;
+            return (
+              <div
+                key={idx}
+                className={`p-4 rounded-full transition-all duration-700 space-y-1 cursor-default ${
+                  isActive
+                    ? stat.glowClass
+                    : 'liquid-glass-pill opacity-75 border-amber-500/25'
+                }`}
+              >
+                <span className={`font-serif-title font-extrabold text-2xl sm:text-3xl block transition-all duration-700 ${isActive ? stat.titleClass : 'text-gold-gradient'}`}>
+                  {stat.title}
+                </span>
+                <span className={`block text-xs font-serif-body transition-colors duration-700 ${isActive ? 'text-white font-semibold' : 'text-purple-200/90'}`}>
+                  {stat.subtitle}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
       </div>
