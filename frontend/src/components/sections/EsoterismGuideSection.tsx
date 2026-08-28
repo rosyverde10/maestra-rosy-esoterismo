@@ -21,7 +21,7 @@ export const EsoterismGuideSection: React.FC = () => {
       id: 'tarot',
       title: 'El Tarot & la Canalización',
       subtitle: 'Claridad para tomar decisiones con certeza',
-      icon: <Eye className="w-5 h-5 text-purple-950" />,
+      icon: <Eye className="w-5 h-5" />,
       description: 'El esoterismo concibe al Tarot no como una adivinación fatalista, sino como un espejo sagrado de tu momento presente. A través de la simbología ancestral, la Maestra Rosy interpreta las influencias energéticas que rodean tu vida para ayudarte a tomar elecciones correctas en el amor, el trabajo y la familia.',
       benefits: [
         'Revelación de intenciones verdaderas de personas cercanas',
@@ -33,7 +33,7 @@ export const EsoterismGuideSection: React.FC = () => {
       id: 'limpias',
       title: 'Limpias & Purificación',
       subtitle: 'Restauración del aura y la armonía personal',
-      icon: <Sun className="w-5 h-5 text-purple-950" />,
+      icon: <Sun className="w-5 h-5" />,
       description: 'Así como el cuerpo físico necesita aseo, nuestro campo energético acumula tensión, envidias y pesadez del entorno. Una limpia espiritual disuelve cargas estancadas, equilibrando los chakras para recuperar la vitalidad, el descanso reparador y el entusiasmo.',
       benefits: [
         'Desbloqueo de caminos estancados sin explicación',
@@ -45,7 +45,7 @@ export const EsoterismGuideSection: React.FC = () => {
       id: 'rituales',
       title: 'Ritualización & Velaciones',
       subtitle: 'Intención focalizada a través del fuego de luz',
-      icon: <Flame className="w-5 h-5 text-purple-950" />,
+      icon: <Flame className="w-5 h-5" />,
       description: 'Los rituales esotéricos con velas preparadas son un acto de devoción e intención. Al curar un velón con elementos naturales (sal consagrada, cuarzos y aceites), canalizamos la luz para potenciar peticiones específicas de salud, unión de pareja y prosperidad económica.',
       benefits: [
         'Atracción de abundancia y apertura de nuevos negocios',
@@ -110,14 +110,14 @@ export const EsoterismGuideSection: React.FC = () => {
                 <button
                   key={pillar.id}
                   onClick={() => setActivePillarId(pillar.id)}
-                  className={`p-4 rounded-2xl transition-all text-left flex items-center gap-3 cursor-pointer ${
+                  className={`p-4 rounded-2xl transition-all duration-300 text-left flex items-center gap-3 ${
                     isSelected
-                      ? 'liquid-glass-btn border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.35)] scale-102 font-bold'
-                      : 'liquid-glass-pill text-purple-200 border-amber-500/25 hover:border-amber-400/50 hover:bg-purple-950'
+                      ? 'liquid-glass-btn border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.45)] font-bold cursor-default'
+                      : 'liquid-glass-pill text-purple-200 border-amber-500/25 hover:scale-105 hover:border-amber-400/80 hover:bg-purple-950/90 hover:shadow-[0_0_25px_rgba(251,191,36,0.35)] cursor-pointer'
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md ${
-                    isSelected ? 'bg-purple-950 text-amber-300 border border-amber-400/50' : 'bg-gold-shine text-purple-950'
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-colors ${
+                    isSelected ? 'bg-purple-950 text-amber-300 border border-amber-400/80' : 'bg-gold-shine text-purple-950'
                   }`}>
                     {pillar.icon}
                   </div>

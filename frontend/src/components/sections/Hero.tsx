@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left animate-fade-up">
             
             {/* Liquid Glass Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4.5 py-2 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-lg mx-auto lg:mx-0">
+            <div className="hidden sm:inline-flex items-center gap-2.5 px-4.5 py-2 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-lg mx-auto lg:mx-0">
               <Sparkles className="w-4 h-4 text-amber-400 shrink-0 animate-star-glow" />
               <span className="tracking-wider uppercase font-serif-title">{siteConfig.heroBadge || "Maestra Rosy • Canalizadora & Guía Espiritual"}</span>
             </div>
