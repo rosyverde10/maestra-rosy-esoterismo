@@ -3,7 +3,6 @@ import { SiteProvider, useSite } from './context/SiteContext';
 import { AnnouncementBar } from './components/layout/AnnouncementBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { AppleMusicBackground } from './components/layout/AppleMusicBackground';
 import { Hero } from './components/sections/Hero';
 import { EsoterismGuideSection } from './components/sections/EsoterismGuideSection';
 import { ProductCatalog } from './components/sections/ProductCatalog';
@@ -83,9 +82,6 @@ const MainContent: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#05020a] text-purple-100 overflow-x-hidden max-w-full relative">
-
-      {/* APPLE MUSIC STYLE ANIMATED LIQUID GRADIENT CANVAS */}
-      <AppleMusicBackground />
 
       {/* Floating Header Wrapper */}
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none">

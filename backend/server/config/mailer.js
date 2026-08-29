@@ -75,7 +75,7 @@ export async function sendOTPEmail(targetEmail, code, businessName = 'Maestra Ro
         body: JSON.stringify({
           sender: { name: businessName, email: process.env.EMAIL_USER || 'michisnsqk@gmail.com' },
           to: [{ email: targetEmail }],
-          subject: `✨ Tu código de verificación de 6 dígitos: ${code}`,
+          subject: `Tu código de verificación de 6 dígitos: ${code}`,
           htmlContent: htmlContent,
         }),
       });
