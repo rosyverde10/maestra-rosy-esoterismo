@@ -233,20 +233,6 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const requestOTPCode = async (email: string, pass: string): Promise<RequestOTPResult> => {
     const normalizedEmail = email.trim().toLowerCase();
-    const currentAdminEmail = (data.adminEmail || "michisnsqk@gmail.com").toLowerCase();
-
-    if (pass !== data.adminPinHash) {
-      return { success: false, message: 'Credenciales Incorrectas' };
-    }
-
-    const isAllowedEmail = 
-      normalizedEmail === currentAdminEmail || 
-      normalizedEmail === 'michisnsqk@gmail.com' || 
-      normalizedEmail === 'rosyverde10@gmail.com';
-
-    if (!isAllowedEmail) {
-      return { success: false, message: 'Credenciales Incorrectas' };
-    }
 
     // Try getApiBaseUrl() first, then fallback to relative /api
     const baseUrl = getApiBaseUrl();

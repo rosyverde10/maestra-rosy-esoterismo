@@ -15,20 +15,10 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const envEmail = (process.env.EMAIL_USER || "michisnsqk@gmail.com").trim().toLowerCase();
-      const currentDataEmail = (currentSiteData?.adminEmail || "michisnsqk@gmail.com").trim().toLowerCase();
+      const adminEmail = (process.env.EMAIL_USER || currentSiteData?.adminEmail || '').trim().toLowerCase();
 
-      const isEmailValid =
-        normalizedEmail === envEmail ||
-        normalizedEmail === currentDataEmail ||
-        normalizedEmail === "michisnsqk@gmail.com" ||
-        normalizedEmail === "rosyverde10@gmail.com" ||
-        normalizedEmail.includes("michis") ||
-        normalizedEmail.includes("rosy");
-
-      const isPasswordValid =
-        password === currentSiteData.adminPinHash ||
-        password === "admin123";
+      const isEmailValid = normalizedEmail === adminEmail;
+      const isPasswordValid = password === currentSiteData.adminPinHash;
 
       if (!isEmailValid || !isPasswordValid) {
         return res.status(401).json({
@@ -70,20 +60,10 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const envEmail = (process.env.EMAIL_USER || "michisnsqk@gmail.com").trim().toLowerCase();
-      const currentDataEmail = (currentSiteData?.adminEmail || "michisnsqk@gmail.com").trim().toLowerCase();
+      const adminEmail = (process.env.EMAIL_USER || currentSiteData?.adminEmail || '').trim().toLowerCase();
 
-      const isEmailValid =
-        normalizedEmail === envEmail ||
-        normalizedEmail === currentDataEmail ||
-        normalizedEmail === "michisnsqk@gmail.com" ||
-        normalizedEmail === "rosyverde10@gmail.com" ||
-        normalizedEmail.includes("michis") ||
-        normalizedEmail.includes("rosy");
-
-      const isPasswordValid =
-        password === currentSiteData.adminPinHash ||
-        password === "admin123";
+      const isEmailValid = normalizedEmail === adminEmail;
+      const isPasswordValid = password === currentSiteData.adminPinHash;
 
       if (!isEmailValid || !isPasswordValid) {
         const attempts = (ipRecord?.attempts || 0) + 1;
@@ -109,14 +89,13 @@ export const AuthController = {
       const mailResult = await sendOTPEmail(normalizedEmail, code, currentSiteData.siteConfig?.businessName);
 
       if (!mailResult || !mailResult.success) {
-        console.warn('⚠️ Advertencia: No se pudo entregar por API de correo, pero el código OTP se generó:', code);
+        console.warn('⚠️ Advertencia en entrega de correo:', mailResult?.error);
       }
 
       return res.json({
         success: true,
         message: `Código de verificación de 6 dígitos enviado exitosamente a ${normalizedEmail}.`,
         expiresAt,
-        code,
       });
     } catch (criticalErr) {
       console.error('CRITICAL AUTH ERROR:', criticalErr);
