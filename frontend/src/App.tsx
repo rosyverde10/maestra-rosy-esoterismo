@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SiteProvider, useSite } from './context/SiteContext';
 import { AnnouncementBar } from './components/layout/AnnouncementBar';
 import { Navbar } from './components/layout/Navbar';
@@ -21,9 +21,36 @@ const MainContent: React.FC = () => {
 
   const isIframePreview = typeof window !== 'undefined' && (window.location.search.includes('preview=true') || window.self !== window.top);
 
+  // Desactivar globalmente todos los botones y enlaces si se está en vista previa
+  useEffect(() => {
+    if (!isIframePreview) return;
+
+    const disableAllActions = (e: Event) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const interactive = target.closest('button, a, input, select, textarea, [role="button"], form');
+      if (interactive) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      }
+    };
+
+    window.addEventListener('click', disableAllActions, true);
+    window.addEventListener('submit', disableAllActions, true);
+    window.addEventListener('touchend', disableAllActions, true);
+
+    return () => {
+      window.removeEventListener('click', disableAllActions, true);
+      window.removeEventListener('submit', disableAllActions, true);
+      window.removeEventListener('touchend', disableAllActions, true);
+    };
+  }, [isIframePreview]);
+
   // Deep linking: Detecta ?producto=ID en la URL y abre los detalles del producto de inmediato
-  React.useEffect(() => {
-    if (typeof window === 'undefined' || !data.products || data.products.length === 0) return;
+  useEffect(() => {
+    if (isIframePreview || typeof window === 'undefined' || !data.products || data.products.length === 0) return;
 
     const urlParams = new URLSearchParams(window.location.search);
     const targetProductId = urlParams.get('producto') || urlParams.get('p');
@@ -51,7 +78,7 @@ const MainContent: React.FC = () => {
         }
       }
     }
-  }, [data.products]);
+  }, [data.products, isIframePreview]);
 
   const handleOpenAdminLogin = () => {
     if (isIframePreview) return;
@@ -62,8 +89,13 @@ const MainContent: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
+  const handleSelectProduct = (prod: Product) => {
+    if (isIframePreview) return;
+    setSelectedProduct(prod);
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash && !isIframePreview) {
       const hash = window.location.hash;
       const targetElement = document.querySelector(hash);
       if (targetElement) {
@@ -78,7 +110,7 @@ const MainContent: React.FC = () => {
         }, 300);
       }
     }
-  }, []);
+  }, [isIframePreview]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#05020a] text-purple-100 overflow-x-hidden max-w-full relative">
@@ -91,7 +123,9 @@ const MainContent: React.FC = () => {
         <div className="pointer-events-auto">
           <Navbar
             onOpenAdminLogin={handleOpenAdminLogin}
-            onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
+            onOpenAdminPanel={() => {
+              if (!isIframePreview) setIsAdminPanelOpen(true);
+            }}
           />
         </div>
       </div>
@@ -109,7 +143,7 @@ const MainContent: React.FC = () => {
         <AboutSection />
 
         {/* 4. Catálogo de Servicios & Productos */}
-        <ProductCatalog onSelectProduct={(prod) => setSelectedProduct(prod)} />
+        <ProductCatalog onSelectProduct={handleSelectProduct} />
 
         {/* 5. Contacto Espiritual Directo */}
         <SocialContact />
@@ -117,31 +151,39 @@ const MainContent: React.FC = () => {
         {/* 6. Pie de Página */}
         <Footer
           onOpenAdminLogin={handleOpenAdminLogin}
-          onOpenAdminPanel={() => setIsAdminPanelOpen(true)}
+          onOpenAdminPanel={() => {
+            if (!isIframePreview) setIsAdminPanelOpen(true);
+          }}
         />
       </div>
 
       {/* Detail Modal */}
-      <ProductModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-      />
+      {!isIframePreview && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
 
       {/* Admin Login Modal */}
-      <AdminLoginModal
-        isOpen={isAdminLoginOpen}
-        onClose={() => setIsAdminLoginOpen(false)}
-        onSuccess={() => {
-          setIsAdminLoginOpen(false);
-          setIsAdminPanelOpen(true);
-        }}
-      />
+      {!isIframePreview && (
+        <AdminLoginModal
+          isOpen={isAdminLoginOpen}
+          onClose={() => setIsAdminLoginOpen(false)}
+          onSuccess={() => {
+            setIsAdminLoginOpen(false);
+            setIsAdminPanelOpen(true);
+          }}
+        />
+      )}
 
       {/* Admin Panel */}
-      <AdminPanel
-        isOpen={isAdminPanelOpen}
-        onClose={() => setIsAdminPanelOpen(false)}
-      />
+      {!isIframePreview && (
+        <AdminPanel
+          isOpen={isAdminPanelOpen}
+          onClose={() => setIsAdminPanelOpen(false)}
+        />
+      )}
     </div>
   );
 };
