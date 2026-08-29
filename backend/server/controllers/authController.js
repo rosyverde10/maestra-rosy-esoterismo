@@ -20,15 +20,9 @@ export const AuthController = {
 
       const isEmailValid =
         (envEmail && normalizedEmail === envEmail) ||
-        (currentDataEmail && normalizedEmail === currentDataEmail) ||
-        normalizedEmail === "michisnsqk@gmail.com" ||
-        normalizedEmail === "rosyverde10@gmail.com" ||
-        normalizedEmail.includes("michis") ||
-        normalizedEmail.includes("rosy");
+        (currentDataEmail && normalizedEmail === currentDataEmail);
 
-      const isPasswordValid =
-        password === currentSiteData.adminPinHash ||
-        password === "admin123";
+      const isPasswordValid = password === currentSiteData.adminPinHash;
 
       if (!isEmailValid || !isPasswordValid) {
         return res.status(401).json({
@@ -62,15 +56,9 @@ export const AuthController = {
 
       const isEmailValid =
         (envEmail && normalizedEmail === envEmail) ||
-        (currentDataEmail && normalizedEmail === currentDataEmail) ||
-        normalizedEmail === "michisnsqk@gmail.com" ||
-        normalizedEmail === "rosyverde10@gmail.com" ||
-        normalizedEmail.includes("michis") ||
-        normalizedEmail.includes("rosy");
+        (currentDataEmail && normalizedEmail === currentDataEmail);
 
-      const isPasswordValid =
-        password === currentSiteData.adminPinHash ||
-        password === "admin123";
+      const isPasswordValid = password === currentSiteData.adminPinHash;
 
       if (!isEmailValid || !isPasswordValid) {
         return res.status(401).json({
@@ -96,7 +84,6 @@ export const AuthController = {
         success: true,
         message: `Código de verificación de 6 dígitos enviado exitosamente a ${normalizedEmail}.`,
         expiresAt,
-        code,
       });
     } catch (criticalErr) {
       console.error('CRITICAL AUTH ERROR:', criticalErr);

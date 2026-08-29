@@ -180,24 +180,6 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const loginAdminDirect = async (email: string, pass: string): Promise<{ success: boolean; message: string }> => {
     const normalizedEmail = email.trim().toLowerCase();
-    const currentAdminEmail = (data.adminEmail || 'michisnsqk@gmail.com').toLowerCase();
-
-    const isPasswordValid = pass === data.adminPinHash || pass === 'admin123';
-    const isEmailValid =
-      normalizedEmail === currentAdminEmail ||
-      normalizedEmail === 'michisnsqk@gmail.com' ||
-      normalizedEmail === 'rosyverde10@gmail.com' ||
-      normalizedEmail.includes('michis') ||
-      normalizedEmail.includes('rosy');
-
-    if (isPasswordValid && isEmailValid) {
-      setIsAdmin(true);
-      try {
-        localStorage.setItem('cajitas_admin_session', 'true');
-        localStorage.setItem('cajitas_admin_session_time', Date.now().toString());
-      } catch (err) {}
-      return { success: true, message: 'Acceso concedido.' };
-    }
 
     const baseUrl = getApiBaseUrl();
     try {
@@ -227,6 +209,17 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
       }
     } catch (err) {}
+
+    // Fallback check against dynamic state if offline/disconnected
+    const currentAdminEmail = (data.adminEmail || '').trim().toLowerCase();
+    if (pass === data.adminPinHash && (normalizedEmail === currentAdminEmail || !currentAdminEmail)) {
+      setIsAdmin(true);
+      try {
+        localStorage.setItem('cajitas_admin_session', 'true');
+        localStorage.setItem('cajitas_admin_session_time', Date.now().toString());
+      } catch (err) {}
+      return { success: true, message: 'Acceso concedido.' };
+    }
 
     return { success: false, message: 'Credenciales no válidas. Verifique su correo y contraseña.' };
   };
