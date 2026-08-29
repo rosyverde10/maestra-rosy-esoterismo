@@ -1,16 +1,25 @@
 import React from 'react';
 import { useSite } from '../../context/SiteContext';
-import { MessageCircle, Phone, MapPin, Clock, Sparkles, ExternalLink } from 'lucide-react';
+import { MessageCircle, Phone, MapPin, Clock, Sparkles } from 'lucide-react';
 
 export const SocialContact: React.FC = () => {
   const { data } = useSite();
   const { socialConfig } = data;
+
+  const isIframePreview = typeof window !== 'undefined' && (window.location.search.includes('preview=true') || window.self !== window.top);
 
   const whatsappMessage = `Hola Maestra Rosy, me gustaría solicitar atención personal o información sobre lecturas de tarot y servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   const defaultMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6616089851174!2d-99.16781268509355!3d19.427024986887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd15a7%3A0x6a6d36e2f1e2f1e2!2sAngel%20de%20la%20Independencia!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx";
   const mapEmbedUrl = socialConfig.googleMapsUrl || defaultMapUrl;
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    if (isIframePreview) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
 
   return (
     <section id="contacto" className="py-12 lg:py-16 bg-mystic-dark relative border-b border-amber-500/25">
@@ -37,10 +46,13 @@ export const SocialContact: React.FC = () => {
           
           {/* WhatsApp Card */}
           <a
-            href={whatsappUrl}
-            target="_blank"
+            href={isIframePreview ? '#' : whatsappUrl}
+            target={isIframePreview ? '_self' : '_blank'}
             rel="noopener noreferrer"
-            className="group p-6 rounded-3xl bg-gradient-to-br from-emerald-950 via-teal-950 to-emerald-900 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.45)] transition-all transform hover:-translate-y-1 border border-emerald-500/50 flex flex-col justify-between space-y-6 relative overflow-hidden"
+            onClick={handleLinkClick}
+            className={`group p-6 rounded-3xl bg-gradient-to-br from-emerald-950 via-teal-950 to-emerald-900 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.45)] transition-all transform hover:-translate-y-1 border border-emerald-500/50 flex flex-col justify-between space-y-6 relative overflow-hidden ${
+              isIframePreview ? 'cursor-default' : ''
+            }`}
           >
             <div className="space-y-3 relative z-10">
               <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-emerald-950 flex items-center justify-center font-bold shrink-0 shadow-lg group-hover:scale-110 transition-transform">
@@ -61,8 +73,11 @@ export const SocialContact: React.FC = () => {
 
           {/* Phone Call Card */}
           <a
-            href={`tel:${socialConfig.phone.replace(/[^0-9+]/g, '')}`}
-            className="group p-6 liquid-glass-card shadow-2xl hover:border-amber-400/80 transition-all transform hover:-translate-y-1 flex flex-col justify-between space-y-6"
+            href={isIframePreview ? '#' : `tel:${socialConfig.phone.replace(/[^0-9+]/g, '')}`}
+            onClick={handleLinkClick}
+            className={`group p-6 liquid-glass-card shadow-2xl hover:border-amber-400/80 transition-all transform hover:-translate-y-1 flex flex-col justify-between space-y-6 ${
+              isIframePreview ? 'cursor-default' : ''
+            }`}
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center font-bold shrink-0 shadow-lg border border-amber-300 group-hover:scale-110 transition-transform">
@@ -108,8 +123,8 @@ export const SocialContact: React.FC = () => {
             </div>
           </div>
 
-          {/* Interactive Google Maps Frame */}
-          <div className="relative rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-purple-950/80 h-[280px] sm:h-[340px] w-full group">
+          {/* Dark Mode Interactive Google Maps Frame */}
+          <div className="relative rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-[#07030e] h-[280px] sm:h-[340px] w-full group">
             <iframe
               title="Ubicación Google Maps Maestra Rosy"
               src={mapEmbedUrl}
@@ -119,18 +134,14 @@ export const SocialContact: React.FC = () => {
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full filter contrast-[1.05] brightness-[0.95]"
+              className={`w-full h-full filter invert-[90%] hue-rotate-180 contrast-[1.25] brightness-[0.85] saturate-[1.2] ${
+                isIframePreview ? 'pointer-events-none' : ''
+              }`}
             />
-            
-            <a
-              href={`https://maps.google.com/?q=${encodeURIComponent(socialConfig.locationAddress)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-4 right-4 liquid-glass-btn px-4 py-2 text-xs flex items-center gap-2 shadow-xl uppercase tracking-wider"
-            >
-              <span>Abrir en Google Maps</span>
-              <ExternalLink className="w-3.5 h-3.5 text-purple-950" />
-            </a>
+            {/* Transparent overlay in preview mode */}
+            {isIframePreview && (
+              <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
+            )}
           </div>
 
         </div>
