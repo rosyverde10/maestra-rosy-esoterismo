@@ -2,6 +2,40 @@ import React from 'react';
 import { useSite } from '../../context/SiteContext';
 import { MessageCircle, Phone, MapPin, Clock, Sparkles } from 'lucide-react';
 
+export const formatGoogleMapsEmbedUrl = (rawInput: string): string => {
+  if (!rawInput || !rawInput.trim()) {
+    return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6616089851174!2d-99.16781268509355!3d19.427024986887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd15a7%3A0x6a6d36e2f1e2f1e2!2sAngel%20de%20la%20Independencia!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx";
+  }
+
+  const str = rawInput.trim();
+
+  // Caso 1: Código iframe HTML completo pegado por el usuario
+  const iframeSrcMatch = str.match(/src=["'](.*?)["']/);
+  if (iframeSrcMatch && iframeSrcMatch[1]) {
+    return iframeSrcMatch[1];
+  }
+
+  // Caso 2: URL de embed válida preexistente
+  if (str.includes('/maps/embed') || str.includes('output=embed')) {
+    return str;
+  }
+
+  // Caso 3: Enlace estándar de Google Maps o dirección de texto plano
+  let queryText = str;
+  if (str.startsWith('http://') || str.startsWith('https://')) {
+    try {
+      const urlObj = new URL(str);
+      const qParam = urlObj.searchParams.get('q') || urlObj.searchParams.get('query');
+      if (qParam) {
+        queryText = qParam;
+      }
+    } catch (err) {}
+  }
+
+  // Convierte cualquier dirección o término de búsqueda a un mapa interactivo oficial de Google Maps
+  return `https://maps.google.com/maps?q=${encodeURIComponent(queryText)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+};
+
 export const SocialContact: React.FC = () => {
   const { data } = useSite();
   const { socialConfig } = data;
@@ -11,8 +45,7 @@ export const SocialContact: React.FC = () => {
   const whatsappMessage = `Hola Maestra Rosy, me gustaría solicitar atención personal o información sobre lecturas de tarot y servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
-  const defaultMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6616089851174!2d-99.16781268509355!3d19.427024986887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd15a7%3A0x6a6d36e2f1e2f1e2!2sAngel%20de%20la%20Independencia!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx";
-  const mapEmbedUrl = socialConfig.googleMapsUrl || defaultMapUrl;
+  const mapEmbedUrl = formatGoogleMapsEmbedUrl(socialConfig.googleMapsUrl || socialConfig.locationAddress);
 
   const handleLinkClick = (e: React.MouseEvent) => {
     if (isIframePreview) {

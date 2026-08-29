@@ -1277,22 +1277,27 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </div>
                   </div>
 
-                  {/* UBICACIÓN DE GOOGLE MAPS */}
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/30 space-y-2">
+                  {/* UBICACIÓN DE GOOGLE MAPS INTUITIVA */}
+                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-emerald-500/30 space-y-2.5">
                     <label className="block text-xs font-bold text-amber-300 uppercase flex items-center justify-between">
-                      <span>Ubicación / Embed de Google Maps</span>
-                      <span className="text-[10px] font-bold text-amber-300 bg-purple-950 px-2 py-0.5 rounded-full border border-amber-500/30">Mapa Interactivo</span>
+                      <span>Ubicación o Enlace de Google Maps</span>
+                      <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-500/40">✨ Conversión Automática</span>
                     </label>
                     <input
                       type="text"
                       value={socialConfigForm.googleMapsUrl || ''}
                       onChange={(e) => handleSocialConfigChange({ googleMapsUrl: e.target.value })}
-                      placeholder="https://www.google.com/maps/embed?pb=..."
-                      className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs font-mono"
+                      placeholder="Ej: Av. Reforma 222, CDMX  ó  pegue cualquier enlace de Google Maps"
+                      className="w-full p-3.5 rounded-xl border border-emerald-500/40 bg-[#0a0414] text-white text-sm font-medium focus:ring-2 focus:ring-emerald-400/40"
                     />
-                    <p className="text-[11px] text-purple-300/80 leading-relaxed">
-                      Ingrese la URL o enlace "Insertar mapa" (embed) de Google Maps para mostrar su ubicación interactiva en la página.
-                    </p>
+                    <div className="p-3 rounded-xl bg-[#0a0414] border border-amber-500/20 text-xs text-purple-200/90 leading-relaxed space-y-1">
+                      <p className="font-bold text-amber-300 flex items-center gap-1.5">
+                        <span>💡 ¡Súper sencillo e intuitivo!</span>
+                      </p>
+                      <p>
+                        Simplemente escriba su dirección completa (ej: <code className="bg-purple-950 text-amber-300 px-1.5 py-0.5 rounded font-mono font-bold">Av. Morelos 123, Guadalajara</code>) o pegue cualquier enlace o código de Google Maps. El sistema generará el mapa interactivo automáticamente sin configuraciones complicadas.
+                      </p>
+                    </div>
                   </div>
 
                   <button
@@ -1398,12 +1403,26 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* ESCENARIO VIRTUAL CON COMPONENTES REALES */}
-              <div className="flex-1 w-full overflow-hidden bg-[#0c0517]">
+              <div
+                className="flex-1 w-full overflow-hidden bg-[#0c0517] relative"
+                onClickCapture={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              >
+                {/* Capa de protección transparente que bloquea absolutamente todos los clics */}
+                <div
+                  className="absolute inset-0 z-[100] bg-transparent cursor-default"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                />
                 <SiteContext.Provider value={previewContextValue}>
                   <ScaledPreviewFrame>
                     <AnnouncementBar />
                     <Navbar onOpenAdminLogin={() => {}} onOpenAdminPanel={() => {}} />
-                    <main className="pt-16">
+                    <main className="pt-16 pointer-events-none">
                       <Hero />
                       <ProductCatalog onSelectProduct={() => {}} />
                       <AboutSection />
@@ -1435,11 +1454,25 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto bg-[#0c0517]">
+              <div
+                className="flex-1 overflow-y-auto bg-[#0c0517] relative"
+                onClickCapture={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              >
+                {/* Capa de protección transparente que bloquea absolutamente todos los clics */}
+                <div
+                  className="absolute inset-0 z-[100] bg-transparent cursor-default"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                />
                 <SiteContext.Provider value={previewContextValue}>
                   <AnnouncementBar />
                   <Navbar onOpenAdminLogin={() => {}} onOpenAdminPanel={() => {}} />
-                  <main className="pt-16">
+                  <main className="pt-16 pointer-events-none">
                     <Hero />
                     <ProductCatalog onSelectProduct={() => {}} />
                     <AboutSection />
