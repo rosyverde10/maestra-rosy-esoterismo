@@ -167,7 +167,7 @@ export const SocialContact: React.FC = () => {
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className={`w-full h-full filter invert-[90%] hue-rotate-180 contrast-[1.25] brightness-[0.85] saturate-[1.2] ${
+              className={`w-full h-full rounded-xl border-0 contrast-[1.05] brightness-[0.95] ${
                 isIframePreview ? 'pointer-events-none' : ''
               }`}
             />
