@@ -4,20 +4,25 @@ import { MessageCircle, Phone, MapPin, Clock, Sparkles } from 'lucide-react';
 
 export const formatGoogleMapsEmbedUrl = (rawInput: string): string => {
   if (!rawInput || !rawInput.trim()) {
-    return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6616089851174!2d-99.16781268509355!3d19.427024986887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd15a7%3A0x6a6d36e2f1e2f1e2!2sAngel%20de%20la%20Independencia!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx";
+    return "https://maps.google.com/maps?q=Angel%20de%20la%20Independencia%20CDMX&t=m&z=15&ie=UTF8&iwloc=&output=embed";
   }
 
-  const str = rawInput.trim();
+  let str = rawInput.trim();
 
-  // Caso 1: Código iframe HTML completo pegado por el usuario
+  // Caso 1: Código iframe HTML completo pegado por el usuario -> extraer contenido de src
   const iframeSrcMatch = str.match(/src=["'](.*?)["']/);
   if (iframeSrcMatch && iframeSrcMatch[1]) {
-    return iframeSrcMatch[1];
+    str = iframeSrcMatch[1];
   }
 
-  // Caso 2: URL de embed válida preexistente
+  // Caso 2: Si es una URL de embed oficial
   if (str.includes('/maps/embed') || str.includes('output=embed')) {
-    return str;
+    // Reemplaza parámetros de vista satelital (t=k / t=h / t=p) por mapa de calles (t=m)
+    let cleanUrl = str.replace(/([?&])t=[khp]/gi, '$1t=m');
+    if (!cleanUrl.includes('t=m') && !cleanUrl.includes('pb=')) {
+      cleanUrl += (cleanUrl.includes('?') ? '&' : '?') + 't=m';
+    }
+    return cleanUrl;
   }
 
   // Caso 3: Enlace estándar de Google Maps o dirección de texto plano
@@ -32,8 +37,8 @@ export const formatGoogleMapsEmbedUrl = (rawInput: string): string => {
     } catch (err) {}
   }
 
-  // Convierte cualquier dirección o término de búsqueda a un mapa interactivo oficial de Google Maps
-  return `https://maps.google.com/maps?q=${encodeURIComponent(queryText)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  // Convierte cualquier dirección o término de búsqueda a mapa interactivo de calles (t=m) por defecto
+  return `https://maps.google.com/maps?q=${encodeURIComponent(queryText)}&t=m&z=15&ie=UTF8&iwloc=&output=embed`;
 };
 
 export const SocialContact: React.FC = () => {
@@ -156,7 +161,7 @@ export const SocialContact: React.FC = () => {
             </div>
           </div>
 
-          {/* Dark Mode Interactive Google Maps Frame */}
+          {/* Roadmap Google Maps Frame */}
           <div className="relative rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-[#07030e] h-[280px] sm:h-[340px] w-full group">
             <iframe
               title="Ubicación Google Maps Maestra Rosy"
@@ -167,7 +172,7 @@ export const SocialContact: React.FC = () => {
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className={`w-full h-full rounded-xl border-0 contrast-[1.05] brightness-[0.95] ${
+              className={`w-full h-full rounded-xl border-0 contrast-[1.05] brightness-[0.98] ${
                 isIframePreview ? 'pointer-events-none' : ''
               }`}
             />
