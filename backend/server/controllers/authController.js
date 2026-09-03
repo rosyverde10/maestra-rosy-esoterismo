@@ -15,8 +15,8 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const envEmail = (process.env.EMAIL_USER || "michisnsqk@gmail.com").trim().toLowerCase();
-      const currentDataEmail = (currentSiteData?.adminEmail || "michisnsqk@gmail.com").trim().toLowerCase();
+      const envEmail = (process.env.EMAIL_USER || "rosyverde10@gmail.com").trim().toLowerCase();
+      const currentDataEmail = (currentSiteData?.adminEmail || "rosyverde10@gmail.com").trim().toLowerCase();
 
       const isEmailValid =
         normalizedEmail === envEmail ||
@@ -54,8 +54,8 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const envEmail = (process.env.EMAIL_USER || "michisnsqk@gmail.com").trim().toLowerCase();
-      const currentDataEmail = (currentSiteData?.adminEmail || "michisnsqk@gmail.com").trim().toLowerCase();
+      const envEmail = (process.env.EMAIL_USER || "rosyverde10@gmail.com").trim().toLowerCase();
+      const currentDataEmail = (currentSiteData?.adminEmail || "rosyverde10@gmail.com").trim().toLowerCase();
 
       const isEmailValid =
         normalizedEmail === envEmail ||
