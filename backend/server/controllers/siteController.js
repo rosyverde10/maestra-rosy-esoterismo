@@ -2,7 +2,7 @@ import { SiteModel } from '../models/siteModel.js';
 
 export const SiteController = {
   getSiteData(req, res) {
-    const data = SiteModel.getSiteData();
+    const data = SiteModel.getPublicSiteData();
     return res.json({ success: true, data });
   },
 
@@ -11,28 +11,30 @@ export const SiteController = {
     if (!newData) {
       return res.status(400).json({ success: false, message: 'Datos requeridos.' });
     }
-    const updated = SiteModel.updateSiteData(newData);
+    SiteModel.updateSiteData(newData);
+    const publicUpdated = SiteModel.getPublicSiteData();
     try {
       const io = req.app.get('io');
       if (io) {
-        io.emit('site:updated', updated);
+        io.emit('site:updated', publicUpdated);
       }
     } catch (err) {
       console.warn('Socket io broadcast skipped:', err.message);
     }
-    return res.json({ success: true, data: updated });
+    return res.json({ success: true, data: publicUpdated });
   },
 
   resetSiteData(req, res) {
-    const reset = SiteModel.resetSiteData();
+    SiteModel.resetSiteData();
+    const publicReset = SiteModel.getPublicSiteData();
     try {
       const io = req.app.get('io');
       if (io) {
-        io.emit('site:updated', reset);
+        io.emit('site:updated', publicReset);
       }
     } catch (err) {
       console.warn('Socket io broadcast skipped:', err.message);
     }
-    return res.json({ success: true, data: reset });
+    return res.json({ success: true, data: publicReset });
   }
 };

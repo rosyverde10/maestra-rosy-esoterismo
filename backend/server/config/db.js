@@ -8,8 +8,6 @@ const __dirname = path.dirname(__filename);
 const DATA_FILE = path.join(__dirname, '../../server-data.json');
 
 export const INITIAL_SITE_DATA = {
-  adminPinHash: "admin123",
-  adminEmail: "michisnsqk@gmail.com",
   siteConfig: {
     businessName: "Maestra Rosy - Esoterismo & Lecturas de Tarot",
     tagline: "Guiado Espiritual, Lecturas de Tarot, Limpias Energéticas, Velas Ritualizadas y Lociones Esotéricas",
@@ -160,10 +158,8 @@ const SiteModelMongo = mongoose.models.SiteData || mongoose.model('SiteData', Si
 let isMongoConnected = false;
 let cachedMongoData = null;
 
-const MONGODB_FALLBACK_URI = "mongodb+srv://rosyverde10_db_user:9jAuY1F8Vfzw3Y7w@cluster0.tvkqzla.mongodb.net/maestra_rosy_db?retryWrites=true&w=majority";
-
 export async function initMongoDB() {
-  const uri = process.env.MONGODB_URI || MONGODB_FALLBACK_URI;
+  const uri = process.env.MONGODB_URI;
   if (!uri) return false;
 
   try {

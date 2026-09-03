@@ -68,18 +68,20 @@ if (fs.existsSync(indexPath)) {
 io.on('connection', (socket) => {
   console.log(`⚡ Cliente conectado a Socket.IO: ${socket.id}`);
 
-  socket.emit('site:init', SiteModel.getSiteData());
+  socket.emit('site:init', SiteModel.getPublicSiteData());
 
   socket.on('site:update', (newData) => {
     console.log('🔄 Actualización recibida del admin. Transmitiendo en tiempo real a todos los clientes...');
-    const updated = SiteModel.updateSiteData(newData);
-    io.emit('site:updated', updated);
+    SiteModel.updateSiteData(newData);
+    const updatedPublic = SiteModel.getPublicSiteData();
+    io.emit('site:updated', updatedPublic);
   });
 
   socket.on('site:reset', () => {
     console.log('🔄 Restablecimiento solicitado. Transmitiendo datos iniciales...');
-    const reset = SiteModel.resetSiteData();
-    io.emit('site:updated', reset);
+    SiteModel.resetSiteData();
+    const resetPublic = SiteModel.getPublicSiteData();
+    io.emit('site:updated', resetPublic);
   });
 
   socket.on('disconnect', () => {

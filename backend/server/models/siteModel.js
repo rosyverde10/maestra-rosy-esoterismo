@@ -7,6 +7,13 @@ export const SiteModel = {
     return readData();
   },
 
+  getPublicSiteData() {
+    const data = readData();
+    if (!data) return {};
+    const { adminPinHash, adminEmail, ...publicData } = data;
+    return publicData;
+  },
+
   updateSiteData(newData) {
     writeData(newData);
     return readData();
