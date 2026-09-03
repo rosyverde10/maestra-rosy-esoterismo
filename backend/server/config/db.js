@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const DATA_FILE = path.join(__dirname, '../../server-data.json');
 
 export const INITIAL_SITE_DATA = {
+  adminPinHash: "admin123",
+  adminEmail: "michisnsqk@gmail.com",
   siteConfig: {
     businessName: "Maestra Rosy - Esoterismo & Lecturas de Tarot",
     tagline: "Guiado Espiritual, Lecturas de Tarot, Limpias Energéticas, Velas Ritualizadas y Lociones Esotéricas",
