@@ -465,16 +465,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         )}
       </AnimatePresence>
 
-      <div className="bg-[#120726] text-purple-100 rounded-3xl shadow-2xl w-[98vw] max-w-[1650px] h-[96vh] flex flex-col overflow-hidden border border-amber-400/30">
+      <div className="bg-[#120726] text-purple-100 rounded-3xl shadow-2xl w-[98vw] max-w-[1650px] h-[96vh] flex flex-col overflow-hidden border border-purple-700/50">
         
         {/* TOP PANEL HEADER */}
-        <div className="bg-[#170b2e] text-amber-300 px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-amber-500/30 shrink-0">
+        <div className="bg-[#160a2c] text-purple-100 px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-purple-800/60 shrink-0">
           <div className="flex items-center gap-3 w-full sm:w-auto">
-            <div className="w-9 h-9 rounded-xl bg-purple-900/80 border border-amber-400/40 flex items-center justify-center shrink-0">
-              <Moon className="w-5 h-5 fill-amber-400 text-amber-400" />
+            <div className="w-9 h-9 rounded-xl bg-purple-900/80 border border-purple-500/40 flex items-center justify-center shrink-0">
+              <Moon className="w-5 h-5 fill-amber-300 text-amber-300" />
             </div>
             <div>
-              <h2 className="font-serif-title font-bold text-base sm:text-lg text-amber-300 leading-tight">
+              <h2 className="font-serif-title font-bold text-base sm:text-lg text-amber-200 leading-tight">
                 Panel de Administración Completo - Maestra Rosy
               </h2>
               <p className="text-[11px] text-purple-300/80 font-mono">
@@ -485,14 +485,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
 
           <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-2.5 pt-2 sm:pt-0 border-t border-purple-900/60 sm:border-none">
             {/* View Mode Selectors */}
-            <div className="flex items-center gap-1 bg-purple-950/80 p-1 rounded-xl border border-amber-500/30">
+            <div className="flex items-center gap-1 bg-purple-950/80 p-1 rounded-xl border border-purple-700/50">
               <button
                 type="button"
                 onClick={() => setViewMode('split')}
                 className={`hidden lg:inline-flex px-3 py-1.5 rounded-lg text-xs font-bold transition-all items-center gap-1.5 ${
                   viewMode === 'split'
-                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md'
-                    : 'text-purple-200 hover:text-amber-300'
+                    ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md font-extrabold'
+                    : 'text-purple-200 hover:text-amber-200'
                 }`}
                 title="Edición a la izquierda + Vista Previa escalada a la derecha"
               >
@@ -505,8 +505,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 onClick={() => setViewMode('edit')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                   viewMode === 'edit'
-                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md'
-                    : 'text-purple-200 hover:text-amber-300'
+                    ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md font-extrabold'
+                    : 'text-purple-200 hover:text-amber-200'
                 }`}
                 title="Solo formulario de edición"
               >
@@ -519,8 +519,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 onClick={() => setViewMode('preview')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                   viewMode === 'preview'
-                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md'
-                    : 'text-purple-200 hover:text-amber-300'
+                    ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md font-extrabold'
+                    : 'text-purple-200 hover:text-amber-200'
                 }`}
                 title="Ver borrador en pantalla completa"
               >
@@ -552,13 +552,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
 
         {/* NAVIGATION TABS FOR ALL 7 SECTIONS */}
         {viewMode !== 'preview' && (
-          <div className="bg-[#180b33] p-2 border-b border-amber-500/20 flex overflow-x-auto gap-1 sm:gap-2 shrink-0 scrollbar-none">
+          <div className="bg-[#180b33] p-2 border-b border-purple-800/50 flex overflow-x-auto gap-1 sm:gap-2 shrink-0 scrollbar-none">
             <button
               onClick={() => setActiveTab('hero')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'hero'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <Sparkles className="w-4 h-4" />
@@ -569,8 +569,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('products')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'products'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <Package className="w-4 h-4" />
@@ -581,8 +581,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('categories')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'categories'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <Layers className="w-4 h-4" />
@@ -593,8 +593,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('about')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'about'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <BookOpen className="w-4 h-4" />
@@ -605,8 +605,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('headerFooter')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'headerFooter'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <Edit3 className="w-4 h-4" />
@@ -617,8 +617,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('socialConfig')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'socialConfig'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <Share2 className="w-4 h-4" />
@@ -629,8 +629,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('security')}
               className={`px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap flex items-center gap-2 ${
                 activeTab === 'security'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-md border border-amber-300'
-                  : 'text-purple-200 hover:text-amber-300 hover:bg-purple-900/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 shadow-md border border-amber-300'
+                  : 'text-purple-200 hover:text-amber-200 hover:bg-purple-900/50'
               }`}
             >
               <Shield className="w-4 h-4" />
@@ -649,22 +649,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               {/* TAB 1: PORTADA & HERO */}
               {activeTab === 'hero' && (
                 <form onSubmit={handleSaveSiteConfig} className="space-y-6">
-                  <div className="bg-purple-950/80 p-4 rounded-2xl border border-amber-400/30 flex items-center justify-between">
+                  <div className="bg-[#1a0e35] p-4 rounded-2xl border border-purple-700/50 flex items-center justify-between">
                     <div>
-                      <h3 className="font-serif-title font-bold text-base text-amber-300">
+                      <h3 className="font-serif-title font-bold text-base text-amber-200">
                         1. Sección Portada (Hero)
                       </h3>
                       <p className="text-xs text-purple-200/80">
-                        Edite el título principal, subtítulo, foto de portada y los 3 distintivos.
+                        Edite el título principal, subtítulo, foto de portada y las 4 tarjetas destacadas.
                       </p>
                     </div>
-                    <span className="px-2.5 py-1 rounded bg-amber-400 text-amber-950 text-[10px] font-extrabold">
+                    <span className="px-2.5 py-1 rounded-full bg-amber-400 text-purple-950 text-[10px] font-extrabold shadow-sm border border-amber-200">
                       📍 Inicio del Sitio
                     </span>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-2">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-2">
+                    <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                       Distintivo Superior Flotante (Badge)
                     </label>
                     <input
@@ -672,47 +672,47 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                       value={siteConfigForm.heroBadge || ''}
                       onChange={(e) => handleSiteConfigChange({ heroBadge: e.target.value })}
                       placeholder="Ej. Maestra Rosy • Canalizadora Espiritual"
-                      className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                      className="w-full p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/40"
                     />
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-2">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-2">
+                    <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                       Título Principal de Portada (Letras Gigantes)
                     </label>
                     <input
                       type="text"
                       value={siteConfigForm.heroTitle}
                       onChange={(e) => handleSiteConfigChange({ heroTitle: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-amber-300 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                      className="w-full p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-amber-200 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/40"
                     />
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-2">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-2">
+                    <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                       Subtítulo Explicativo de Portada
                     </label>
                     <textarea
                       rows={3}
                       value={siteConfigForm.heroSubtitle}
                       onChange={(e) => handleSiteConfigChange({ heroSubtitle: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                      className="w-full p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/40"
                     />
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-3">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-3">
+                    <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                       Imagen Principal de Portada
                     </label>
                     <div className="flex gap-4 items-center">
-                      <div className="w-32 h-20 rounded-xl overflow-hidden bg-purple-950 border border-amber-500/30 shrink-0">
+                      <div className="w-32 h-20 rounded-xl overflow-hidden bg-purple-950 border border-purple-700/50 shrink-0">
                         <img
                           src={siteConfigForm.heroImage || '/images/hero.jpg'}
                           alt="Portada"
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <label className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold text-xs flex items-center gap-2 cursor-pointer transition-colors shadow">
+                      <label className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-purple-950 font-extrabold text-xs flex items-center gap-2 cursor-pointer transition-colors shadow">
                         <Upload className="w-4 h-4" />
                         <span>Subir Foto de Portada</span>
                         <input type="file" accept="image/*" onChange={handleHeroImageUpload} className="hidden" />
@@ -721,19 +721,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-2">
-                      <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                    <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-2">
+                      <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                         Texto Botón Principal
                       </label>
                       <input
                         type="text"
                         value={siteConfigForm.heroCtaButton || ''}
                         onChange={(e) => handleSiteConfigChange({ heroCtaButton: e.target.value })}
-                        className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
+                        className="w-full p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-white font-medium text-sm"
                       />
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-2">
+                    <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-2">
                       <label className="block text-xs font-bold text-emerald-400 uppercase tracking-wider">
                         Texto Botón WhatsApp
                       </label>
@@ -746,86 +746,86 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-3">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center justify-between">
+                  <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-3">
+                    <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider flex items-center justify-between">
                       <span>Las 4 Tarjetas Destacadas de la Portada</span>
-                      <span className="text-[10px] text-amber-400 bg-purple-950 px-2 py-0.5 rounded border border-amber-500/30">Editables en tiempo real</span>
+                      <span className="text-[10px] text-amber-200 bg-purple-950 px-2 py-0.5 rounded border border-purple-700/50">Editables en tiempo real</span>
                     </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                       {/* Tarjeta 1 */}
-                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
-                        <label className="block text-[11px] font-bold text-amber-300">Tarjeta 1 (ej: +15 Años)</label>
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-purple-800/40">
+                        <label className="block text-[11px] font-bold text-amber-200">Tarjeta 1</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature1Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature1Title: e.target.value })}
-                          placeholder="Título (ej: +15 AÑOS)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
+                          placeholder="Título (ej: TAROT CERTERO)"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature1Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature1Subtitle: e.target.value })}
-                          placeholder="Subtítulo (ej: Guiado Espiritual)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
+                          placeholder="Subtítulo (ej: Presencial & En línea)"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
 
                       {/* Tarjeta 2 */}
-                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
-                        <label className="block text-[11px] font-bold text-purple-300">Tarjeta 2 (ej: 100%)</label>
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-purple-800/40">
+                        <label className="block text-[11px] font-bold text-purple-200">Tarjeta 2</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature2Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature2Title: e.target.value })}
-                          placeholder="Título (ej: 100%)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
+                          placeholder="Título (ej: LIMPIAS & SANACIÓN)"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature2Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature2Subtitle: e.target.value })}
-                          placeholder="Subtítulo (ej: Atención Confidencial)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
+                          placeholder="Subtítulo (ej: Aura y Energías)"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
 
                       {/* Tarjeta 3 */}
-                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
-                        <label className="block text-[11px] font-bold text-emerald-300">Tarjeta 3 (ej: Presencial)</label>
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-purple-800/40">
+                        <label className="block text-[11px] font-bold text-emerald-300">Tarjeta 3</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature3Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature3Title: e.target.value })}
-                          placeholder="Título (ej: PRESENCIAL)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
+                          placeholder="Título (ej: PRODUCTOS CURADOS)"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature3Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature3Subtitle: e.target.value })}
-                          placeholder="Subtítulo (ej: Y Consultas Virtuales)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
+                          placeholder="Subtítulo (ej: Velas y Lociones)"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
 
                       {/* Tarjeta 4 */}
-                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
-                        <label className="block text-[11px] font-bold text-teal-300">Tarjeta 4 (ej: 24/7)</label>
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-purple-800/40">
+                        <label className="block text-[11px] font-bold text-teal-300">Tarjeta 4</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature4Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature4Title: e.target.value })}
                           placeholder="Título (ej: 24/7)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature4Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature4Subtitle: e.target.value })}
                           placeholder="Subtítulo (ej: Atención por WhatsApp)"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
+                          className="w-full p-2.5 rounded-xl border border-purple-700/50 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
                     </div>
@@ -833,7 +833,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 font-bold text-sm flex items-center justify-center gap-2 shadow-xl transition-all border border-amber-300 cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-purple-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl transition-all border border-amber-300 cursor-pointer"
                   >
                     <Save className="w-5 h-5" />
                     <span>Guardar y Publicar Cambios de Portada</span>
@@ -844,37 +844,37 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               {/* TAB 2: CATÁLOGO & PRODUCTOS */}
               {activeTab === 'products' && (
                 <div className="space-y-6">
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-4">
-                    <h3 className="font-serif-title font-bold text-base text-amber-300">
+                  <div className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-4">
+                    <h3 className="font-serif-title font-bold text-base text-amber-200">
                       Encabezado de la Sección del Catálogo
                     </h3>
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                      <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                         Título de la Sección del Catálogo
                       </label>
                       <input
                         type="text"
                         value={siteConfigForm.catalogTitle || ''}
                         onChange={(e) => handleSiteConfigChange({ catalogTitle: e.target.value })}
-                        className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
+                        className="w-full p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-white font-medium text-sm"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                      <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                         Subtítulo de la Sección del Catálogo
                       </label>
                       <input
                         type="text"
                         value={siteConfigForm.catalogSubtitle || ''}
                         onChange={(e) => handleSiteConfigChange({ catalogSubtitle: e.target.value })}
-                        className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
+                        className="w-full p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-white font-medium text-sm"
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between bg-[#1f0f3d] p-4 rounded-2xl border border-amber-500/25 shadow-md">
+                  <div className="flex items-center justify-between bg-[#1a0e35] p-4 rounded-2xl border border-purple-800/40 shadow-md">
                     <div>
-                      <h3 className="font-serif-title font-bold text-base text-amber-300">
+                      <h3 className="font-serif-title font-bold text-base text-amber-200">
                         Productos Registrados ({data.products.length})
                       </h3>
                       <p className="text-xs text-purple-200/80">Agregue o edite fotos, precios y detalles.</p>
@@ -882,7 +882,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
 
                     <button
                       onClick={handleOpenCreateProduct}
-                      className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 font-bold text-xs flex items-center gap-1.5 shadow border border-amber-300 cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-purple-950 font-extrabold text-xs flex items-center gap-1.5 shadow border border-amber-300 cursor-pointer"
                     >
                       <Plus className="w-4 h-4" />
                       <span>Agregar Producto</span>
@@ -894,10 +894,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     {data.products.map((prod) => (
                       <div
                         key={prod.id}
-                        className="bg-[#1a0e35] rounded-2xl p-4 border border-amber-500/30 shadow-md flex flex-col justify-between space-y-3 hover:border-amber-400/60 transition-all"
+                        className="bg-[#1a0e35] rounded-2xl p-4 border border-purple-800/40 shadow-md flex flex-col justify-between space-y-3 hover:border-amber-400/60 transition-all"
                       >
                         <div className="flex gap-3 items-center">
-                          <div className="w-16 h-16 rounded-xl overflow-hidden bg-purple-950 shrink-0 border border-amber-500/30">
+                          <div className="w-16 h-16 rounded-xl overflow-hidden bg-purple-950 shrink-0 border border-purple-700/50">
                             <img
                               src={prod.images[0] || '/images/hero.jpg'}
                               alt={prod.name}
@@ -906,11 +906,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wide">
+                              <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wide">
                                 {prod.category}
                               </span>
                               {prod.featured && (
-                                <span className="px-1.5 py-0.2 bg-amber-400 text-amber-950 text-[9px] font-extrabold rounded">
+                                <span className="px-2 py-0.5 rounded-full bg-amber-400 text-purple-950 text-[10px] font-extrabold shadow-sm border border-amber-200 flex items-center gap-1 shrink-0">
                                   ⭐ Destacado
                                 </span>
                               )}
@@ -918,7 +918,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                             <h4 className="font-serif-title font-bold text-purple-100 text-sm truncate">
                               {prod.name}
                             </h4>
-                            <p className="text-xs text-amber-300 font-bold mt-0.5">
+                            <p className="text-xs text-amber-200 font-bold mt-0.5">
                               {prod.priceText}
                             </p>
                           </div>
@@ -968,8 +968,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               {/* TAB 3: CATEGORÍAS */}
               {activeTab === 'categories' && (
                 <div className="space-y-6">
-                  <div className="bg-[#1f0f3d] p-4 rounded-2xl border border-amber-500/25">
-                    <h3 className="font-serif-title font-bold text-base text-amber-300">
+                  <div className="bg-[#1a0e35] p-4 rounded-2xl border border-purple-800/40">
+                    <h3 className="font-serif-title font-bold text-base text-amber-200">
                       Gestión de Categorías del Catálogo
                     </h3>
                     <p className="text-xs text-purple-200/80">
@@ -977,8 +977,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </p>
                   </div>
 
-                  <form onSubmit={handleAddCategorySubmit} className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-3">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  <form onSubmit={handleAddCategorySubmit} className="p-4 rounded-2xl bg-[#1a0e35] border border-purple-800/40 space-y-3">
+                    <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider">
                       Agregar Nueva Categoría
                     </label>
                     <div className="flex gap-2">
@@ -987,11 +987,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                         value={newCatInput}
                         onChange={(e) => setNewCatInput(e.target.value)}
                         placeholder="Ej. Baños de Purificación"
-                        className="flex-1 p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
+                        className="flex-1 p-3 rounded-xl border border-purple-700/50 bg-[#0a0414] text-white font-medium text-sm"
                       />
                       <button
                         type="submit"
-                        className="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 font-bold text-xs shadow flex items-center gap-1.5 cursor-pointer"
+                        className="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-purple-950 font-extrabold text-xs shadow flex items-center gap-1.5 cursor-pointer"
                       >
                         <Plus className="w-4 h-4" />
                         <span>Agregar</span>
@@ -999,8 +999,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </div>
                   </form>
 
-                  <div className="bg-[#1f0f3d] p-5 rounded-2xl border border-amber-500/25 space-y-3 shadow-sm">
-                    <h3 className="font-serif-title font-bold text-base text-amber-300">
+                  <div className="bg-[#1a0e35] p-5 rounded-2xl border border-purple-800/40 space-y-3 shadow-sm">
+                    <h3 className="font-serif-title font-bold text-base text-amber-200">
                       Categorías Actuales del Catálogo
                     </h3>
                     <div className="divide-y divide-purple-900/60">
