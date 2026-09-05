@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { Product } from '../../types';
 import { useSite } from '../../context/SiteContext';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
-import { X, MessageCircle, Share2, Sparkles, ZoomIn, Wand2, Compass } from 'lucide-react';
+import { X, MessageCircle, Share2, Sparkles, ZoomIn, Wand2, Compass, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ProductModalProps {
@@ -82,8 +82,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
 
               <div className="grid grid-cols-1 md:grid-cols-2">
                 
-                {/* Gallery Showcase */}
-                <div className="p-5 sm:p-6 bg-purple-950/40 flex flex-col justify-between space-y-4 border-b md:border-b-0 md:border-r border-amber-500/25">
+                {/* Gallery Showcase - justify-start para colocar las miniaturas inmediatamente debajo de la foto */}
+                <div className="p-5 sm:p-6 bg-purple-950/40 flex flex-col justify-start space-y-4 border-b md:border-b-0 md:border-r border-amber-500/25">
                   <div
                     onClick={() => setIsLightboxOpen(true)}
                     onTouchStart={handleTouchStart}
@@ -113,15 +113,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                     </div>
                   </div>
 
-                  {/* Thumbnails */}
+                  {/* Thumbnails immediately below main photo */}
                   {images.length > 1 && (
-                    <div className="space-y-3">
+                    <div className="space-y-3 pt-1">
                       <div className="flex items-center justify-center gap-1.5">
                         {images.map((_, idx) => (
                           <button
                             key={idx}
                             onClick={() => setSelectedImageIndex(idx)}
-                            className={`h-2 rounded-full transition-all ${
+                            className={`h-2 rounded-full transition-all cursor-pointer ${
                               selectedImageIndex === idx ? 'w-6 bg-amber-400' : 'w-2 bg-purple-800/60'
                             }`}
                             aria-label={`Ver imagen ${idx + 1}`}
@@ -237,7 +237,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
         )}
       </AnimatePresence>
 
-      {/* Lightbox */}
+      {/* Fullscreen Lightbox - Botones de navegación únicamente en computadora (hidden md:flex), deslizamiento con el dedo en celular */}
       <AnimatePresence>
         {isLightboxOpen && (
           <div
@@ -246,11 +246,40 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
           >
             <button
               onClick={() => setIsLightboxOpen(false)}
-              className="absolute top-4 right-4 z-10 p-3 rounded-full bg-purple-950 hover:bg-purple-900 text-amber-300 transition-colors border border-amber-400/40 shadow-xl cursor-pointer"
+              className="absolute top-4 right-4 z-30 p-3 rounded-full bg-purple-950 hover:bg-purple-900 text-amber-300 transition-colors border border-amber-400/40 shadow-xl cursor-pointer"
               title="Cerrar vista completa"
             >
               <X className="w-6 h-6" />
             </button>
+
+            {/* Desktop Navigation Arrows (hidden on mobile, visible on desktop) */}
+            {images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImageIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+                  }}
+                  className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-purple-950/90 hover:bg-purple-900 text-amber-300 border border-amber-400/40 shadow-2xl transition-all cursor-pointer hover:scale-110 z-30"
+                  title="Imagen anterior"
+                >
+                  <ChevronLeft className="w-7 h-7 text-amber-300" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+                  }}
+                  className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-purple-950/90 hover:bg-purple-900 text-amber-300 border border-amber-400/40 shadow-2xl transition-all cursor-pointer hover:scale-110 z-30"
+                  title="Siguiente imagen"
+                >
+                  <ChevronRight className="w-7 h-7 text-amber-300" />
+                </button>
+              </>
+            )}
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -267,13 +296,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                 className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl border border-amber-400/40"
               />
 
+              {/* Dot indicators - Solo visibles en computadora (hidden md:flex) */}
               {images.length > 1 && (
-                <div className="flex items-center justify-center gap-2 bg-purple-950/90 px-4 py-2 rounded-full backdrop-blur-md border border-amber-500/40">
+                <div className="hidden md:flex items-center justify-center gap-2 bg-purple-950/90 px-4 py-2 rounded-full backdrop-blur-md border border-amber-500/40">
                   {images.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setSelectedImageIndex(idx)}
-                      className={`h-2 rounded-full transition-all ${
+                      className={`h-2 rounded-full transition-all cursor-pointer ${
                         selectedImageIndex === idx ? 'w-6 bg-amber-400' : 'w-2 bg-purple-700/60'
                       }`}
                       aria-label={`Ver imagen ${idx + 1}`}
