@@ -1522,11 +1522,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
       {isProductModalOpen && (
         <div
           className="fixed inset-0 z-[250] overflow-y-auto bg-[#040208]/90 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-5"
-          onClick={() => setIsProductModalOpen(false)}
         >
           <div
             className="bg-[#180b33] text-purple-100 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.9)] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 space-y-6 border border-amber-400/50 relative my-auto"
-            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-purple-900/60 pb-4">
               <h3 className="font-serif-title font-bold text-lg text-amber-300">
