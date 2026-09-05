@@ -28,6 +28,8 @@ export interface SiteConfig {
   heroFeature2Subtitle: string;
   heroFeature3Title: string;
   heroFeature3Subtitle: string;
+  heroFeature4Title?: string;
+  heroFeature4Subtitle?: string;
   catalogTitle: string;
   catalogSubtitle: string;
   aboutBadge: string;

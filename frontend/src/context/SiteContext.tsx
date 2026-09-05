@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+  import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { SiteData, Product, SiteConfig, SocialConfig } from '../types';
 import { loadSiteData, saveSiteData, resetSiteData as storageReset } from '../utils/storage';
 import { subscribeToSiteUpdates, emitSiteUpdate, socket, getApiBaseUrl } from '../services/socket';

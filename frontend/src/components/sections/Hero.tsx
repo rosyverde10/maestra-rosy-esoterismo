@@ -23,26 +23,26 @@ export const Hero: React.FC = () => {
   // Stat items with CONSTANT 2px border width at all times to prevent border-thickness layout shift
   const stats = [
     {
-      title: '+15 Años',
-      subtitle: 'Guiado Espiritual',
+      title: siteConfig.heroFeature1Title || '+15 Años',
+      subtitle: siteConfig.heroFeature1Subtitle || 'Guiado Espiritual',
       activeGlow: 'border-amber-400 bg-purple-950/95 shadow-[0_0_35px_rgba(251,191,36,0.7)] text-amber-300 opacity-100',
       titleClass: 'text-gold-gradient font-bold'
     },
     {
-      title: '100%',
-      subtitle: 'Atención Confidencial',
+      title: siteConfig.heroFeature2Title || '100%',
+      subtitle: siteConfig.heroFeature2Subtitle || 'Atención Confidencial',
       activeGlow: 'border-purple-400 bg-purple-950/95 shadow-[0_0_35px_rgba(192,132,252,0.7)] text-purple-300 opacity-100',
       titleClass: 'text-mystic-gradient font-bold'
     },
     {
-      title: 'Presencial',
-      subtitle: 'Y Consultas Virtuales',
+      title: siteConfig.heroFeature3Title || 'Presencial',
+      subtitle: siteConfig.heroFeature3Subtitle || 'Y Consultas Virtuales',
       activeGlow: 'border-emerald-400 bg-emerald-950/90 shadow-[0_0_35px_rgba(52,211,153,0.7)] text-emerald-300 opacity-100',
       titleClass: 'text-emerald-300 font-bold'
     },
     {
-      title: '24/7',
-      subtitle: 'Atención por WhatsApp',
+      title: siteConfig.heroFeature4Title || '24/7',
+      subtitle: siteConfig.heroFeature4Subtitle || 'Atención por WhatsApp',
       activeGlow: 'border-teal-400 bg-teal-950/90 shadow-[0_0_35px_rgba(45,212,191,0.7)] text-teal-300 opacity-100',
       titleClass: 'text-teal-300 font-bold'
     }

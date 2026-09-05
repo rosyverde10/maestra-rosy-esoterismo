@@ -745,62 +745,85 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   </div>
 
                   <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-3">
-                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider">
-                      Las 3 Tarjetas de Características de Portada
+                    <label className="block text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center justify-between">
+                      <span>Las 4 Tarjetas Destacadas de la Portada</span>
+                      <span className="text-[10px] text-amber-400 bg-purple-950 px-2 py-0.5 rounded border border-amber-500/30">Editables en tiempo real</span>
                     </label>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div className="space-y-1">
-                        <label className="block text-[11px] font-bold text-purple-200">Tarjeta 1</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      {/* Tarjeta 1 */}
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
+                        <label className="block text-[11px] font-bold text-amber-300">Tarjeta 1 (ej: +15 Años)</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature1Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature1Title: e.target.value })}
-                          placeholder="Título"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
+                          placeholder="Título (ej: +15 AÑOS)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature1Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature1Subtitle: e.target.value })}
-                          placeholder="Subtítulo"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
+                          placeholder="Subtítulo (ej: Guiado Espiritual)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
 
-                      <div className="space-y-1">
-                        <label className="block text-[11px] font-bold text-purple-200">Tarjeta 2</label>
+                      {/* Tarjeta 2 */}
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
+                        <label className="block text-[11px] font-bold text-purple-300">Tarjeta 2 (ej: 100%)</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature2Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature2Title: e.target.value })}
-                          placeholder="Título"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
+                          placeholder="Título (ej: 100%)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature2Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature2Subtitle: e.target.value })}
-                          placeholder="Subtítulo"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
+                          placeholder="Subtítulo (ej: Atención Confidencial)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
 
-                      <div className="space-y-1">
-                        <label className="block text-[11px] font-bold text-purple-200">Tarjeta 3</label>
+                      {/* Tarjeta 3 */}
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
+                        <label className="block text-[11px] font-bold text-emerald-300">Tarjeta 3 (ej: Presencial)</label>
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature3Title || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature3Title: e.target.value })}
-                          placeholder="Título"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
+                          placeholder="Título (ej: PRESENCIAL)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
                         />
                         <input
                           type="text"
                           value={siteConfigForm.heroFeature3Subtitle || ''}
                           onChange={(e) => handleSiteConfigChange({ heroFeature3Subtitle: e.target.value })}
-                          placeholder="Subtítulo"
-                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-xs"
+                          placeholder="Subtítulo (ej: Y Consultas Virtuales)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
+                        />
+                      </div>
+
+                      {/* Tarjeta 4 */}
+                      <div className="space-y-1.5 p-3 rounded-xl bg-[#0a0414] border border-amber-500/30">
+                        <label className="block text-[11px] font-bold text-teal-300">Tarjeta 4 (ej: 24/7)</label>
+                        <input
+                          type="text"
+                          value={siteConfigForm.heroFeature4Title || ''}
+                          onChange={(e) => handleSiteConfigChange({ heroFeature4Title: e.target.value })}
+                          placeholder="Título (ej: 24/7)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-bold"
+                        />
+                        <input
+                          type="text"
+                          value={siteConfigForm.heroFeature4Subtitle || ''}
+                          onChange={(e) => handleSiteConfigChange({ heroFeature4Subtitle: e.target.value })}
+                          placeholder="Subtítulo (ej: Atención por WhatsApp)"
+                          className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-purple-200 text-xs"
                         />
                       </div>
                     </div>
