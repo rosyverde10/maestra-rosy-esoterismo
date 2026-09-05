@@ -2,6 +2,41 @@ import React from 'react';
 import { useSite } from '../../context/SiteContext';
 import { MessageCircle, Phone, MapPin, Clock, Sparkles } from 'lucide-react';
 
+const DEFAULT_MAP_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d650.8862487341354!2d-100.05588520815776!3d20.451710644369573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d373007609b047%3A0x8b5626322e9909ac!2sEsoterismo%20Maestra%20Rosy!5e1!3m2!1ses-419!2smx!4v1788591696484!5m2!1ses-419!2smx";
+
+export const formatGoogleMapsEmbedUrl = (rawInput?: string): string => {
+  if (!rawInput || !rawInput.trim()) {
+    return DEFAULT_MAP_URL;
+  }
+
+  let str = rawInput.trim();
+
+  // Caso 1: Código iframe HTML completo pegado por el usuario -> extraer src
+  const iframeSrcMatch = str.match(/src=["'](.*?)["']/);
+  if (iframeSrcMatch && iframeSrcMatch[1]) {
+    str = iframeSrcMatch[1];
+  }
+
+  // Caso 2: URL de embed oficial
+  if (str.includes('/maps/embed') || str.includes('output=embed')) {
+    return str;
+  }
+
+  // Caso 3: Enlace estándar de Google Maps o dirección de texto plano
+  let queryText = str;
+  if (str.startsWith('http://') || str.startsWith('https://')) {
+    try {
+      const urlObj = new URL(str);
+      const qParam = urlObj.searchParams.get('q') || urlObj.searchParams.get('query');
+      if (qParam) {
+        queryText = qParam;
+      }
+    } catch (err) {}
+  }
+
+  return `https://maps.google.com/maps?q=${encodeURIComponent(queryText)}&t=m&z=16&ie=UTF8&iwloc=&output=embed`;
+};
+
 export const SocialContact: React.FC = () => {
   const { data } = useSite();
   const { socialConfig } = data;
@@ -10,6 +45,8 @@ export const SocialContact: React.FC = () => {
 
   const whatsappMessage = `Hola Maestra Rosy, me gustaría solicitar atención personal o información sobre lecturas de tarot y servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const mapEmbedUrl = formatGoogleMapsEmbedUrl(socialConfig.googleMapsUrl || socialConfig.locationAddress);
 
   const handleLinkClick = (e: React.MouseEvent) => {
     if (isIframePreview) {
@@ -30,7 +67,7 @@ export const SocialContact: React.FC = () => {
           </div>
 
           <h2 className="font-serif-title text-2xl sm:text-4xl lg:text-4xl font-extrabold text-gold-gradient tracking-tight">
-            Contacto Espiritual & Atención Personal
+            Contacto Espiritual & Ubicación del Santuario
           </h2>
 
           <p className="text-purple-200/90 text-sm sm:text-base lg:text-lg font-serif-body leading-relaxed">
@@ -96,9 +133,9 @@ export const SocialContact: React.FC = () => {
         </div>
 
         {/* Sanctuary Address & Working Hours Block */}
-        <div className="liquid-glass-card p-6 sm:p-8 shadow-2xl border border-amber-500/30 animate-fade-up stagger-2">
+        <div className="liquid-glass-card p-6 sm:p-8 space-y-6 shadow-2xl border border-amber-500/30 animate-fade-up stagger-2">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center border-b border-amber-500/20 pb-6">
             <div className="flex items-start gap-4">
               <div className="w-11 h-11 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center shrink-0 border border-amber-300 shadow-md">
                 <MapPin className="w-5 h-5 text-purple-950" />
@@ -118,6 +155,26 @@ export const SocialContact: React.FC = () => {
                 <p className="text-xs sm:text-sm text-purple-200/90 font-serif-body mt-0.5">{socialConfig.workingHours}</p>
               </div>
             </div>
+          </div>
+
+          {/* Interactive Google Maps Frame for Esoterismo Maestra Rosy */}
+          <div className="relative rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-[#07030e] h-[280px] sm:h-[360px] w-full group">
+            <iframe
+              title="Ubicación Google Maps Esoterismo Maestra Rosy"
+              src={mapEmbedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              className={`w-full h-full rounded-xl border-0 contrast-[1.05] brightness-[0.98] ${
+                isIframePreview ? 'pointer-events-none' : ''
+              }`}
+            />
+            {isIframePreview && (
+              <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
+            )}
           </div>
 
         </div>

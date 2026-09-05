@@ -38,7 +38,7 @@ export const INITIAL_SITE_DATA: SiteData = {
     phone: "+52 (55) 5123 4567",
     locationAddress: "Consultorio Espiritual, Ciudad de México / Consultas a Distancia",
     workingHours: "Lunes a Sábado: 9:00 AM - 9:00 PM | Atendemos mensajes de WhatsApp",
-    googleMapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.6616089851174!2d-99.16781268509355!3d19.427024986887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd15a7%3A0x6a6d36e2f1e2f1e2!2sAngel%20de%20la%20Independencia!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx"
+    googleMapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d650.8862487341354!2d-100.05588520815776!3d20.451710644369573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d373007609b047%3A0x8b5626322e9909ac!2sEsoterismo%20Maestra%20Rosy!5e1!3m2!1ses-419!2smx!4v1788591696484!5m2!1ses-419!2smx"
   },
   categories: [
     "Todas",

@@ -11,7 +11,7 @@ export async function sendOTPEmail(targetEmail, code, businessName = 'Maestra Ro
     <div style="font-family: 'Georgia', serif; max-width: 520px; margin: 0 auto; background-color: #120726; border: 1px solid #d4af37; border-radius: 16px; padding: 32px; color: #f3f4f6;">
       <div style="text-align: center; margin-bottom: 24px;">
         <h1 style="color: #d4af37; margin: 0; font-size: 26px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);">${businessName}</h1>
-        <p style="color: #c084fc; font-size: 13px; font-weight: 600; margin-top: 6px; font-family: sans-serif;">✨ Código de Seguridad de Acceso Administrativo</p>
+        <p style="color: #c084fc; font-size: 13px; font-weight: 600; margin-top: 6px; font-family: sans-serif;"> Código de Seguridad de Acceso Administrativo</p>
       </div>
 
       <div style="background-color: #1e0e38; border-radius: 12px; padding: 24px; text-align: center; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);">

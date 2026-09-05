@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Plus, Trash2, Edit3, Save, Check, Upload, Layers,
   Package, Share2, Shield, Download, Mail, Ruler, LogOut,
-  Eye, Monitor, Layout, Sparkles, BookOpen, ArrowLeft, MessageCircle, Moon
+  Eye, EyeOff, Monitor, Layout, Sparkles, BookOpen, ArrowLeft, MessageCircle, Moon
 } from 'lucide-react';
 
 import { Hero } from '../sections/Hero';
@@ -198,6 +198,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   // Password Form State
   const [newPasswordInput, setNewPasswordInput] = useState('');
   const [confirmPasswordInput, setConfirmPasswordInput] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordMsg, setPasswordMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Global Floating Save Notification State
@@ -1300,6 +1302,24 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </div>
                   </div>
 
+                  {/* UBICACIÓN DE GOOGLE MAPS */}
+                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-amber-500/30 space-y-2.5">
+                    <label className="block text-xs font-bold text-amber-300 uppercase flex items-center justify-between">
+                      <span>Ubicación o Enlace de Google Maps</span>
+                      <span className="text-[10px] font-bold text-amber-300 bg-purple-950 px-2 py-0.5 rounded-full border border-amber-500/30">📍 Enlace de Mapa</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={socialConfigForm.googleMapsUrl || ''}
+                      onChange={(e) => handleSocialConfigChange({ googleMapsUrl: e.target.value })}
+                      placeholder="Pegue aquí el enlace o código iframe de Google Maps"
+                      className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-sm font-medium focus:ring-2 focus:ring-amber-400/40"
+                    />
+                    <p className="text-[11px] text-purple-200/80">
+                      Mapa actual configurado: <strong className="text-amber-300">Esoterismo Maestra Rosy</strong>. Puedes pegar un nuevo enlace si deseas actualizar la ubicación.
+                    </p>
+                  </div>
+
                   <button
                     type="submit"
                     className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl transition-all border border-emerald-400/30 cursor-pointer"
@@ -1332,23 +1352,45 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   <div className="p-5 rounded-2xl bg-[#1f0f3d] border border-amber-500/25 space-y-4 shadow-sm">
                     <h3 className="font-serif-title font-bold text-base text-amber-300 flex items-center gap-2">
                       <Shield className="w-5 h-5 text-amber-400" />
-                      Cambiar Contraseña
+                      Cambiar Contraseña de Administrador
                     </h3>
                     <form onSubmit={handleChangePasswordSubmit} className="space-y-3">
-                      <input
-                        type="password"
-                        placeholder="Nueva contraseña"
-                        value={newPasswordInput}
-                        onChange={(e) => setNewPasswordInput(e.target.value)}
-                        className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
-                      />
-                      <input
-                        type="password"
-                        placeholder="Confirmar nueva contraseña"
-                        value={confirmPasswordInput}
-                        onChange={(e) => setConfirmPasswordInput(e.target.value)}
-                        className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
-                      />
+                      <div className="relative">
+                        <input
+                          type={showNewPassword ? 'text' : 'password'}
+                          placeholder="Nueva contraseña"
+                          value={newPasswordInput}
+                          onChange={(e) => setNewPasswordInput(e.target.value)}
+                          className="w-full p-3 pr-11 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm focus:ring-2 focus:ring-amber-400/40"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowNewPassword(!showNewPassword)}
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-purple-300 hover:text-amber-300"
+                          title={showNewPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                        >
+                          {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? 'text' : 'password'}
+                          placeholder="Confirmar nueva contraseña"
+                          value={confirmPasswordInput}
+                          onChange={(e) => setConfirmPasswordInput(e.target.value)}
+                          className="w-full p-3 pr-11 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm focus:ring-2 focus:ring-amber-400/40"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-purple-300 hover:text-amber-300"
+                          title={showConfirmPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                        >
+                          {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+
                       <button
                         type="submit"
                         className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 text-xs font-bold shadow border border-amber-300 cursor-pointer"
@@ -1500,14 +1542,25 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
             </div>
 
             <form onSubmit={handleSaveProductSubmit} className="space-y-4">
+              <div className="p-3.5 rounded-2xl bg-[#0a0414] border border-amber-500/30 text-xs text-purple-200/90 leading-relaxed space-y-1">
+                <p className="font-bold text-amber-300 flex items-center gap-1.5">
+                  <span>💡 Guía Rápida de Publicación (Pesos Mexicanos MXN)</span>
+                </p>
+                <p>
+                  Todos los precios se registran automáticamente en <strong className="text-amber-200">Pesos Mexicanos ($ MXN)</strong>. Puedes agregar servicios (lecturas, limpias) o productos físicos (velas, lociones, amuletos).
+                </p>
+              </div>
+
               <div>
-                <label className="block text-xs font-bold text-amber-300 uppercase mb-1">Nombre del Elemento</label>
+                <label className="block text-xs font-bold text-amber-300 uppercase mb-1">
+                  Nombre del Producto o Servicio
+                </label>
                 <input
                   type="text"
                   required
                   value={productForm.name}
                   onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                  placeholder="Ej. Lectura de Tarot Integral"
+                  placeholder="Ej. Lectura de Tarot Completa & Canalización"
                   className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm focus:ring-2 focus:ring-amber-400/40"
                 />
               </div>
@@ -1533,51 +1586,72 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     onChange={(e) => setProductForm({ ...productForm, status: e.target.value as any })}
                     className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-amber-300 font-bold text-sm cursor-pointer"
                   >
-                    <option value="disponible" className="bg-[#180b33] text-emerald-400">✓ Disponible</option>
-                    <option value="sobre_pedido" className="bg-[#180b33] text-amber-300">✨ Por Cita</option>
+                    <option value="disponible" className="bg-[#180b33] text-emerald-400">✓ Disponible (Entrega o cita inmediata)</option>
+                    <option value="sobre_pedido" className="bg-[#180b33] text-amber-300">✨ Por Cita (Previa agenda)</option>
                     <option value="agotado" className="bg-[#180b33] text-rose-400">❌ Agotado temporalmente</option>
                   </select>
                 </div>
               </div>
 
-              {/* PRICE INPUTS */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl bg-[#0a0414] border border-amber-500/20">
-                <div>
-                  <label className="block text-xs font-bold text-amber-300 uppercase mb-1">Precio Numérico (MXN)</label>
-                  <input
-                    type="number"
-                    value={priceNum}
-                    onChange={(e) => setPriceNum(e.target.value)}
-                    placeholder="450"
-                    className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#180b33] text-amber-300 font-bold text-sm"
-                  />
+              {/* PRICE INPUTS WITH CLEAR MXN BADGES & PREVIEW */}
+              <div className="p-4 rounded-2xl bg-[#0a0414] border border-amber-500/30 space-y-3">
+                <label className="block text-xs font-bold text-amber-300 uppercase flex items-center justify-between">
+                  <span>Precio en Pesos Mexicanos (MXN)</span>
+                  <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-500/40">🇲🇽 Moneda: MXN</span>
+                </label>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-semibold text-purple-200 mb-1">Costo Numérico ($ MXN)</label>
+                    <div className="relative flex items-center">
+                      <span className="absolute left-3 font-bold text-amber-300 text-sm">$</span>
+                      <input
+                        type="number"
+                        value={priceNum}
+                        onChange={(e) => setPriceNum(e.target.value)}
+                        placeholder="450"
+                        className="w-full pl-8 pr-14 py-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-amber-300 font-bold text-sm focus:ring-2 focus:ring-amber-400/40"
+                      />
+                      <span className="absolute right-3 font-mono font-bold text-xs text-purple-300/80">MXN</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-semibold text-purple-200 mb-1">Nota o Aclaración del Precio (Opcional)</label>
+                    <input
+                      type="text"
+                      value={priceNote}
+                      onChange={(e) => setPriceNote(e.target.value)}
+                      placeholder="Ej: Por Cita / En Línea / Frasco 250ml"
+                      className="w-full p-2.5 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-xs font-medium"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-amber-300 uppercase mb-1">Nota del Precio (Opcional)</label>
-                  <input
-                    type="text"
-                    value={priceNote}
-                    onChange={(e) => setPriceNote(e.target.value)}
-                    placeholder="Ej. Por Cita / En Línea"
-                    className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-sm"
-                  />
+
+                <div className="p-2.5 rounded-xl bg-[#180b33] border border-amber-500/20 text-xs flex items-center gap-2">
+                  <span className="text-purple-300 font-medium">Así se verá el precio en la página:</span>
+                  <strong className="text-amber-300 font-bold font-mono">$ {priceNum || '0'} MXN{priceNote ? ` (${priceNote})` : ''}</strong>
                 </div>
               </div>
 
-              {/* DIMENSIONS */}
+              {/* DIMENSIONS / DURACIÓN */}
               <div className="p-4 rounded-2xl bg-[#0a0414] border border-amber-500/20 space-y-2">
                 <label className="block text-xs font-bold text-amber-300 uppercase flex items-center gap-2">
                   <Ruler className="w-4 h-4 text-amber-400" />
-                  <span>Dimensiones / Duración</span>
+                  <span>Duración del Servicio ó Tamaño del Producto</span>
                 </label>
 
                 <input
                   type="text"
                   value={productForm.dimensions}
                   onChange={(e) => setProductForm({ ...productForm, dimensions: e.target.value })}
-                  placeholder="Ej. Sesión de 45 a 60 minutos"
+                  placeholder="Ej. Sesión de 45 a 60 min  ó  Alt. 20 cm × Diám. 7 cm"
                   className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#180b33] text-white text-sm font-medium"
                 />
+                <p className="text-[11px] text-purple-300/80">
+                  • Para <strong>Servicios</strong> (Lecturas, Limpias): escribe la duración (ej: <em>Sesión de 45 minutos</em>). <br />
+                  • Para <strong>Productos</strong> (Velas, Lociones): escribe las dimensiones (ej: <em>Frasco de cristal 250 ml</em>).
+                </p>
               </div>
 
               <div>
@@ -1587,17 +1661,18 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   required
                   value={productForm.description}
                   onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
+                  placeholder="Explique en qué consiste el trabajo espiritual o las propiedades del producto..."
                   className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-sm font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-amber-300 uppercase mb-1">Materiales y Elementos</label>
+                <label className="block text-xs font-bold text-amber-300 uppercase mb-1">Materiales y Elementos Incluidos</label>
                 <input
                   type="text"
                   value={productForm.materials}
                   onChange={(e) => setProductForm({ ...productForm, materials: e.target.value })}
-                  placeholder="Ej. Cartas de Tarot, Velón de Luz, Esfera de Cristal..."
+                  placeholder="Ej. Cartas de Tarot Marsella, Velón de Luz, Esfera de Cristal, Copal..."
                   className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white text-sm font-medium"
                 />
               </div>
