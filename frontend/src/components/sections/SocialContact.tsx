@@ -2,45 +2,6 @@ import React from 'react';
 import { useSite } from '../../context/SiteContext';
 import { MessageCircle, Phone, MapPin, Clock, Sparkles } from 'lucide-react';
 
-export const formatGoogleMapsEmbedUrl = (rawInput: string): string => {
-  if (!rawInput || !rawInput.trim()) {
-    return "https://maps.google.com/maps?q=Angel%20de%20la%20Independencia%20CDMX&t=m&z=15&ie=UTF8&iwloc=&output=embed";
-  }
-
-  let str = rawInput.trim();
-
-  // Caso 1: Código iframe HTML completo pegado por el usuario -> extraer contenido de src
-  const iframeSrcMatch = str.match(/src=["'](.*?)["']/);
-  if (iframeSrcMatch && iframeSrcMatch[1]) {
-    str = iframeSrcMatch[1];
-  }
-
-  // Caso 2: Si es una URL de embed oficial
-  if (str.includes('/maps/embed') || str.includes('output=embed')) {
-    // Reemplaza parámetros de vista satelital (t=k / t=h / t=p) por mapa de calles (t=m)
-    let cleanUrl = str.replace(/([?&])t=[khp]/gi, '$1t=m');
-    if (!cleanUrl.includes('t=m') && !cleanUrl.includes('pb=')) {
-      cleanUrl += (cleanUrl.includes('?') ? '&' : '?') + 't=m';
-    }
-    return cleanUrl;
-  }
-
-  // Caso 3: Enlace estándar de Google Maps o dirección de texto plano
-  let queryText = str;
-  if (str.startsWith('http://') || str.startsWith('https://')) {
-    try {
-      const urlObj = new URL(str);
-      const qParam = urlObj.searchParams.get('q') || urlObj.searchParams.get('query');
-      if (qParam) {
-        queryText = qParam;
-      }
-    } catch (err) {}
-  }
-
-  // Convierte cualquier dirección o término de búsqueda a mapa interactivo de calles (t=m) por defecto
-  return `https://maps.google.com/maps?q=${encodeURIComponent(queryText)}&t=m&z=15&ie=UTF8&iwloc=&output=embed`;
-};
-
 export const SocialContact: React.FC = () => {
   const { data } = useSite();
   const { socialConfig } = data;
@@ -49,8 +10,6 @@ export const SocialContact: React.FC = () => {
 
   const whatsappMessage = `Hola Maestra Rosy, me gustaría solicitar atención personal o información sobre lecturas de tarot y servicios esotéricos.`;
   const whatsappUrl = `https://wa.me/${socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
-
-  const mapEmbedUrl = formatGoogleMapsEmbedUrl(socialConfig.googleMapsUrl || socialConfig.locationAddress);
 
   const handleLinkClick = (e: React.MouseEvent) => {
     if (isIframePreview) {
@@ -67,19 +26,19 @@ export const SocialContact: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-3 animate-fade-up">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 liquid-glass-pill text-amber-300 text-xs font-semibold shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span className="uppercase tracking-wider font-serif-title">Atención Directa & Ubicación</span>
+            <span className="uppercase tracking-wider font-serif-title">Atención Directa & Santuario</span>
           </div>
 
           <h2 className="font-serif-title text-2xl sm:text-4xl lg:text-4xl font-extrabold text-gold-gradient tracking-tight">
-            Contacto Espiritual & Ubicación del Santuario
+            Contacto Espiritual & Atención Personal
           </h2>
 
           <p className="text-purple-200/90 text-sm sm:text-base lg:text-lg font-serif-body leading-relaxed">
-            Comunícate directamente con la Maestra Rosy por WhatsApp o llamada telefónica para agendar tu consulta o visitarnos en nuestro altar.
+            Comunícate directamente con la Maestra Rosy por WhatsApp o llamada telefónica para agendar tu consulta presencial o a distancia.
           </p>
         </div>
 
-        {/* 2 Contact Cards Grid: WhatsApp & Phone ONLY */}
+        {/* 2 Contact Cards Grid: WhatsApp & Phone */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-up stagger-1">
           
           {/* WhatsApp Card */}
@@ -136,10 +95,10 @@ export const SocialContact: React.FC = () => {
 
         </div>
 
-        {/* Integrated Google Maps & Sanctuary Address Block */}
-        <div className="liquid-glass-card p-6 sm:p-8 space-y-6 shadow-2xl border border-amber-500/30 animate-fade-up stagger-2">
+        {/* Sanctuary Address & Working Hours Block */}
+        <div className="liquid-glass-card p-6 sm:p-8 shadow-2xl border border-amber-500/30 animate-fade-up stagger-2">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center border-b border-amber-500/20 pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div className="flex items-start gap-4">
               <div className="w-11 h-11 rounded-2xl bg-gold-shine text-purple-950 flex items-center justify-center shrink-0 border border-amber-300 shadow-md">
                 <MapPin className="w-5 h-5 text-purple-950" />
@@ -161,30 +120,10 @@ export const SocialContact: React.FC = () => {
             </div>
           </div>
 
-          {/* Roadmap Google Maps Frame */}
-          <div className="relative rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-[#07030e] h-[280px] sm:h-[340px] w-full group">
-            <iframe
-              title="Ubicación Google Maps Maestra Rosy"
-              src={mapEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className={`w-full h-full rounded-xl border-0 contrast-[1.05] brightness-[0.98] ${
-                isIframePreview ? 'pointer-events-none' : ''
-              }`}
-            />
-            {/* Transparent overlay in preview mode */}
-            {isIframePreview && (
-              <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
-            )}
-          </div>
-
         </div>
 
       </div>
     </section>
   );
 };
+

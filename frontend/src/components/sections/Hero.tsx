@@ -161,22 +161,22 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Live Statistics Ticker Banner - STRICT CONSTANT 2px BORDER WIDTH AT ALL TIMES */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-amber-500/20 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-amber-500/20 text-center">
           {stats.map((stat, idx) => {
             const isActive = activeStatIndex === idx;
             return (
               <div
                 key={idx}
-                className={`box-border border-2 rounded-full h-full py-4 px-3 sm:px-4 flex flex-col justify-center items-center cursor-default backdrop-blur-xl transition-all duration-700 space-y-1 ${
+                className={`box-border border-2 rounded-2xl sm:rounded-full min-h-[78px] sm:min-h-[85px] py-2.5 sm:py-3.5 px-2 sm:px-4 flex flex-col justify-center items-center cursor-default backdrop-blur-xl transition-all duration-700 space-y-0.5 ${
                   isActive
                     ? stat.activeGlow
                     : 'border-amber-500/25 bg-[#0c051a]/70 shadow-none opacity-65'
                 }`}
               >
-                <span className={`font-serif-title font-extrabold text-2xl sm:text-3xl block transition-colors duration-700 ${isActive ? stat.titleClass : 'text-gold-gradient'}`}>
+                <span className={`font-serif-title font-extrabold text-sm sm:text-base md:text-lg block transition-colors duration-700 tracking-wide uppercase leading-tight ${isActive ? stat.titleClass : 'text-gold-gradient'}`}>
                   {stat.title}
                 </span>
-                <span className={`block text-xs font-serif-body transition-colors duration-700 ${isActive ? 'text-white font-semibold' : 'text-purple-200/80'}`}>
+                <span className={`block text-[10px] sm:text-xs font-serif-body transition-colors duration-700 leading-tight ${isActive ? 'text-white font-semibold' : 'text-purple-200/80'}`}>
                   {stat.subtitle}
                 </span>
               </div>

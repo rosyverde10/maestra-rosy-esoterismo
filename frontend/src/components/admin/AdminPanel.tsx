@@ -1300,29 +1300,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                     </div>
                   </div>
 
-                  {/* UBICACIÓN DE GOOGLE MAPS INTUITIVA */}
-                  <div className="p-4 rounded-2xl bg-[#1f0f3d] border border-emerald-500/30 space-y-2.5">
-                    <label className="block text-xs font-bold text-amber-300 uppercase flex items-center justify-between">
-                      <span>Ubicación o Enlace de Google Maps</span>
-                      <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-500/40">✨ Conversión Automática</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={socialConfigForm.googleMapsUrl || ''}
-                      onChange={(e) => handleSocialConfigChange({ googleMapsUrl: e.target.value })}
-                      placeholder="Ej: Av. Reforma 222, CDMX  ó  pegue cualquier enlace de Google Maps"
-                      className="w-full p-3.5 rounded-xl border border-emerald-500/40 bg-[#0a0414] text-white text-sm font-medium focus:ring-2 focus:ring-emerald-400/40"
-                    />
-                    <div className="p-3 rounded-xl bg-[#0a0414] border border-amber-500/20 text-xs text-purple-200/90 leading-relaxed space-y-1">
-                      <p className="font-bold text-amber-300 flex items-center gap-1.5">
-                        <span>💡 ¡Súper sencillo e intuitivo!</span>
-                      </p>
-                      <p>
-                        Simplemente escriba su dirección completa (ej: <code className="bg-purple-950 text-amber-300 px-1.5 py-0.5 rounded font-mono font-bold">Av. Morelos 123, Guadalajara</code>) o pegue cualquier enlace o código de Google Maps. El sistema generará el mapa interactivo automáticamente sin configuraciones complicadas.
-                      </p>
-                    </div>
-                  </div>
-
                   <button
                     type="submit"
                     className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl transition-all border border-emerald-400/30 cursor-pointer"
@@ -1342,10 +1319,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                       Correo de Administración para Verificación 2FA
                     </h3>
                     <p className="text-xs text-purple-200/80">
-                      Los códigos de seguridad de 6 dígitos para inicio de sesión se envían a este correo verificado:
+                      Los códigos de seguridad de 6 dígitos para inicio de sesión se envían a este correo verificado en Resend:
                     </p>
                     <div className="p-3 rounded-xl bg-[#0a0414] border border-amber-500/30 flex items-center justify-between">
-                      <span className="font-mono font-bold text-sm text-amber-300">{data.adminEmail || 'michisnsqk@gmail.com'}</span>
+                      <span className="font-mono font-bold text-sm text-amber-300">{data.adminEmail || 'rosy10@gmail.com'}</span>
                       <span className="px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-300 text-[10px] font-extrabold uppercase border border-emerald-500/30">
                         ✓ Verificado (Resend API)
                       </span>

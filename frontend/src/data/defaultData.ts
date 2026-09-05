@@ -2,7 +2,7 @@ import type { SiteData } from '../types';
 
 export const INITIAL_SITE_DATA: SiteData = {
   adminPinHash: "admin123",
-  adminEmail: "rosyverde10@gmail.com",
+  adminEmail: "rosy10@gmail.com",
 
   siteConfig: {
     businessName: "Maestra Rosy - Esoterismo & Lecturas de Tarot",

@@ -14,7 +14,7 @@ interface Pillar {
 
 export const EsoterismGuideSection: React.FC = () => {
   const { data } = useSite();
-  const [activePillarId, setActivePillarId] = useState<string>('tarot');
+  const [activePillarId, setActivePillarId] = useState<string | null>(null);
 
   const pillars: Pillar[] = [
     {
@@ -70,9 +70,11 @@ export const EsoterismGuideSection: React.FC = () => {
     }
   ];
 
-  const activePillar = pillars.find((p) => p.id === activePillarId) || pillars[0];
+  const activePillar = pillars.find((p) => p.id === activePillarId);
 
-  const whatsappMessage = `Hola Maestra Rosy, leí la sección sobre esoterismo en su página y me gustaría consultar sobre ${activePillar.title}.`;
+  const whatsappMessage = activePillar
+    ? `Hola Maestra Rosy, leí la sección sobre esoterismo en su página y me gustaría consultar sobre ${activePillar.title}.`
+    : `Hola Maestra Rosy, leí la sección de esoterismo en su sitio web y me gustaría información general.`;
   const whatsappUrl = `https://wa.me/${data.socialConfig.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
@@ -109,88 +111,126 @@ export const EsoterismGuideSection: React.FC = () => {
               return (
                 <button
                   key={pillar.id}
-                  onClick={() => setActivePillarId(pillar.id)}
-                  className={`p-4 rounded-2xl transition-all duration-300 text-left flex items-center gap-3 ${
+                  onClick={() => setActivePillarId(isSelected ? null : pillar.id)}
+                  className={`p-4 rounded-2xl transition-all duration-300 text-left flex items-center justify-between gap-3 group relative overflow-hidden ${
                     isSelected
-                      ? 'liquid-glass-btn border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.45)] font-bold cursor-default'
-                      : 'liquid-glass-pill text-purple-200 border-amber-500/25 hover:scale-105 hover:border-amber-400/80 hover:bg-purple-950/90 hover:shadow-[0_0_25px_rgba(251,191,36,0.35)] cursor-pointer'
+                      ? 'liquid-glass-btn border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.45)] font-bold cursor-pointer'
+                      : 'liquid-glass-pill text-purple-200 border-amber-500/25 hover:scale-[1.02] hover:border-amber-400/80 hover:bg-purple-950/90 hover:shadow-[0_0_25px_rgba(251,191,36,0.35)] cursor-pointer'
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-colors ${
-                    isSelected ? 'bg-purple-950 text-amber-300 border border-amber-400/80' : 'bg-gold-shine text-purple-950'
-                  }`}>
-                    {pillar.icon}
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-colors ${
+                      isSelected ? 'bg-purple-950 text-amber-300 border border-amber-400/80' : 'bg-gold-shine text-purple-950 group-hover:scale-105'
+                    }`}>
+                      {pillar.icon}
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className={`font-serif-title font-bold text-xs sm:text-sm uppercase tracking-wider block truncate ${
+                        isSelected ? 'text-purple-950' : 'text-amber-300'
+                      }`}>
+                        {pillar.title}
+                      </h3>
+                      <span className={`text-[10px] font-serif-body block mt-0.5 truncate ${
+                        isSelected ? 'text-purple-950/80 font-semibold' : 'text-purple-300/80'
+                      }`}>
+                        {pillar.subtitle}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className={`font-serif-title font-bold text-xs sm:text-sm uppercase tracking-wider block ${
-                      isSelected ? 'text-purple-950' : 'text-amber-300'
-                    }`}>
-                      {pillar.title}
-                    </h3>
-                    <span className={`text-[10px] font-serif-body block mt-0.5 ${
-                      isSelected ? 'text-purple-950/80 font-semibold' : 'text-purple-300/80'
-                    }`}>
-                      {pillar.subtitle}
+
+                  {!isSelected && (
+                    <span className="shrink-0 text-[10px] font-bold text-amber-300 bg-purple-950/80 px-2 py-0.5 rounded-full border border-amber-500/40 group-hover:bg-amber-400 group-hover:text-purple-950 transition-all flex items-center gap-1 shadow-sm">
+                      <span>Toca aquí</span>
+                      <span>✨</span>
                     </span>
-                  </div>
+                  )}
                 </button>
               );
             })}
           </div>
 
-          {/* Active Pillar Card Content */}
+          {/* Active Pillar Card Content or Unselected Initial State */}
           <AnimatePresence mode="wait">
-            <motion.div
-              key={activePillar.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="liquid-glass-card p-5 sm:p-7 shadow-2xl space-y-4"
-            >
-              <div className="space-y-2 pb-4 border-b border-amber-500/20">
-                <span className="text-amber-400 text-[11px] font-serif-title font-bold uppercase tracking-wider block">
-                  Pilar de Conocimiento
-                </span>
-                <h3 className="font-serif-title font-bold text-xl sm:text-2xl text-amber-200">
-                  {activePillar.title}
-                </h3>
-                <p className="text-purple-100/90 font-serif-body text-xs sm:text-sm leading-relaxed">
-                  {activePillar.description}
-                </p>
-              </div>
-
-              {/* Benefits Checklist */}
-              <div className="space-y-2">
-                <h4 className="font-serif-title font-bold text-xs text-amber-300 uppercase tracking-wider">
-                  Beneficios Directos:
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {activePillar.benefits.map((benefit, idx) => (
-                    <div key={idx} className="p-3 rounded-xl bg-purple-950/60 border border-amber-500/20 flex items-start gap-2 text-[11px] sm:text-xs text-purple-100 font-serif-body leading-tight">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>{benefit}</span>
-                    </div>
-                  ))}
+            {activePillar ? (
+              <motion.div
+                key={activePillar.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="liquid-glass-card p-5 sm:p-7 shadow-2xl space-y-4"
+              >
+                <div className="space-y-2 pb-4 border-b border-amber-500/20">
+                  <div className="flex items-center justify-between">
+                    <span className="text-amber-400 text-[11px] font-serif-title font-bold uppercase tracking-wider block">
+                      Pilar de Conocimiento
+                    </span>
+                    <button
+                      onClick={() => setActivePillarId(null)}
+                      className="text-[10px] font-bold text-purple-300 hover:text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-full border border-amber-500/30 transition-colors"
+                    >
+                      ✕ Ocultar información
+                    </button>
+                  </div>
+                  <h3 className="font-serif-title font-bold text-xl sm:text-2xl text-amber-200">
+                    {activePillar.title}
+                  </h3>
+                  <p className="text-purple-100/90 font-serif-body text-xs sm:text-sm leading-relaxed">
+                    {activePillar.description}
+                  </p>
                 </div>
-              </div>
 
-              {/* CTA embedded */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-amber-500/20">
-                <span className="text-[11px] text-purple-200/90 font-serif-body italic">
-                  ¿Tienes alguna duda sobre este servicio espiritual?
-                </span>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="whatsapp-emerald-btn px-5 py-2 text-xs flex items-center gap-2 uppercase tracking-wider shrink-0"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 fill-emerald-950 text-emerald-950" />
-                  <span>Consultar por WhatsApp</span>
-                </a>
-              </div>
-            </motion.div>
+                {/* Benefits Checklist */}
+                <div className="space-y-2">
+                  <h4 className="font-serif-title font-bold text-xs text-amber-300 uppercase tracking-wider">
+                    Beneficios Directos:
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {activePillar.benefits.map((benefit, idx) => (
+                      <div key={idx} className="p-3 rounded-xl bg-purple-950/60 border border-amber-500/20 flex items-start gap-2 text-[11px] sm:text-xs text-purple-100 font-serif-body leading-tight">
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA embedded */}
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-amber-500/20">
+                  <span className="text-[11px] text-purple-200/90 font-serif-body italic">
+                    ¿Tienes alguna duda sobre este servicio espiritual?
+                  </span>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="whatsapp-emerald-btn px-5 py-2 text-xs flex items-center gap-2 uppercase tracking-wider shrink-0"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 fill-emerald-950 text-emerald-950" />
+                    <span>Consultar por WhatsApp</span>
+                  </a>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="unselected-prompt"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="liquid-glass-card p-6 sm:p-8 text-center space-y-3 border-2 border-dashed border-amber-400/40 shadow-xl bg-purple-950/30"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-amber-400/20 text-amber-300 flex items-center justify-center mx-auto border border-amber-400/40 animate-pulse">
+                  <Sparkles className="w-6 h-6 text-amber-300" />
+                </div>
+                <h3 className="font-serif-title font-bold text-base sm:text-lg text-amber-300">
+                  Selecciona una opción arriba para descubrir su significado
+                </h3>
+                <p className="text-xs sm:text-sm text-purple-200/90 font-serif-body max-w-md mx-auto leading-relaxed">
+                  Haz clic o toca en <strong className="text-amber-200">"El Tarot & Canalización"</strong>, <strong className="text-amber-200">"Limpias & Purificación"</strong> o <strong className="text-amber-200">"Ritualización"</strong> para desplegar la información y sus beneficios espirituales.
+                </p>
+              </motion.div>
+            )}
           </AnimatePresence>
 
         </div>
