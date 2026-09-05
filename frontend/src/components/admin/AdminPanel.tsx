@@ -299,7 +299,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
       featured: false,
     });
     setPriceNum('450');
-    setPriceNote('Disponible');
+    setPriceNote('');
     setLengthCm('25');
     setWidthCm('18');
     setHeightCm('12');

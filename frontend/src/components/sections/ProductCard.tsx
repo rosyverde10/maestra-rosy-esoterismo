@@ -16,19 +16,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
     switch (status) {
       case 'disponible':
         return (
-          <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-950/90 text-emerald-300 border border-emerald-500/50 uppercase tracking-wider inline-flex items-center gap-1 shrink-0 shadow-md">
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/90 text-emerald-300 border border-emerald-500/50 uppercase tracking-wider inline-flex items-center gap-1 shrink-0 shadow-md">
             ✓ Disponible
           </span>
         );
       case 'sobre_pedido':
         return (
-          <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-950/90 text-amber-300 border border-amber-500/50 uppercase tracking-wider inline-flex items-center gap-1 shrink-0 shadow-md">
-            ✨ Por Cita
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-950/90 text-amber-300 border border-amber-500/50 uppercase tracking-wider inline-flex items-center gap-1 shrink-0 shadow-md">
+            Por Cita
           </span>
         );
       case 'agotado':
         return (
-          <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-rose-950/90 text-rose-300 border border-rose-500/50 uppercase tracking-wider inline-flex items-center gap-1 shrink-0 shadow-md">
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-950/90 text-rose-300 border border-rose-500/50 uppercase tracking-wider inline-flex items-center gap-1 shrink-0 shadow-md">
             Agotado
           </span>
         );
@@ -36,6 +36,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
         return null;
     }
   };
+
+  const parsePriceComponents = (rawPriceText: string) => {
+    if (!rawPriceText) return { mainPrice: '$ 0 MXN', note: '' };
+
+    const match = rawPriceText.match(/^(.*?)(?:\s*\((.*?)\))?$/);
+    if (!match) return { mainPrice: rawPriceText, note: '' };
+
+    const mainPrice = match[1]?.trim() || rawPriceText;
+    const note = match[2]?.trim() || '';
+
+    const isDuplicateStatusNote =
+      note.toUpperCase() === 'DISPONIBLE' ||
+      note.toUpperCase() === 'POR CITA' ||
+      note.toUpperCase() === 'AGOTADO' ||
+      note.toUpperCase() === 'SOBRE PEDIDO';
+
+    return {
+      mainPrice,
+      note: isDuplicateStatusNote ? '' : note,
+    };
+  };
+
+  const { mainPrice, note } = parsePriceComponents(product.priceText);
 
   const directProductLink = `${window.location.origin}/?producto=${product.id}`;
   const whatsappMessage = `Hola Maestra Rosy, me interesa consultar sobre "${product.name}" (${product.priceText}).\n\nVer en la página: ${directProductLink}`;
@@ -98,16 +121,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
       {/* Card Information */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4 relative z-10">
         <div>
-          <div className="flex items-center justify-between gap-2 mb-2.5">
-            <div>
-              {getStatusBadge(product.status)}
-            </div>
-            <span className="text-amber-300 font-serif-title font-extrabold text-base sm:text-lg drop-shadow">
-              {product.priceText}
+          {/* Price & Status Badge Header */}
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <span className="text-amber-300 font-serif-title font-extrabold text-base sm:text-lg drop-shadow-md">
+              {mainPrice}
             </span>
+            {getStatusBadge(product.status)}
           </div>
 
-          <h3 className="font-serif-title font-bold text-purple-100 text-lg sm:text-xl line-clamp-1 group-hover:text-amber-300 transition-colors">
+          {/* Optional Note on clean second line */}
+          {note && (
+            <p className="text-[11px] text-purple-200/90 font-serif-body font-medium italic mb-2 leading-tight">
+              ({note})
+            </p>
+          )}
+
+          <h3 className="font-serif-title font-bold text-purple-100 text-lg sm:text-xl line-clamp-1 group-hover:text-amber-300 transition-colors mt-1">
             {product.name}
           </h3>
 
