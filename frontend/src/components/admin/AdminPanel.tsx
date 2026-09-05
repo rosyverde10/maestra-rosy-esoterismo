@@ -1426,16 +1426,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* ESCENARIO VIRTUAL CON COMPONENTES REALES */}
-              <div
-                className="flex-1 w-full overflow-hidden bg-[#0c0517] relative"
-                onClickCapture={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-              >
-                {/* Capa de protección transparente que bloquea absolutamente todos los clics */}
+              <div className="flex-1 w-full overflow-hidden bg-[#0c0517] relative">
+                {/* Capa de protección transparente aislada dentro del contenedor de vista previa */}
                 <div
-                  className="absolute inset-0 z-[100] bg-transparent cursor-default"
+                  className="absolute inset-0 z-10 bg-transparent cursor-default"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -1477,16 +1471,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              <div
-                className="flex-1 overflow-y-auto bg-[#0c0517] relative"
-                onClickCapture={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-              >
-                {/* Capa de protección transparente que bloquea absolutamente todos los clics */}
+              <div className="flex-1 overflow-y-auto bg-[#0c0517] relative">
+                {/* Capa de protección transparente aislada dentro de la vista previa completa */}
                 <div
-                  className="absolute inset-0 z-[100] bg-transparent cursor-default"
+                  className="absolute inset-0 z-10 bg-transparent cursor-default"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -1511,15 +1499,25 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
 
       </div>
 
-      {/* PRODUCT CREATE/EDIT MODAL */}
+      {/* PRODUCT CREATE/EDIT MODAL - PRIORIDAD Z-INDEX [250] */}
       {isProductModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-3 bg-[#07020f]/90 backdrop-blur-md">
-          <div className="bg-[#180b33] text-purple-100 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 space-y-6 border border-amber-400/40">
+        <div
+          className="fixed inset-0 z-[250] overflow-y-auto bg-[#040208]/90 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-5"
+          onClick={() => setIsProductModalOpen(false)}
+        >
+          <div
+            className="bg-[#180b33] text-purple-100 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.9)] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 space-y-6 border border-amber-400/50 relative my-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between border-b border-purple-900/60 pb-4">
               <h3 className="font-serif-title font-bold text-lg text-amber-300">
                 {editingProduct ? 'Editar Producto / Servicio' : 'Agregar Nuevo Producto / Servicio'}
               </h3>
-              <button onClick={() => setIsProductModalOpen(false)} className="text-purple-300 hover:text-amber-300">
+              <button
+                type="button"
+                onClick={() => setIsProductModalOpen(false)}
+                className="p-2 text-purple-300 hover:text-amber-300 rounded-full bg-purple-950/80 hover:bg-purple-900 transition-colors border border-amber-500/30 cursor-pointer"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1532,7 +1530,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   required
                   value={productForm.name}
                   onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                  className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm"
+                  placeholder="Ej. Lectura de Tarot Integral"
+                  className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-white font-medium text-sm focus:ring-2 focus:ring-amber-400/40"
                 />
               </div>
 
@@ -1542,7 +1541,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   <select
                     value={productForm.category}
                     onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
-                    className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-amber-300 font-bold text-sm"
+                    className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-amber-300 font-bold text-sm cursor-pointer"
                   >
                     {data.categories.filter((c) => c !== 'Todas').map((cat) => (
                       <option key={cat} value={cat} className="bg-[#180b33] text-amber-300">{cat}</option>
@@ -1555,7 +1554,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                   <select
                     value={productForm.status}
                     onChange={(e) => setProductForm({ ...productForm, status: e.target.value as any })}
-                    className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-amber-300 font-bold text-sm"
+                    className="w-full p-3 rounded-xl border border-amber-500/40 bg-[#0a0414] text-amber-300 font-bold text-sm cursor-pointer"
                   >
                     <option value="disponible" className="bg-[#180b33] text-emerald-400">✓ Disponible</option>
                     <option value="sobre_pedido" className="bg-[#180b33] text-amber-300">✨ Por Cita</option>
@@ -1676,13 +1675,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   onClick={() => setIsProductModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-purple-800 text-purple-200 text-xs font-bold hover:bg-purple-900/60"
+                  className="px-5 py-2.5 rounded-xl border border-purple-700 text-purple-200 text-xs font-bold hover:bg-purple-900/60 cursor-pointer transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 text-xs font-bold shadow-lg border border-amber-300 cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-amber-950 text-xs font-bold shadow-lg border border-amber-300 cursor-pointer transition-all active:scale-95"
                 >
                   Guardar Producto
                 </button>
@@ -1695,7 +1694,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
       {/* Custom Confirmation Modal Dialog */}
       <AnimatePresence>
         {confirmModal.isOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#07020f]/85 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="fixed inset-0 z-[350] flex items-center justify-center p-4 bg-[#07020f]/85 backdrop-blur-sm animate-in fade-in duration-200">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
