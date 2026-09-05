@@ -73,7 +73,7 @@ export async function sendOTPEmail(targetEmail, code, businessName = 'Maestra Ro
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          sender: { name: businessName, email: process.env.EMAIL_USER || 'rosyverde10@gmail.com' },
+          sender: { name: businessName, email: process.env.EMAIL_USER || targetEmail },
           to: [{ email: targetEmail }],
           subject: `Tu código de verificación de 6 dígitos: ${code}`,
           htmlContent: htmlContent,
@@ -95,7 +95,7 @@ export async function sendOTPEmail(targetEmail, code, businessName = 'Maestra Ro
 
   // 3. Fallback: Nodemailer SMTP Transport
   try {
-    const rawUser = process.env.EMAIL_USER || 'rosyverde10@gmail.com';
+    const rawUser = process.env.EMAIL_USER || targetEmail;
     const rawPass = process.env.EMAIL_PASS || '';
 
     const cleanUser = rawUser.trim();

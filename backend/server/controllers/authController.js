@@ -15,17 +15,16 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const envEmail = (process.env.EMAIL_USER || "rosyverde10@gmail.com").trim().toLowerCase();
-      const currentDataEmail = (currentSiteData?.adminEmail || "rosyverde10@gmail.com").trim().toLowerCase();
+      const envEmail = (process.env.EMAIL_USER || "").trim().toLowerCase();
+      const currentDataEmail = (currentSiteData?.adminEmail || "").trim().toLowerCase();
 
+      // Validacion estricta contra variables de entorno o la configuracion dinamica de la base de datos
       const isEmailValid =
-        normalizedEmail === envEmail ||
-        normalizedEmail === currentDataEmail ||
-        normalizedEmail === "michisnsqk@gmail.com" ||
-        normalizedEmail === "rosyverde10@gmail.com";
+        (envEmail && normalizedEmail === envEmail) ||
+        (currentDataEmail && normalizedEmail === currentDataEmail);
 
       const validPin = currentSiteData?.adminPinHash || process.env.ADMIN_PIN || "admin123";
-      const isPasswordValid = password === validPin || password === "admin123";
+      const isPasswordValid = password === validPin;
 
       if (!isEmailValid || !isPasswordValid) {
         return res.status(401).json({
@@ -54,17 +53,16 @@ export const AuthController = {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const envEmail = (process.env.EMAIL_USER || "rosyverde10@gmail.com").trim().toLowerCase();
-      const currentDataEmail = (currentSiteData?.adminEmail || "rosyverde10@gmail.com").trim().toLowerCase();
+      const envEmail = (process.env.EMAIL_USER || "").trim().toLowerCase();
+      const currentDataEmail = (currentSiteData?.adminEmail || "").trim().toLowerCase();
 
+      // Validacion estricta contra variables de entorno o la configuracion dinamica de la base de datos
       const isEmailValid =
-        normalizedEmail === envEmail ||
-        normalizedEmail === currentDataEmail ||
-        normalizedEmail === "michisnsqk@gmail.com" ||
-        normalizedEmail === "rosyverde10@gmail.com";
+        (envEmail && normalizedEmail === envEmail) ||
+        (currentDataEmail && normalizedEmail === currentDataEmail);
 
       const validPin = currentSiteData?.adminPinHash || process.env.ADMIN_PIN || "admin123";
-      const isPasswordValid = password === validPin || password === "admin123";
+      const isPasswordValid = password === validPin;
 
       if (!isEmailValid || !isPasswordValid) {
         return res.status(401).json({
